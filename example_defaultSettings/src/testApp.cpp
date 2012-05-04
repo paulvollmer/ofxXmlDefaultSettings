@@ -1,8 +1,8 @@
 /*
  *  ofxXmlDefaultSettings
- *  Created by Paul Vollmer, http://www.wng.cc
+ *  Developed by Paul Vollmer, http://www.wng.cc
  *  
- *  Copyright (c) 2012 openFrameworks. All rights reserved.
+ *  Copyright (c) 2012 wrong-entertainment. All rights reserved.
  *  
  *  The MIT License
  *  
@@ -30,19 +30,17 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.02
- *  @version            0.1.0b
+ *  @modified           2012.05.04
+ *  @version            0.1.0c
  */
 
 #include "testApp.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon write ofLog messages.
-#define OFXXMLDEFAULTSETTINGS_LOG
 
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	defXML.init();
+	defXML.load();
 	defXML.setSettings();
 	
 }
