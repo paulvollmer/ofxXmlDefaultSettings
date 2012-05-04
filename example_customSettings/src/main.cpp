@@ -1,10 +1,10 @@
-/*
+/**
  *  ofxXmlDefaultSettings
- *  Created by Paul Vollmer, http://www.wng.cc
- *  
- *  Copyright (c) 2012 openFrameworks. All rights reserved.
+ *
  *  
  *  The MIT License
+ *
+ *  Copyright (c) 2012 Paul Vollmer, http://www.wng.cc
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +29,9 @@
  *  @testet_plattform   MacOs 10.6
  *                      ??? Win
  *                      ??? Linux
- *  @Dependencies       ofxXmlSettings
- *  @modified           2012.04.28
- *  @version            0.1.0a
+ *  @dependencies       ofxXmlSettings
+ *  @modified           2012.05.04
+ *  @version            0.1.0c
  */
 
 #include "ofMain.h"

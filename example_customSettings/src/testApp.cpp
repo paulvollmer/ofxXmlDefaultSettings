@@ -1,10 +1,10 @@
-/*
+/**
  *  ofxXmlDefaultSettings
- *  Created by Paul Vollmer, http://www.wng.cc
- *  
- *  Copyright (c) 2012 openFrameworks. All rights reserved.
+ *
  *  
  *  The MIT License
+ *
+ *  Copyright (c) 2012 Paul Vollmer, http://www.wng.cc
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +29,9 @@
  *  @testet_plattform   MacOs 10.6
  *                      ??? Win
  *                      ??? Linux
- *  @Dependencies       ofxXmlSettings
- *  @modified           2012.04.28
- *  @version            0.1.0a
+ *  @dependencies       ofxXmlSettings
+ *  @modified           2012.05.04
+ *  @version            0.1.0c
  */
 
 #include "testApp.h"
@@ -39,10 +39,18 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	defXML.init("myDefaultSettings.xml");
-	defXML.setSettings();
+	// Load our default xml file.
+	defXML.load();
+	//defXML.load("myDefaultSettings.xml");
+	
+	defXML.setFrameRate();
+	defXML.setWindowShape();
+	defXML.setWindowPosition();
+	ofSetWindowTitle("an other title, not from our default xml.");
+	//defXML.setWindowTitle();
 	
 	
+	// Add custom settings to the xml default file.
 	int tempVar1, tempVar2, tempVar3;
 	
 	if (defXML.tagExists("wng", 0)) {
@@ -81,6 +89,9 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::exit(){
 	
-	defXML.getSettings();
+	//defXML.setWindowPosition();
+	
+	// Save the current settings to xml.
+	defXML.saveSettings();
 	
 }
