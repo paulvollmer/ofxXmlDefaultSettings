@@ -29,24 +29,58 @@
  *  @testet_plattform   MacOs 10.6
  *                      ??? Win
  *                      ??? Linux
- *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.02
- *  @version            0.1.0b
+ *  @Dependencies       ofxXmlSettings
+ *  @modified           2012.04.28
+ *  @version            0.1.0a
  */
 
-#include "ofMain.h"
 #include "testApp.h"
-#include "ofAppGlutWindow.h"
 
-//========================================================================
-int main( ){
+//--------------------------------------------------------------
+void testApp::setup(){
+	
+	defXML.init("myDefaultSettings.xml");
+	defXML.setSettings();
+	
+	
+	int tempVar1, tempVar2, tempVar3;
+	
+	if (defXML.tagExists("wng", 0)) {
+		tempVar1 = defXML.getValue("wng:myVar1", 0, 0);
+		tempVar2 = defXML.getValue("wng:myVar2", 0, 0);
+		tempVar3 = defXML.getValue("wng:myVar3", 0, 0);
+	} else {
+		tempVar1 = 100;
+		tempVar2 = 200;
+		tempVar3 = 300;
+		defXML.addTag("wng");
+		defXML.pushTag("wng", 0);
+		defXML.addValue("myVar1", tempVar1);
+		defXML.addValue("myVar2", tempVar2);
+		defXML.addValue("myVar3", tempVar3);
+		defXML.popTag();
+		defXML.saveFile();
+	}
+	
+	ofLog() << "tempVar1 = " << tempVar1;
+	ofLog() << "tempVar2 = " << tempVar2;
+	ofLog() << "tempVar3 = " << tempVar3;
+	
+}
 
-    ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);			// <-------- setup the GL context
+//--------------------------------------------------------------
+void testApp::update(){
 
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
-	ofRunApp( new testApp());
+}
 
+//--------------------------------------------------------------
+void testApp::draw(){
+	
+}
+
+//--------------------------------------------------------------
+void testApp::exit(){
+	
+	defXML.getSettings();
+	
 }

@@ -1,40 +1,49 @@
+/*
+ *  ofxXmlDefaultSettings
+ *  Created by Paul Vollmer, http://www.wng.cc
+ *  
+ *  Copyright (c) 2012 openFrameworks. All rights reserved.
+ *  
+ *  The MIT License
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in
+ *  all copies or substantial portions of the Software.
+ *  
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ *
+ *  
+ *  @testet_oF          0.07
+ *  @testet_plattform   MacOs 10.6
+ *                      ??? Win
+ *                      ??? Linux
+ *  @dependencies       ofxXmlSettings
+ *  @modified           2012.05.02
+ *  @version            0.1.0b
+ */
+
 #include "testApp.h"
+
+// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon write ofLog messages.
+#define OFXXMLDEFAULTSETTINGS_LOG
 
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	defaultXml.init();
-	//defaultXml.init("wngTest_1.xml");
-	
-	defaultXml.setSettings();
-	
-	//ofSetFrameRate(defaultXml.getValue("ofGetFrameRate", 60, 0));
-	//ofSetWindowShape(defaultXml.getValue("ofGetWidth", 600, 0), defaultXml.getValue("ofGetHeight", 480, 0) );
-	
-	
-	
-	// add custom tags
-	
-	/*if(!defaultXml.tagExists("ofAppSettings", 0)){
-		cout << "### No\n";
-	} else {
-	defaultXml.addTag("ofAppSettings");
-	defaultXml.pushTag("ofAppSettings", 0);
-	defaultXml.addValue("counterRuns", 0);
-	defaultXml.addValue("lastRun", 0);
-	defaultXml.addValue("counter", 0);
-	}
-	
-	/*if(defaultXml.load()){
-		cout << "load\n";
-		defaultXml.addTag("wng");
-		defaultXml.pushTag("wng", 0);
-		defaultXml.addValue("myVar", 100);
-		defaultXml.popTag();
-		defaultXml.saveFile();
-	}else{
-		cout << "no load\n";
-	}*/
+	defXML.init();
+	defXML.setSettings();
 	
 }
 
@@ -51,6 +60,6 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::exit(){
 	
-	defaultXml.getSettings();
+	defXML.getSettings();
 	
 }

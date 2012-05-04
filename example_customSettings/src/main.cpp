@@ -29,9 +29,9 @@
  *  @testet_plattform   MacOs 10.6
  *                      ??? Win
  *                      ??? Linux
- *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.02
- *  @version            0.1.0b
+ *  @Dependencies       ofxXmlSettings
+ *  @modified           2012.04.28
+ *  @version            0.1.0a
  */
 
 #include "ofMain.h"

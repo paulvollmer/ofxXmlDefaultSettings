@@ -29,15 +29,26 @@
  *  @testet_plattform   MacOs 10.6
  *                      ??? Win
  *                      ??? Linux
- *  @Dependencies       ofxXmlSettings
- *  @modified           2012.04.27
- *  @version            0.1.0
+ *  @dependencies       ofxXmlSettings
+ *  @modified           2012.05.02
+ *  @version            0.1.0b
  */
 
 #include "ofxXmlDefaultSettings.h"
 
 
-	
+
+/**
+ * This class is an extension for ofxXmlSettings to create a
+ * default settings xml file. At this file we create
+ * openFrameworks placeholder to store core variables like:
+ * - window position,
+ * - window size,
+ * - framerate,
+ * - fullscreen,
+ * - cursor
+ * Also you can use this xml to store other variables.
+ */
 ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	// Set our default filename.
 	// if init(string filename) will be called, 
@@ -58,9 +69,13 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 void ofxXmlDefaultSettings::init(string filename){
 	this->filename = filename;
 	if(load()){
-		ofLogVerbose("Default XML loaded!");
-	}else{
-		ofLogVerbose("Unable to load Default XML. create a default XML file!");
+		#ifdef OFXXMLDEFAULTSETTINGS_LOG
+			ofLog() << "[ofxXmlDefaultSettings] Default XML loaded!";
+		#endif
+	} else {
+		#ifdef OFXXMLDEFAULTSETTINGS_LOG
+			ofLog() << "[ofxXmlDefaultSettings] Unable to load Default XML. create a default XML file!";
+		#endif
 		createDefaultXml();
 		load();
 	}
@@ -93,10 +108,17 @@ bool ofxXmlDefaultSettings::save(){
  * set the openFrameworks core settings from xml content.
  */
 void ofxXmlDefaultSettings::setSettings(){
-	ofSetFrameRate(getValue("ofGetFrameRate", 60, 0));
-	ofSetWindowShape(getValue("ofGetWidth", 1024, 0), getValue("ofGetHeight", 768, 0));
-	ofSetWindowPosition(getValue("ofGetWindowPositionX", 30, 0), getValue("ofGetWindowPositionY", 30, 0));
-	cout << "Set Settings from Default Xml file." << endl;
+	//ofSetLogger
+	//ofSetVerticalSync(<#bool bSync#>)
+	ofSetFrameRate(getValue("ofFrameRate", 60, 0));
+	//ofSetWindowShape(getValue("ofWidth", 1024, 0), getValue("ofHeight", 768, 0));
+	ofSetWindowPosition(getValue("ofWindowPositionX", 30, 0), getValue("ofWindowPositionY", 30, 0));
+	ofSetWindowTitle(getValue("ofWindowTitle", "wng_openFrameworks", 0));
+	/*ofShowCursor() ofHideCursor()
+	ofSetFullscreen(<#bool fullscreen#>)
+	ofSetEscapeQuitsApp(<#bool bQuitOnEsc#>)*/
+	
+	ofLog() << "[ofxXmlDefaultSettings] Set Settings from default Xml file.";
 }
 
 
@@ -106,15 +128,16 @@ void ofxXmlDefaultSettings::setSettings(){
  * save to xml.
  */
 void ofxXmlDefaultSettings::getSettings(){
-	setValue("ofGetFrameRate", ofGetFrameRate(), 0);
-	setValue("ofGetWidth", ofGetWidth(), 0);
-	setValue("ofGetHeight", ofGetHeight(), 0);
-	setValue("ofGetWindowPositionX", ofGetWindowPositionX(), 0);
-	setValue("ofGetWindowPositionY", ofGetWindowPositionY(), 0);
+	setValue("ofFrameRate", ofGetFrameRate(), 0);
+	setAttribute("ofWindowShape", "width", ofGetWidth(), 0);
+	setAttribute("ofWindowShape", "height", ofGetHeight(), 0);
+	setAttribute("ofWindowPosition", "x", ofGetWindowPositionX(), 0);
+	setAttribute("ofWindowPosition", "y", ofGetWindowPositionY(), 0);
+	setValue("ofWindowTitle", "wng_openFrameworks", 0);
 	//setValue("ofGetFullscreen", tempFullscreen, 0);
 	//setValue("ofGetCursor", tempCursor, 0);
 	save();
-	cout << "Get Settings to Default Xml file." << endl;
+	ofLog() << "[ofxXmlDefaultSettings] Get Settings to Default Xml file.";
 }
 
 
@@ -128,13 +151,17 @@ void ofxXmlDefaultSettings::getSettings(){
  */
 void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
-	xml.addValue("ofGetFrameRate", 60);
-	xml.addValue("ofGetWidth", 1024);
-	xml.addValue("ofGetHeight", 768);
-	xml.addValue("ofGetWindowPositionX", 30);
-	xml.addValue("ofGetWindowPositionY", 30);
-	xml.addValue("ofGetFullscreen", false);
-	xml.addValue("ofGetCursor", false);
+	xml.addValue("ofFrameRate", 60);
+	xml.addTag("ofWindowShape");
+	xml.addAttribute("ofWindowShape", "width", 1024, 0);
+	xml.addAttribute("ofWindowShape", "height", 1024, 0);
+	xml.addTag("ofWindowPosition");
+	xml.addAttribute("ofWindowPosition", "x", 30, 0);
+	xml.addAttribute("ofWindowPosition", "y", 30, 0);
+	xml.addValue("ofWindowTitle", "wng_openFrameworks");
+	xml.addValue("ofFullscreen", false);
+	xml.addValue("ofCursor", false);
+	
 	xml.saveFile(ofFilePath::getCurrentWorkingDirectory()+"/"+filename);
-	cout << "Default content generated and Xml file saved!" << endl;
+	ofLog() << "[ofxXmlDefaultSettings] Default content generated and Xml file saved!";
 }

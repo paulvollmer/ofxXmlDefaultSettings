@@ -29,25 +29,15 @@
  *  @testet_plattform   MacOs 10.6
  *                      ??? Win
  *                      ??? Linux
- *  @Dependencies       ofxXmlSettings
- *  @modified           2012.04.27
- *  @version            0.1.0
+ *  @dependencies       ofxXmlSettings
+ *  @modified           2012.05.02
+ *  @version            0.1.0b
  */
 
 #include "ofxXmlSettings.h"
 
-	
-/**
- * This class is an extension for ofxXmlSettings to create a
- * default settings xml file. At this file we create
- * openFrameworks placeholder to store core variables like:
- * - window position,
- * - window size,
- * - framerate,
- * - fullscreen,
- * - cursor
- * Also you can use this xml to store other variables.
- */
+
+
 class ofxXmlDefaultSettings : public ofxXmlSettings {
 	
 		
