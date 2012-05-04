@@ -1,10 +1,10 @@
-/*
+/**
  *  ofxXmlDefaultSettings.cpp
- *  Developed by Paul Vollmer, http://www.wng.cc
- *  
- *  Copyright (c) 2012 wrong-entertainment. All rights reserved.
+ *
  *  
  *  The MIT License
+ *
+ *  Copyright (c) 2012 Paul Vollmer, http://www.wng.cc
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -38,30 +38,20 @@
 
 
 
-/**
- * This class is an extension for ofxXmlSettings to create a
- * default settings xml file. At this file we create
- * openFrameworks placeholder to store core variables like:
- * - window position,
- * - window size,
- * - framerate,
- * - fullscreen,
- * - cursor
- * Also you can use this xml to store other variables.
- */
 ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
-	// Set our default filepath. if init() will be called, 
+	// Setting default filepath. if load() is called, 
 	// the filepath will be used to save the xml file.
-	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings23.xml";
+	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
 }	
 	
 	
 /**
- * init check if a default xml file exist.
- * if no file is found, let generate one.
+ * load checks if a default xml file exist.
+ * if no file is found, the method createDefaultXml()
+ * creats a xml file automaticly.
  *
  * @param filepath
- *        Path of our default xml file.
+ *        Path to default xml file.
  */
 void ofxXmlDefaultSettings::load(string filepath){
 	this->filepath = filepath;
@@ -79,133 +69,141 @@ void ofxXmlDefaultSettings::load(string filepath){
 	}
 }
 
+/**
+ * Same as load(string filepath) but we use the default filepath.
+ */
 void ofxXmlDefaultSettings::load(){
 	load(filepath);
 }
 
 
 /**
- * Save the default xml file.
+ * Get the openFrameworks core settings and save values into xml.
  *
  * @param return
  *        Set boolean true, if file is saved.
  */
-bool ofxXmlDefaultSettings::save(){
-	return saveFile(filepath);
-}
-
-
-/**
- * Set the openFrameworks core settings from xml content.
- */
-void ofxXmlDefaultSettings::setSettings(){
-	setFrameRate();
-	setWindowShape();
-	setWindowPosition();
-	setWindowTitle();
-	setCursor();
-	setFullscreen();
-	setEscapeQuitsApp();
-	//ofSetLogger
-	//ofSetVerticalSync(<#bool bSync#>)
-	
-	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] Set Settings from default Xml file.";
-	#endif
-}
-
-
-void ofxXmlDefaultSettings::setFrameRate(){
-	 ofSetFrameRate(getValue("ofFrameRate", 60, 0));
-}
-
-void ofxXmlDefaultSettings::setWindowShape(){
-	ofSetWindowShape(getAttribute("ofWindowShape", "width", 1024, 0),
-					 getAttribute("ofWindowShape", "height", 768, 0));
-}
-
-void ofxXmlDefaultSettings::setWindowPosition(){
-	ofSetWindowPosition(getAttribute("ofWindowPosition", "x", 30, 0),
-						getAttribute("ofWindowPosition", "x", 30, 0));
-}
-
-void ofxXmlDefaultSettings::setWindowTitle(){
-	ofSetWindowTitle(getValue("ofWindowTitle", "openFrameworks Application", 0));
-}
-
-void ofxXmlDefaultSettings::setCursor(){
-	int temp = getValue("ofWindowTitle", 0, 0);
-	if(temp == 0){
-		ofShowCursor();
-	} else {
-		ofHideCursor();
-	}
-}
-
-void ofxXmlDefaultSettings::setFullscreen(){
-	int temp = getValue("ofFullscreen", 0, 0);
-	if(temp == 0){
-		ofSetFullscreen(true);
-	} else {
-		ofSetFullscreen(false);
-	}
-}
-
-void ofxXmlDefaultSettings::setEscapeQuitsApp(){
-	int temp = getValue("ofEscapeQuitsApp", 0, 0);
-	if(temp == 0){
-		ofSetEscapeQuitsApp(true);
-	} else {
-		ofSetEscapeQuitsApp(false);
-	}
-}
-
-
-
-/**
- * Get the openFrameworks core settings and save values to xml.
- */
-void ofxXmlDefaultSettings::getSettings(){
+bool ofxXmlDefaultSettings::saveSettings(){
 	setValue("ofFrameRate", ofGetFrameRate(), 0);
 	setAttribute("ofWindowShape", "width", ofGetWidth(), 0);
 	setAttribute("ofWindowShape", "height", ofGetHeight(), 0);
 	setAttribute("ofWindowPosition", "x", ofGetWindowPositionX(), 0);
 	setAttribute("ofWindowPosition", "y", ofGetWindowPositionY(), 0);
-	setValue("ofWindowTitle", "wng_openFrameworks", 0);
-	//setValue("ofGetFullscreen", tempFullscreen, 0);
-	//setValue("ofGetCursor", tempCursor, 0);
-	save();
-	
+	saveFile(filepath);
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] Get Settings to Default Xml file.";
+		ofLog() << "[ofxXmlDefaultSettings] Save settings to default xml file.";
+		ofLog() << "                        Filepath = " << filepath;
 	#endif
 }
+
+
+/**
+ * Set the openFrameworks core settings from xml file.
+ */
+void ofxXmlDefaultSettings::setSettings(){
+	setFrameRate();
+	setFullscreen();
+	setWindowShape();
+	setWindowPosition();
+	setWindowTitle();
+	setCursor();
+	setEscapeQuitsApp();
+	//ofSetLogger
+	//ofSetVerticalSync(<#bool bSync#>)
+	#ifdef OFXXMLDEFAULTSETTINGS_LOG
+		ofLog() << "[ofxXmlDefaultSettings] Set Settings from default xml file.";
+	#endif
+}
+
+/**
+ * Set the framerate from xml file.
+ */
+void ofxXmlDefaultSettings::setFrameRate(){
+	 ofSetFrameRate(getValue("ofFrameRate", 60, 0));
+}
+
+/**
+ * Set the window size from xml file.
+ */
+void ofxXmlDefaultSettings::setWindowShape(){
+	ofSetWindowShape(getAttribute("ofWindowShape", "width", 1024, 0),
+					 getAttribute("ofWindowShape", "height", 768, 0));
+}
+
+/**
+ * Set the window position from xml file.
+ */
+void ofxXmlDefaultSettings::setWindowPosition(){
+	ofSetWindowPosition(getAttribute("ofWindowPosition", "x", 30, 0),
+						getAttribute("ofWindowPosition", "y", 30, 0));
+}
+
+/**
+ * Set the window title from xml file.
+ */
+void ofxXmlDefaultSettings::setWindowTitle(){
+	ofSetWindowTitle(getValue("ofWindowTitle", "openFrameworks Application", 0));
+}
+
+/**
+ * Set the cursor mode from xml file.
+ */
+void ofxXmlDefaultSettings::setCursor(){
+	int temp = getValue("ofCursor", false, 0);
+	if(temp == 1){
+		ofHideCursor();
+	} else {
+		ofShowCursor();
+	}
+}
+
+/**
+ * Set the fullscreen mode from xml file.
+ */
+void ofxXmlDefaultSettings::setFullscreen(){
+	int temp = getValue("ofFullscreen", false, 0);
+	if(temp == 0){
+		ofSetFullscreen(false);
+	} else {
+		ofSetFullscreen(true);
+	}
+}
+
+/**
+ * Set the ofSetEscapeQuitsApp from xml file.
+ */
+void ofxXmlDefaultSettings::setEscapeQuitsApp(){
+	int temp = getValue("ofEscapeQuitsApp", false, 0);
+	if(temp == 0){
+		ofSetEscapeQuitsApp(false);
+	} else {
+		ofSetEscapeQuitsApp(true);
+	}
+}
+
 
 
 /**
  * private method
  * createDefaultXml
  *
- * we create tags to store the ofCore Settings there.
- * the tags was named like the ofGet... methods 
- * i think this looks good to use. OF syntax as xml tag :)
+ * Creating tags to store openFrameworks core settings.
+ * The tags are named like the ofGet... methods. OF syntax as xml tag :)
  */
 void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
 	xml.addValue("ofFrameRate", 60);
+	xml.addValue("ofFullscreen", false);
 	xml.addTag("ofWindowShape");
 	xml.addAttribute("ofWindowShape", "width", 1024, 0);
 	xml.addAttribute("ofWindowShape", "height", 768, 0);
 	xml.addTag("ofWindowPosition");
 	xml.addAttribute("ofWindowPosition", "x", 30, 0);
 	xml.addAttribute("ofWindowPosition", "y", 30, 0);
-	xml.addValue("ofWindowTitle", "wng_openFrameworks");
+	xml.addValue("ofWindowTitle", "openFrameworks Application");
 	xml.addValue("ofCursor", false);
-	xml.addValue("ofFullscreen", false);
 	xml.addValue("ofEscapeQuitsApp", false);
-	
 	xml.saveFile(filepath);
-	
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
 		ofLog() << "[ofxXmlDefaultSettings] Default xml file generated and saved!";
 		ofLog() << "                        Filepath = " << filepath;

@@ -1,10 +1,10 @@
-/*
+/**
  *  ofxXmlDefaultSettings.h
- *  Developed by Paul Vollmer, http://www.wng.cc
- *  
- *  Copyright (c) 2012 wrong-entertainment. All rights reserved.
+ *
  *  
  *  The MIT License
+ *
+ *  Copyright (c) 2012 Paul Vollmer, http://www.wng.cc
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
 
 #include "ofxXmlSettings.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon write ofLog messages.
+// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
 #define OFXXMLDEFAULTSETTINGS_LOG
 
 
@@ -51,8 +51,8 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void load(string filepath);
 		void load();
 	
-		bool save();
-		
+		bool saveSettings();
+	
 		void setSettings();
 		void setFrameRate();
 		void setWindowShape();
@@ -61,8 +61,6 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void setCursor();
 		void setFullscreen();
 		void setEscapeQuitsApp();
-		
-		void getSettings();
 		
 		string filepath;
 	

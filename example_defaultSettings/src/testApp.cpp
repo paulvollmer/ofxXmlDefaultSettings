@@ -1,10 +1,10 @@
-/*
+/**
  *  ofxXmlDefaultSettings
- *  Developed by Paul Vollmer, http://www.wng.cc
- *  
- *  Copyright (c) 2012 wrong-entertainment. All rights reserved.
+ *
  *  
  *  The MIT License
+ *
+ *  Copyright (c) 2012 Paul Vollmer, http://www.wng.cc
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
+	// Load our default xml file.
 	defXML.load();
+	// and set the openFrameworks core settings from it.
 	defXML.setSettings();
 	
 }
@@ -58,6 +60,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::exit(){
 	
-	defXML.getSettings();
+	// Save the current settings to xml.
+	defXML.saveSettings();
 	
 }
