@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.04
- *  @version            0.1.0c
+ *  @modified           2012.05.06
+ *  @version            0.1.0d
  */
 
 #include "ofxXmlDefaultSettings.h"
@@ -62,7 +62,7 @@ void ofxXmlDefaultSettings::load(string filepath){
 	} else {
 		#ifdef OFXXMLDEFAULTSETTINGS_LOG
 			ofLog() << "[ofxXmlDefaultSettings] Unable to load default xml!";
-			ofLog() << "                        Filepath = " << filepath;
+			//ofLog() << "                        Filepath = " << filepath;
 		#endif
 		createDefaultXml();
 		loadFile(filepath);
@@ -84,15 +84,17 @@ void ofxXmlDefaultSettings::load(){
  *        Set boolean true, if file is saved.
  */
 bool ofxXmlDefaultSettings::saveSettings(){
-	setValue("ofFrameRate", ofGetFrameRate(), 0);
-	setAttribute("ofWindowShape", "width", ofGetWidth(), 0);
-	setAttribute("ofWindowShape", "height", ofGetHeight(), 0);
-	setAttribute("ofWindowPosition", "x", ofGetWindowPositionX(), 0);
-	setAttribute("ofWindowPosition", "y", ofGetWindowPositionY(), 0);
+	if(ofGetWindowMode() == 0){
+		setAttribute("ofCore:ofWindowShape", "width", ofGetWidth(), 0);
+		setAttribute("ofCore:ofWindowShape", "height", ofGetHeight(), 0);
+		setAttribute("ofCore:ofWindowPosition", "x", ofGetWindowPositionX(), 0);
+		setAttribute("ofCore:ofWindowPosition", "y", ofGetWindowPositionY(), 0);
+	}
+	setValue("ofCore:ofFullscreen", ofGetWindowMode(), 0);
 	saveFile(filepath);
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
 		ofLog() << "[ofxXmlDefaultSettings] Save settings to default xml file.";
-		ofLog() << "                        Filepath = " << filepath;
+		//ofLog() << "                        Filepath = " << filepath;
 	#endif
 }
 
@@ -119,37 +121,37 @@ void ofxXmlDefaultSettings::setSettings(){
  * Set the framerate from xml file.
  */
 void ofxXmlDefaultSettings::setFrameRate(){
-	 ofSetFrameRate(getValue("ofFrameRate", 60, 0));
+	 ofSetFrameRate(getValue("ofCore:ofFrameRate", 60, 0));
 }
 
 /**
  * Set the window size from xml file.
  */
 void ofxXmlDefaultSettings::setWindowShape(){
-	ofSetWindowShape(getAttribute("ofWindowShape", "width", 1024, 0),
-					 getAttribute("ofWindowShape", "height", 768, 0));
+	ofSetWindowShape(getAttribute("ofCore:ofWindowShape", "width", 1024, 0),
+					 getAttribute("ofCore:ofWindowShape", "height", 768, 0));
 }
 
 /**
  * Set the window position from xml file.
  */
 void ofxXmlDefaultSettings::setWindowPosition(){
-	ofSetWindowPosition(getAttribute("ofWindowPosition", "x", 30, 0),
-						getAttribute("ofWindowPosition", "y", 30, 0));
+	ofSetWindowPosition(getAttribute("ofCore:ofWindowPosition", "x", 30, 0),
+						getAttribute("ofCore:ofWindowPosition", "y", 30, 0));
 }
 
 /**
  * Set the window title from xml file.
  */
 void ofxXmlDefaultSettings::setWindowTitle(){
-	ofSetWindowTitle(getValue("ofWindowTitle", "openFrameworks Application", 0));
+	ofSetWindowTitle(getValue("ofCore:ofWindowTitle", "openFrameworks Application", 0));
 }
 
 /**
  * Set the cursor mode from xml file.
  */
 void ofxXmlDefaultSettings::setCursor(){
-	int temp = getValue("ofCursor", false, 0);
+	int temp = getValue("ofCore:ofCursor", false, 0);
 	if(temp == 1){
 		ofHideCursor();
 	} else {
@@ -161,7 +163,7 @@ void ofxXmlDefaultSettings::setCursor(){
  * Set the fullscreen mode from xml file.
  */
 void ofxXmlDefaultSettings::setFullscreen(){
-	int temp = getValue("ofFullscreen", false, 0);
+	int temp = getValue("ofCore:ofFullscreen", false, 0);
 	if(temp == 0){
 		ofSetFullscreen(false);
 	} else {
@@ -173,7 +175,7 @@ void ofxXmlDefaultSettings::setFullscreen(){
  * Set the ofSetEscapeQuitsApp from xml file.
  */
 void ofxXmlDefaultSettings::setEscapeQuitsApp(){
-	int temp = getValue("ofEscapeQuitsApp", false, 0);
+	int temp = getValue("ofCore:ofEscapeQuitsApp", false, 0);
 	if(temp == 0){
 		ofSetEscapeQuitsApp(false);
 	} else {
@@ -192,17 +194,20 @@ void ofxXmlDefaultSettings::setEscapeQuitsApp(){
  */
 void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
-	xml.addValue("ofFrameRate", 60);
-	xml.addValue("ofFullscreen", false);
-	xml.addTag("ofWindowShape");
-	xml.addAttribute("ofWindowShape", "width", 1024, 0);
-	xml.addAttribute("ofWindowShape", "height", 768, 0);
-	xml.addTag("ofWindowPosition");
-	xml.addAttribute("ofWindowPosition", "x", 30, 0);
-	xml.addAttribute("ofWindowPosition", "y", 30, 0);
-	xml.addValue("ofWindowTitle", "openFrameworks Application");
-	xml.addValue("ofCursor", false);
-	xml.addValue("ofEscapeQuitsApp", false);
+	xml.addTag("ofCore");
+	xml.pushTag("ofCore", 0);
+		xml.addValue("ofFrameRate", 60);
+		xml.addValue("ofFullscreen", false);
+		xml.addTag("ofWindowShape");
+		xml.addAttribute("ofWindowShape", "width", 1024, 0);
+		xml.addAttribute("ofWindowShape", "height", 768, 0);
+		xml.addTag("ofWindowPosition");
+		xml.addAttribute("ofWindowPosition", "x", 30, 0);
+		xml.addAttribute("ofWindowPosition", "y", 30, 0);
+		xml.addValue("ofWindowTitle", "openFrameworks Application");
+		xml.addValue("ofCursor", false);
+		xml.addValue("ofEscapeQuitsApp", false);
+	xml.popTag();
 	xml.saveFile(filepath);
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
 		ofLog() << "[ofxXmlDefaultSettings] Default xml file generated and saved!";
