@@ -110,8 +110,7 @@ void ofxXmlDefaultSettings::setSettings(){
 	setWindowTitle();
 	setCursor();
 	setEscapeQuitsApp();
-	//ofSetLogger
-	//ofSetVerticalSync(<#bool bSync#>)
+	setLogToFile();
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
 		ofLog() << "[ofxXmlDefaultSettings] Set Settings from default xml file.";
 	#endif
@@ -183,6 +182,18 @@ void ofxXmlDefaultSettings::setEscapeQuitsApp(){
 	}
 }
 
+/**
+ * Set the ofLogToFile from xml file.
+ */
+void ofxXmlDefaultSettings::setLogToFile(){
+	int temp = getValue("ofCore:ofLogToFile", true, 0);
+	string tempPath = getAttribute("ofCore:ofLogToFile", "filepath", "log", 0);
+	string tempName = getAttribute("ofCore:ofLogToFile", "filename", "logs.txt", 0);
+	if(temp == 1){
+		ofLogToFile(tempPath+"/"+tempName, 1);
+	}
+}
+
 
 
 /**
@@ -207,6 +218,9 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 		xml.addValue("ofWindowTitle", "openFrameworks Application");
 		xml.addValue("ofCursor", false);
 		xml.addValue("ofEscapeQuitsApp", false);
+		xml.addValue("ofLogToFile", true);
+		xml.addAttribute("ofLogToFile", "filepath", "log", 0);
+		xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
 	xml.popTag();
 	xml.saveFile(filepath);
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG

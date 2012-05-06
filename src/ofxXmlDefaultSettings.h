@@ -61,6 +61,7 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void setCursor();
 		void setFullscreen();
 		void setEscapeQuitsApp();
+		void setLogToFile();
 		
 		string filepath;
 	
