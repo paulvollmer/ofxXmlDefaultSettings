@@ -202,8 +202,8 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 		xml.addAttribute("ofWindowShape", "width", 1024, 0);
 		xml.addAttribute("ofWindowShape", "height", 768, 0);
 		xml.addTag("ofWindowPosition");
-		xml.addAttribute("ofWindowPosition", "x", 30, 0);
-		xml.addAttribute("ofWindowPosition", "y", 30, 0);
+		xml.addAttribute("ofWindowPosition", "x", 0, 0);
+		xml.addAttribute("ofWindowPosition", "y", 44, 0);
 		xml.addValue("ofWindowTitle", "openFrameworks Application");
 		xml.addValue("ofCursor", false);
 		xml.addValue("ofEscapeQuitsApp", false);
