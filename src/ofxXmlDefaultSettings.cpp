@@ -187,10 +187,25 @@ void ofxXmlDefaultSettings::setEscapeQuitsApp(){
  */
 void ofxXmlDefaultSettings::setLogToFile(){
 	int temp = getValue("ofCore:ofLogToFile", true, 0);
-	string tempPath = getAttribute("ofCore:ofLogToFile", "filepath", "log", 0);
+	string tempPath = getAttribute("ofCore:ofLogToFile", "filepath", "NULL", 0);
 	string tempName = getAttribute("ofCore:ofLogToFile", "filename", "logs.txt", 0);
 	if(temp == 1){
-		ofLogToFile(tempPath+"/"+tempName, 1);
+		
+		// If the filepath attribute is NULL, 
+		// we run the default method and save the log file to current working directory.
+		if(tempPath == "NULL"){
+			// check if a logs folder exist.
+			// if no folder found, create one.
+			ofDirectory dir(ofFilePath::getCurrentWorkingDirectory()+"/logs");
+			if(!dir.exists()){
+				dir.create(true);
+			}
+			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs"+"/"+tempName, 1);
+			
+		} else {
+			ofLogToFile(tempPath+"/"+tempName, 1);
+		}
+
 	}
 }
 
@@ -219,12 +234,12 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 		xml.addValue("ofCursor", false);
 		xml.addValue("ofEscapeQuitsApp", false);
 		xml.addValue("ofLogToFile", true);
-		xml.addAttribute("ofLogToFile", "filepath", "log", 0);
+		xml.addAttribute("ofLogToFile", "filepath", "NULL", 0);
 		xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
 	xml.popTag();
 	xml.saveFile(filepath);
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
 		ofLog() << "[ofxXmlDefaultSettings] Default xml file generated and saved!";
-		ofLog() << "                        Filepath = " << filepath;
+		//ofLog() << "                        Filepath = " << filepath;
 	#endif
 }
