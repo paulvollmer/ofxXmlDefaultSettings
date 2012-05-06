@@ -15,7 +15,7 @@ openFrameworks core variables:
 - escape quits app  
   
 **Current Version:**  
-0.1.0c (stable and versioned using [semantic versioning](http://semver.org/))   
+0.1.0d (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
 MacOS 10.6   
@@ -32,6 +32,9 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 
 ## Changelog  
 A detailed changelog, intended for programmers.  
+  
+0.1.0d  
+added ofLogToFile, changes at ofFullscreen support.  
   
 0.1.0c  
 changes at method wording, clear up code, final test  
