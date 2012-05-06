@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.04
- *  @version            0.1.0c
+ *  @modified           2012.05.06
+ *  @version            0.1.0d
  */
 
 #include "testApp.h"
@@ -54,6 +54,19 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+}
+
+//--------------------------------------------------------------
+void testApp::keyPressed(int key){
+	
+	switch (key) {
+		case 'f':
+			ofToggleFullscreen();
+			break;
+		default:
+			break;
+	}
 	
 }
 
