@@ -1,5 +1,5 @@
 /**
- *  ofxXmlDefaultSettings.h
+ *  ofxXmlDefaultSettings
  *
  *  
  *  The MIT License
@@ -34,54 +34,20 @@
  *  @version            0.1.0d
  */
 
-#include "ofxXmlSettings.h"
-
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-//#define OFXXMLDEFAULTSETTINGS_LOG
+#include "ofMain.h"
+#include "ofxXmlDefaultSettings.h"
 
 
+class testApp : public ofBaseApp{
 
-
-
-class ofxXmlDefaultSettings : public ofxXmlSettings {
-	
 	public:
-		ofxXmlDefaultSettings();
-		
-		
-		void load(string filepath);
-		void load();
-	
-		bool saveSettings();
-	
-		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
-		
-		string filepath;
-	
-	
-	private:
-		void createDefaultXml();
-		
-};
+		void setup();
+		void update();
+		void draw();
+		void keyPressed(int key);
+		void exit();
 
-
-
-
-
-class ofxXmlOscSettings {
-	
-	public:
-		ofxXmlOscSettings();
-	
-	
-		void init();
+		ofxXmlDefaultSettings defXML;
+		ofxXmlOscSettings defXMLosc;
 	
 };

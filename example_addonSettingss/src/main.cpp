@@ -1,5 +1,5 @@
 /**
- *  ofxXmlDefaultSettings.h
+ *  ofxXmlDefaultSettings
  *
  *  
  *  The MIT License
@@ -34,54 +34,19 @@
  *  @version            0.1.0d
  */
 
-#include "ofxXmlSettings.h"
+#include "ofMain.h"
+#include "testApp.h"
+#include "ofAppGlutWindow.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-//#define OFXXMLDEFAULTSETTINGS_LOG
+//========================================================================
+int main( ){
 
+    ofAppGlutWindow window;
+	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);			// <-------- setup the GL context
 
+	// this kicks off the running of my app
+	// can be OF_WINDOW or OF_FULLSCREEN
+	// pass in width and height too:
+	ofRunApp( new testApp());
 
-
-
-class ofxXmlDefaultSettings : public ofxXmlSettings {
-	
-	public:
-		ofxXmlDefaultSettings();
-		
-		
-		void load(string filepath);
-		void load();
-	
-		bool saveSettings();
-	
-		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
-		
-		string filepath;
-	
-	
-	private:
-		void createDefaultXml();
-		
-};
-
-
-
-
-
-class ofxXmlOscSettings {
-	
-	public:
-		ofxXmlOscSettings();
-	
-	
-		void init();
-	
-};
+}

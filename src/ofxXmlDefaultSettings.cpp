@@ -46,8 +46,8 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	
 	
 /**
- * load checks if a default xml file exist.
- * if no file is found, the method createDefaultXml()
+ * This method checks if a default xml file exist.
+ * if no file is found, the method "createDefaultXml()"
  * creats a xml file automaticly.
  *
  * @param filepath
@@ -242,4 +242,14 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 		ofLog() << "[ofxXmlDefaultSettings] Default xml file generated and saved!";
 		//ofLog() << "                        Filepath = " << filepath;
 	#endif
+}
+
+
+
+
+
+ofxXmlOscSettings::ofxXmlOscSettings(){}
+
+void ofxXmlOscSettings::init(){
+	cout << "test" << endl;
 }
