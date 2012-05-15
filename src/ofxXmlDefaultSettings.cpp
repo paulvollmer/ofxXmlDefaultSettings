@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.06
- *  @version            0.1.0d
+ *  @modified           2012.05.15
+ *  @version            0.1.0e
  */
 
 #include "ofxXmlDefaultSettings.h"

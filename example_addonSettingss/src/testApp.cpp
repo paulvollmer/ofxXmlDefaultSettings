@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.06
- *  @version            0.1.0d
+ *  @modified           2012.05.15
+ *  @version            0.1.0e
  */
 
 #include "testApp.h"
@@ -46,13 +46,16 @@ void testApp::setup(){
 	
 	// Initialize osc addon settings.
 	defXMLosc.init(defXML);
+	// get values from xml file.
 	cout << "Host = " << defXMLosc.getHost(defXML) << endl;
 	cout << "Port = " << defXMLosc.getPort(defXML) << endl;
 	
+	// change the osc settings vriable values.
 	defXMLosc.setHost(defXML, "169.192.0.1");
 	defXMLosc.setPort(defXML, 12345);
 	cout << "Host = " << defXMLosc.getHost(defXML) << endl;
 	cout << "Port = " << defXMLosc.getPort(defXML) << endl;
+	
 }
 
 //--------------------------------------------------------------
@@ -68,22 +71,12 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	
-	switch (key) {
-		case 'f':
-			ofToggleFullscreen();
-			break;
-		default:
-			break;
-	}
-	
 }
 
 //--------------------------------------------------------------
 void testApp::exit(){
 	
-	//defXML.setWindowPosition();
-	
-	// Save the current settings to xml.
+	// See "example_default"
 	defXML.saveSettings();
 	
 }
