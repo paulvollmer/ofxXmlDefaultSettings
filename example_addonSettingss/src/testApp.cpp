@@ -1,5 +1,5 @@
 /**
- *  ofxXmlDefaultSettings.h
+ *  ofxXmlDefaultSettings
  *
  *  
  *  The MIT License
@@ -34,68 +34,49 @@
  *  @version            0.1.0e
  */
 
-#include "ofxXmlSettings.h"
+#include "testApp.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-//#define OFXXMLDEFAULTSETTINGS_LOG
-
-
-
-
-
-/**
- * This is our base class.
- * with this class we create a default xml file with default content.
- * From this defaul file we grab our setting values.
- */
-class ofxXmlDefaultSettings : public ofxXmlSettings {
+//--------------------------------------------------------------
+void testApp::setup(){
 	
-	public:
-		ofxXmlDefaultSettings();
-		
-		
-		void load(string filepath);
-		void load();
-	
-		bool saveSettings();
-	
-		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
-		
-		string filepath;
+	// See "example_default"
+	defXML.load();
+	defXML.setSettings();
 	
 	
-	private:
-		void createDefaultXml();
-		
-};
-
-
-
-
-
-/**
- * This is our ofxOsc addon settigs class.
- * We can init, get and set values.
- */
-class ofxXmlOscSettings : public ofxXmlDefaultSettings {
+	// Initialize osc addon settings.
+	defXMLosc.init(defXML);
+	// get values from xml file.
+	cout << "Host = " << defXMLosc.getHost(defXML) << endl;
+	cout << "Port = " << defXMLosc.getPort(defXML) << endl;
 	
-	public:
-		ofxXmlOscSettings();
+	// change the osc settings vriable values.
+	defXMLosc.setHost(defXML, "169.192.0.1");
+	defXMLosc.setPort(defXML, 12345);
+	cout << "Host = " << defXMLosc.getHost(defXML) << endl;
+	cout << "Port = " << defXMLosc.getPort(defXML) << endl;
 	
-		void init(ofxXmlDefaultSettings XML);
+}
+
+//--------------------------------------------------------------
+void testApp::update(){
+
+}
+
+//--------------------------------------------------------------
+void testApp::draw(){
 	
-		string getHost(ofxXmlDefaultSettings XML);
-		int getPort(ofxXmlDefaultSettings XML);
+}
+
+//--------------------------------------------------------------
+void testApp::keyPressed(int key){
 	
-		void setHost(ofxXmlDefaultSettings XML, string h);
-		void setPort(ofxXmlDefaultSettings XML, int p);
+}
+
+//--------------------------------------------------------------
+void testApp::exit(){
 	
-};
+	// See "example_default"
+	defXML.saveSettings();
+	
+}
