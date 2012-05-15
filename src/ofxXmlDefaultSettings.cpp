@@ -250,6 +250,39 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 
 ofxXmlOscSettings::ofxXmlOscSettings(){}
 
-void ofxXmlOscSettings::init(){
-	cout << "test" << endl;
+void ofxXmlOscSettings::init(ofxXmlDefaultSettings XML){
+	if(!XML.tagExists("ofxOsc", 0)){
+		cout << "Create osc tags" << endl;
+		
+		XML.addTag("ofxOsc");
+		XML.pushTag("ofxOsc", 0);
+		XML.addValue("host", "127.0.0.1");
+		XML.addValue("port", 8000);
+		XML.popTag();
+		XML.saveFile(XML.filepath);
+	}
+	else {
+		cout << "OK" << endl;
+	}
+
+	
+}
+
+
+string ofxXmlOscSettings::getHost(ofxXmlDefaultSettings XML){
+	return XML.getValue("ofxOsc:host", "127.0.0.1", 0);
+}
+
+int ofxXmlOscSettings::getPort(ofxXmlDefaultSettings XML){
+	return XML.getValue("ofxOsc:port", 8000, 0);
+}
+
+
+
+void ofxXmlOscSettings::setHost(ofxXmlDefaultSettings XML, string h){
+	XML.setValue("ofxOsc::host", h, 0);
+}
+
+void ofxXmlOscSettings::setPort(ofxXmlDefaultSettings XML, int p){
+	XML.setValue("ofxOsc::port", p, 0);
 }

@@ -76,12 +76,17 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 
 
 
-class ofxXmlOscSettings {
+class ofxXmlOscSettings : public ofxXmlDefaultSettings {
 	
 	public:
 		ofxXmlOscSettings();
 	
+		void init(ofxXmlDefaultSettings XML);
 	
-		void init();
+		string getHost(ofxXmlDefaultSettings XML);
+		int getPort(ofxXmlDefaultSettings XML);
+	
+		void setHost(ofxXmlDefaultSettings XML, string h);
+		void setPort(ofxXmlDefaultSettings XML, int p);
 	
 };
