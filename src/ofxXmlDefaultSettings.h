@@ -43,6 +43,11 @@
 
 
 
+/**
+ * This is our base class.
+ * with this class we create a default xml file with default content.
+ * From this defaul file we grab our setting values.
+ */
 class ofxXmlDefaultSettings : public ofxXmlSettings {
 	
 	public:
@@ -76,6 +81,10 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 
 
 
+/**
+ * This is our ofxOsc addon settigs class.
+ * We can init, get and set values.
+ */
 class ofxXmlOscSettings : public ofxXmlDefaultSettings {
 	
 	public:
