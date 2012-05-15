@@ -13,6 +13,7 @@ openFrameworks core variables:
 - fullscreen  
 - cursor  
 - escape quits app  
+- log to file  
   
 **Current Version:**  
 0.1.0d (stable and versioned using [semantic versioning](http://semver.org/))   
