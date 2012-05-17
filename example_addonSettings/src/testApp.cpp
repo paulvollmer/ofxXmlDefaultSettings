@@ -44,20 +44,26 @@ void testApp::setup(){
 	defXML.setSettings();
 	
 	
-	// Initialize osc addon settings.
+	// Initialize osc sender addon settings.
 	defXMLosc.initSender(defXML);
-	// get values from xml file.
-	cout << "Host = " << defXMLosc.getSenderHost(defXML) << endl;
-	cout << "Port = " << defXMLosc.getSenderPort(defXML) << endl;
+	// or initialize with host and port variables
+	//defXMLosc.initSender(defXML, "127.0.0.101", 9000);
 	
-	// change the osc settings vriable values.
-	defXMLosc.setSenderHost(defXML, "169.192.0.1");
+	sender.setup(defXMLosc.getSenderHost(defXML),
+				 defXMLosc.getSenderPort(defXML));
+	
+	// change the osc sender settings variable.
+	/*defXMLosc.setSenderHost(defXML, "90.60.90.0");
 	defXMLosc.setSenderPort(defXML, 12345);
-	cout << "Host = " << defXMLosc.getSenderHost(defXML) << endl;
-	cout << "Port = " << defXMLosc.getSenderPort(defXML) << endl;
+	cout << "Sender Host = " << defXMLosc.getSenderHost(defXML) << endl;
+	cout << "Sender Port = " << defXMLosc.getSenderPort(defXML) << endl;*/
 	
 	
-	//receiver.setup(PORT);
+	
+	// Initialize osc sender addon settings.
+	defXMLosc.initReceiver(defXML);
+	
+	receiver.setup(defXMLosc.getReceiverPort(defXML));
 	
 }
 

@@ -52,6 +52,7 @@ class testApp : public ofBaseApp{
 		ofxXmlDefaultSettings   defXML;
 		ofxXmlOscSettings       defXMLosc;
 	
+		ofxOscSender sender;
 		ofxOscReceiver receiver;
 	
 	
