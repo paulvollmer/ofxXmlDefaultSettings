@@ -90,12 +90,13 @@ class ofxXmlOscSettings : public ofxXmlDefaultSettings {
 	public:
 		ofxXmlOscSettings();
 	
-		void init(ofxXmlDefaultSettings XML);
+		void initSender(ofxXmlDefaultSettings XML, string host, int port);
+		void initSender(ofxXmlDefaultSettings XML);
 	
-		string getHost(ofxXmlDefaultSettings XML);
-		int getPort(ofxXmlDefaultSettings XML);
+		string getSenderHost(ofxXmlDefaultSettings XML);
+		int getSenderPort(ofxXmlDefaultSettings XML);
 	
-		void setHost(ofxXmlDefaultSettings XML, string h);
-		void setPort(ofxXmlDefaultSettings XML, int p);
+		void setSenderHost(ofxXmlDefaultSettings XML, string h);
+		void setSenderPort(ofxXmlDefaultSettings XML, int p);
 	
 };

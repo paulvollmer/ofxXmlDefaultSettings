@@ -37,6 +37,8 @@
 #include "ofMain.h"
 #include "ofxXmlDefaultSettings.h"
 
+#include "ofxOsc.h"
+
 
 class testApp : public ofBaseApp{
 
@@ -48,6 +50,9 @@ class testApp : public ofBaseApp{
 		void exit();
 
 		ofxXmlDefaultSettings defXML;
+	
 		ofxXmlOscSettings defXMLosc;
+		ofxOscReceiver receiver;
+	
 	
 };
