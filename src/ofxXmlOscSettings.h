@@ -36,8 +36,11 @@
 
 #include "ofxXmlSettings.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-#define OFXXMLDEFAULTSETTINGS_LOG
+// If "OFXXMLOSCSETTINGS_LOG" is defined, the addon prints out ofLog messages.
+#define OFXXMLOSCSETTINGS_LOG
+
+#define DEFAULT_HOST "localhost"
+#define DEFAULT_PORT 12345
 
 
 
@@ -52,13 +55,25 @@ class ofxXmlOscSettings : public ofxXmlSettings {
 	public:
 		ofxXmlOscSettings();
 	
-		void initSender(ofxXmlDefaultSettings XML, string host, int port);
-		void initSender(ofxXmlDefaultSettings XML);
 	
-		string getSenderHost(ofxXmlDefaultSettings XML);
-		int getSenderPort(ofxXmlDefaultSettings XML);
+		// Sender
+		void initSender(ofxXmlSettings XML, string host, int port);
+		void initSender(ofxXmlSettings XML);
 	
-		void setSenderHost(ofxXmlDefaultSettings XML, string h);
-		void setSenderPort(ofxXmlDefaultSettings XML, int p);
+		string getSenderHost(ofxXmlSettings XML);
+		int getSenderPort(ofxXmlSettings XML);
+	
+		void setSenderHost(ofxXmlSettings XML, string h);
+		void setSenderPort(ofxXmlSettings XML, int p);
+	
+	
+		// Receiver
+		void initReceiver(ofxXmlSettings XML, int port);
+		void initReceiver(ofxXmlSettings XML);
+	
+		int getReceiverPort(ofxXmlSettings XML);
+	
+		void setReceiverPort(ofxXmlSettings XML, int port);
+	
 	
 };

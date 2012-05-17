@@ -55,23 +55,31 @@ ofxXmlOscSettings::ofxXmlOscSettings(){}
  * @param port
  *        Port number
  */
-void ofxXmlOscSettings::initSender(ofxXmlDefaultSettings XML, string host, int port){
-	if(!XML.tagExists("ofxOsc", 0)){
-		XML.addTag("ofxOsc");
-		XML.pushTag("ofxOsc", 0);
+void ofxXmlOscSettings::initSender(ofxXmlSettings XML, string host, int port){
+	if(!XML.tagExists("ofxOscSender", 0)){
+		XML.addTag("ofxOscSender");
+		XML.pushTag("ofxOscSender", 0);
 		XML.addValue("host", host);
 		XML.addValue("port", port);
 		XML.popTag();
-		XML.saveFile(XML.filepath);
+		//XML.saveFile(XML.filepath);
 	
-		#ifdef OFXXMLDEFAULTSETTINGS_LOG
-			cout << "Create osc tags" << endl;
+		#ifdef OFXXMLOSCSETTINGS_LOG
+			ofLog() << "[ofxXmlOscSettings] No XML tags found. Create ofxOscSender XML content";
 		#endif
 	} else {
-		#ifdef OFXXMLDEFAULTSETTINGS_LOG
-			cout << "OK" << endl;
+		setSenderHost(XML, host);
+		setSenderPort(XML, port);
+		
+		#ifdef OFXXMLOSCSETTINGS_LOG
+			ofLog() << "[ofxXmlOscSettings] XML tags ok";
 		#endif
 	}
+	
+	#ifdef OFXXMLOSCSETTINGS_LOG
+		ofLog() << "[ofxXmlOscSettings] Host = " << host;
+		ofLog() << "[ofxXmlOscSettings] Port = " << port;
+	#endif
 }
 
 /**
@@ -80,8 +88,8 @@ void ofxXmlOscSettings::initSender(ofxXmlDefaultSettings XML, string host, int p
  * Port: 1234
  * @see initSender(ofxXmlDefaultSettings XML, string host, int port)
  */
-void ofxXmlOscSettings::initSender(ofxXmlDefaultSettings XML){
-	initSender(XML, "127.0.0.1", 1234);
+void ofxXmlOscSettings::initSender(ofxXmlSettings XML){
+	initSender(XML, DEFAULT_HOST, DEFAULT_PORT);
 }
 
 
@@ -92,8 +100,8 @@ void ofxXmlOscSettings::initSender(ofxXmlDefaultSettings XML){
  *        A xml file.
  * @return Host string
  */
-string ofxXmlOscSettings::getSenderHost(ofxXmlDefaultSettings XML){
-	return XML.getValue("ofxOsc:host", "127.0.0.1", 0);
+string ofxXmlOscSettings::getSenderHost(ofxXmlSettings XML){
+	return XML.getValue("ofxOscSender:host", DEFAULT_HOST, 0);
 }
 
 /**
@@ -103,8 +111,8 @@ string ofxXmlOscSettings::getSenderHost(ofxXmlDefaultSettings XML){
  *        A xml file.
  * @return Port number
  */
-int ofxXmlOscSettings::getSenderPort(ofxXmlDefaultSettings XML){
-	return XML.getValue("ofxOsc:port", 8000, 0);
+int ofxXmlOscSettings::getSenderPort(ofxXmlSettings XML){
+	return XML.getValue("ofxOscSender:port", DEFAULT_PORT, 0);
 }
 
 
@@ -116,8 +124,8 @@ int ofxXmlOscSettings::getSenderPort(ofxXmlDefaultSettings XML){
  * @param host
  *        Host name or ip
  */
-void ofxXmlOscSettings::setSenderHost(ofxXmlDefaultSettings XML, string host){
-	XML.setValue("ofxOsc::host", host, 0);
+void ofxXmlOscSettings::setSenderHost(ofxXmlSettings XML, string host){
+	XML.setValue("ofxOscSender:host", host, 0);
 }
 
 /**
@@ -128,6 +136,55 @@ void ofxXmlOscSettings::setSenderHost(ofxXmlDefaultSettings XML, string host){
  * @param port
  *        Port number
  */
-void ofxXmlOscSettings::setSenderPort(ofxXmlDefaultSettings XML, int port){
-	XML.setValue("ofxOsc::port", port, 0);
+void ofxXmlOscSettings::setSenderPort(ofxXmlSettings XML, int port){
+	XML.setValue("ofxOscSender:port", port, 0);
+}
+
+
+
+
+
+
+
+
+
+/**
+ *
+ */
+void ofxXmlOscSettings::initReceiver(ofxXmlSettings XML, int port){
+	if(!XML.tagExists("ofxOscReceiver", 0)){
+		XML.addTag("ofxOscReceiver");
+		XML.pushTag("ofxOscReceiver", 0);
+		XML.addValue("port", port);
+		XML.popTag();
+		
+		#ifdef OFXXMLOSCSETTINGS_LOG
+			cout << "[ofxXmlOscSettings] No XML tags found. Create ofxOscReceiver XML content" << endl;
+		#endif
+	} else {
+		setReceiverPort(XML, port);
+		#ifdef OFXXMLOSCSETTINGS_LOG
+			cout << "[ofxXmlOscSettings] XML tags ok" << endl;
+		#endif
+	}
+}
+
+void ofxXmlOscSettings::initReceiver(ofxXmlSettings XML){
+	initReceiver(XML, 1234);
+}
+
+
+/**
+ *
+ */
+int ofxXmlOscSettings::getReceiverPort(ofxXmlSettings XML){
+	return XML.getValue("ofxOscReceiver:port", DEFAULT_PORT, 0);
+}
+
+
+/**
+ *
+ */
+void ofxXmlOscSettings::setReceiverPort(ofxXmlSettings XML, int port){
+	XML.setValue("ofxOscReceiver:port", port, 0);
 }
