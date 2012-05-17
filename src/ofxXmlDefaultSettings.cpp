@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.15
- *  @version            0.1.0e
+ *  @modified           2012.05.17
+ *  @version            0.1.1
  */
 
 #include "ofxXmlDefaultSettings.h"
@@ -245,94 +245,4 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 		ofLog() << "[ofxXmlDefaultSettings] Default xml file generated and saved!";
 		//ofLog() << "                        Filepath = " << filepath;
 	#endif
-}
-
-
-
-
-
-
-/**
- * Constructor
- */
-ofxXmlOscSettings::ofxXmlOscSettings(){}
-
-
-/**
- * Check if a ofxOscSender tag exist.
- * If no tag found, create a default xml structure.
- *
- * @param XML
- *        A xml file.
- * @param host
- *        Host name or ip
- * @param port
- *        Port number
- */
-void ofxXmlOscSettings::initSender(ofxXmlDefaultSettings XML, string host, int port){
-	if(!XML.tagExists("ofxOsc", 0)){
-		XML.addTag("ofxOsc");
-		XML.pushTag("ofxOsc", 0);
-		XML.addValue("host", host);
-		XML.addValue("port", port);
-		XML.popTag();
-		XML.saveFile(XML.filepath);
-		
-		cout << "Create osc tags" << endl;
-	}
-	else {
-		cout << "OK" << endl;
-	}
-}
-
-void ofxXmlOscSettings::initSender(ofxXmlDefaultSettings XML){
-	initSender(XML, "127.0.0.1", 8000);
-}
-
-
-/**
- * Get the Host name or ip
- *
- * @param XML
- *        A xml file.
- * @return Host string
- */
-string ofxXmlOscSettings::getSenderHost(ofxXmlDefaultSettings XML){
-	return XML.getValue("ofxOsc:host", "127.0.0.1", 0);
-}
-
-/**
- * Get the Port number
- *
- * @param XML
- *        A xml file.
- * @return Port number
- */
-int ofxXmlOscSettings::getSenderPort(ofxXmlDefaultSettings XML){
-	return XML.getValue("ofxOsc:port", 8000, 0);
-}
-
-
-/**
- * Set the Host name.
- *
- * @param XML
- *        A xml file.
- * @param host
- *        Host name or ip
- */
-void ofxXmlOscSettings::setSenderHost(ofxXmlDefaultSettings XML, string host){
-	XML.setValue("ofxOsc::host", host, 0);
-}
-
-/**
- * Set the Port number
- *
- * @param XML
- *        A xml file.
- * @param port
- *        Port number
- */
-void ofxXmlOscSettings::setSenderPort(ofxXmlDefaultSettings XML, int port){
-	XML.setValue("ofxOsc::port", port, 0);
 }

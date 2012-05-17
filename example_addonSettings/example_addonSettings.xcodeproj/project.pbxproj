@@ -24,6 +24,7 @@
 		4E43BCC6156513D9003485C0 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E43BCB6156513D9003485C0 /* ofxOscMessage.cpp */; };
 		4E43BCC7156513D9003485C0 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E43BCB8156513D9003485C0 /* ofxOscReceiver.cpp */; };
 		4E43BCC8156513D9003485C0 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E43BCBA156513D9003485C0 /* ofxOscSender.cpp */; };
+		4E43BDA115651F98003485C0 /* ofxXmlOscSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E43BD9F15651F98003485C0 /* ofxXmlOscSettings.cpp */; };
 		4E443D28154B0C560002A8AE /* ofxXmlDefaultSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E443D26154B0C560002A8AE /* ofxXmlDefaultSettings.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -116,6 +117,8 @@
 		4E43BCB9156513D9003485C0 /* ofxOscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
 		4E43BCBA156513D9003485C0 /* ofxOscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
 		4E43BCBB156513D9003485C0 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
+		4E43BD9F15651F98003485C0 /* ofxXmlOscSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlOscSettings.cpp; sourceTree = "<group>"; };
+		4E43BDA015651F98003485C0 /* ofxXmlOscSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlOscSettings.h; sourceTree = "<group>"; };
 		4E443D24154B0C560002A8AE /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = install.xml; path = ../install.xml; sourceTree = SOURCE_ROOT; };
 		4E443D26154B0C560002A8AE /* ofxXmlDefaultSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlDefaultSettings.cpp; sourceTree = "<group>"; };
 		4E443D27154B0C560002A8AE /* ofxXmlDefaultSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlDefaultSettings.h; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 			children = (
 				4E443D26154B0C560002A8AE /* ofxXmlDefaultSettings.cpp */,
 				4E443D27154B0C560002A8AE /* ofxXmlDefaultSettings.h */,
+				4E43BD9F15651F98003485C0 /* ofxXmlOscSettings.cpp */,
+				4E43BDA015651F98003485C0 /* ofxXmlOscSettings.h */,
 			);
 			name = src;
 			path = ../src;
@@ -568,6 +573,7 @@
 				4E43BCC6156513D9003485C0 /* ofxOscMessage.cpp in Sources */,
 				4E43BCC7156513D9003485C0 /* ofxOscReceiver.cpp in Sources */,
 				4E43BCC8156513D9003485C0 /* ofxOscSender.cpp in Sources */,
+				4E43BDA115651F98003485C0 /* ofxXmlOscSettings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

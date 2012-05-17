@@ -1,5 +1,5 @@
 /**
- *  ofxXmlDefaultSettings
+ *  ofxXmlDefaultSettings.h
  *
  *  
  *  The MIT License
@@ -34,25 +34,31 @@
  *  @version            0.1.1
  */
 
-#include "ofMain.h"
-#include "ofxXmlDefaultSettings.h"
-#include "ofxXmlOscSettings.h"
-#include "ofxOsc.h"
+#include "ofxXmlSettings.h"
+
+// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
+#define OFXXMLDEFAULTSETTINGS_LOG
 
 
-class testApp : public ofBaseApp{
 
+
+
+/**
+ * This is our ofxOsc addon settigs class.
+ * We can init, get and set values.
+ */
+class ofxXmlOscSettings : public ofxXmlSettings {
+	
 	public:
-		void setup();
-		void update();
-		void draw();
-		void keyPressed(int key);
-		void exit();
-
-		ofxXmlDefaultSettings   defXML;
-		ofxXmlOscSettings       defXMLosc;
+		ofxXmlOscSettings();
 	
-		ofxOscReceiver receiver;
+		void initSender(ofxXmlDefaultSettings XML, string host, int port);
+		void initSender(ofxXmlDefaultSettings XML);
 	
+		string getSenderHost(ofxXmlDefaultSettings XML);
+		int getSenderPort(ofxXmlDefaultSettings XML);
+	
+		void setSenderHost(ofxXmlDefaultSettings XML, string h);
+		void setSenderPort(ofxXmlDefaultSettings XML, int p);
 	
 };

@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.15
- *  @version            0.1.0e
+ *  @modified           2012.05.17
+ *  @version            0.1.1
  */
 
 #include "testApp.h"

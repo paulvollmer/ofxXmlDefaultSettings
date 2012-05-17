@@ -30,8 +30,8 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.15
- *  @version            0.1.0e
+ *  @modified           2012.05.17
+ *  @version            0.1.1
  */
 
 #include "ofxXmlSettings.h"
@@ -75,28 +75,4 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 	private:
 		void createDefaultXml();
 		
-};
-
-
-
-
-
-/**
- * This is our ofxOsc addon settigs class.
- * We can init, get and set values.
- */
-class ofxXmlOscSettings : public ofxXmlDefaultSettings {
-	
-	public:
-		ofxXmlOscSettings();
-	
-		void initSender(ofxXmlDefaultSettings XML, string host, int port);
-		void initSender(ofxXmlDefaultSettings XML);
-	
-		string getSenderHost(ofxXmlDefaultSettings XML);
-		int getSenderPort(ofxXmlDefaultSettings XML);
-	
-		void setSenderHost(ofxXmlDefaultSettings XML, string h);
-		void setSenderPort(ofxXmlDefaultSettings XML, int p);
-	
 };
