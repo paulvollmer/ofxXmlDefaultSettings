@@ -1,5 +1,5 @@
 /**
- *  ofxXmlDefaultSettings.h
+ *  ofxXmlDefaultSettings
  *
  *  
  *  The MIT License
@@ -34,45 +34,58 @@
  *  @version            0.1.1
  */
 
-#include "ofxXmlSettings.h"
+#include "testApp.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-//#define OFXXMLDEFAULTSETTINGS_LOG
-
-
-
-
-
-/**
- * This is our base class.
- * with this class we create a default xml file with default content.
- * From this defaul file we grab our setting values.
- */
-class ofxXmlDefaultSettings : public ofxXmlSettings {
+//--------------------------------------------------------------
+void testApp::setup(){
 	
-	public:
-		ofxXmlDefaultSettings();
-		
-		
-		void load(string filepath);
-		void load();
-	
-		bool saveSettings();
-	
-		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
-		
-		string filepath;
+	// See "example_default"
+	defXML.load();
+	defXML.setSettings();
 	
 	
-	private:
-		void createDefaultXml();
-		
-};
+	// Initialize osc sender addon settings.
+	defXMLosc.initSender(defXML);
+	// or initialize with host and port variables
+	//defXMLosc.initSender(defXML, "127.0.0.101", 9000);
+	
+	sender.setup(defXMLosc.getSenderHost(defXML),
+				 defXMLosc.getSenderPort(defXML));
+	
+	// change the osc sender settings variable.
+	/*defXMLosc.setSenderHost(defXML, "90.60.90.0");
+	defXMLosc.setSenderPort(defXML, 12345);
+	cout << "Sender Host = " << defXMLosc.getSenderHost(defXML) << endl;
+	cout << "Sender Port = " << defXMLosc.getSenderPort(defXML) << endl;*/
+	
+	
+	
+	// Initialize osc sender addon settings.
+	defXMLosc.initReceiver(defXML);
+	
+	receiver.setup(defXMLosc.getReceiverPort(defXML));
+	
+}
+
+//--------------------------------------------------------------
+void testApp::update(){
+
+}
+
+//--------------------------------------------------------------
+void testApp::draw(){
+	
+}
+
+//--------------------------------------------------------------
+void testApp::keyPressed(int key){
+	
+}
+
+//--------------------------------------------------------------
+void testApp::exit(){
+	
+	// See "example_default"
+	defXML.saveSettings();
+	
+}

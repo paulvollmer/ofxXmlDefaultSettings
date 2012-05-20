@@ -36,43 +36,44 @@
 
 #include "ofxXmlSettings.h"
 
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-//#define OFXXMLDEFAULTSETTINGS_LOG
+// If "OFXXMLOSCSETTINGS_LOG" is defined, the addon prints out ofLog messages.
+#define OFXXMLOSCSETTINGS_LOG
+
+#define DEFAULT_HOST "localhost"
+#define DEFAULT_PORT 12345
 
 
 
 
 
 /**
- * This is our base class.
- * with this class we create a default xml file with default content.
- * From this defaul file we grab our setting values.
+ * This is our ofxOsc addon settigs class.
+ * We can init, get and set values.
  */
-class ofxXmlDefaultSettings : public ofxXmlSettings {
+class ofxXmlOscSettings : public ofxXmlSettings {
 	
 	public:
-		ofxXmlDefaultSettings();
-		
-		
-		void load(string filepath);
-		void load();
-	
-		bool saveSettings();
-	
-		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
-		
-		string filepath;
+		ofxXmlOscSettings();
 	
 	
-	private:
-		void createDefaultXml();
-		
+		// Sender
+		void initSender(ofxXmlSettings XML, string host, int port);
+		void initSender(ofxXmlSettings XML);
+	
+		string getSenderHost(ofxXmlSettings XML);
+		int getSenderPort(ofxXmlSettings XML);
+	
+		void setSenderHost(ofxXmlSettings XML, string h);
+		void setSenderPort(ofxXmlSettings XML, int p);
+	
+	
+		// Receiver
+		void initReceiver(ofxXmlSettings XML, int port);
+		void initReceiver(ofxXmlSettings XML);
+	
+		int getReceiverPort(ofxXmlSettings XML);
+	
+		void setReceiverPort(ofxXmlSettings XML, int port);
+	
+	
 };

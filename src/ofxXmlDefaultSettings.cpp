@@ -30,14 +30,17 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.06
- *  @version            0.1.0d
+ *  @modified           2012.05.17
+ *  @version            0.1.1
  */
 
 #include "ofxXmlDefaultSettings.h"
 
 
 
+/**
+ * Constructor
+ */
 ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	// Setting default filepath. if load() is called, 
 	// the filepath will be used to save the xml file.
@@ -46,8 +49,8 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	
 	
 /**
- * load checks if a default xml file exist.
- * if no file is found, the method createDefaultXml()
+ * This method checks if a default xml file exist.
+ * if no file is found, the method "createDefaultXml()"
  * creats a xml file automaticly.
  *
  * @param filepath

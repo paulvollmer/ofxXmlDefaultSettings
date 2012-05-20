@@ -31,7 +31,7 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @modified           2012.05.06
- *  @version            0.1.0d
+ *  @version            0.1.1
  */
 
 #include "ofMain.h"
