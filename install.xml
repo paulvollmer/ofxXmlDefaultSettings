@@ -1,6 +1,6 @@
 <install>
     <name>ofxXmlDefaultSettings</name>
-    <version>0.1.0d</version>
+    <version>0.1.1</version>
     <author>Paul Vollmer</author>
     <url>http://www.wng.cc</url>
     
@@ -10,9 +10,11 @@
         <!-- ===================================================================== -->
         
         <src>
-            <folder name="addons/ofxXmlDefaultSettings/src">	
+            <folder name="addons/ofxXmlDefaultSettings/src">
                 <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlDefaultSettings.h</file>
                 <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlDefaultSettings.cpp</file>
+                <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlOscSettings.h</file>
+                <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlOscSettings.cpp</file>
             </folder>
         </src>
         

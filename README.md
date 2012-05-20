@@ -3,8 +3,7 @@
 
 **General Information**  
 ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings.  
-Also you can use this xml to store other variables.  
-
+  
 openFrameworks core variables:  
 - window position  
 - window size  
@@ -15,8 +14,13 @@ openFrameworks core variables:
 - escape quits app  
 - log to file  
   
+The same xml stuff works for the following addons:  
+ofxOsc (ofxOscSender, ofxOscReceiver)  
+  
+Also you can use the xml to store other variables.  
+  
 **Current Version:**  
-0.1.0d (stable and versioned using [semantic versioning](http://semver.org/))   
+0.1.1 (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
 MacOS 10.6   
@@ -33,6 +37,9 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 
 ## Changelog  
 A detailed changelog, intended for programmers.  
+  
+0.1.1  
+added ofxOsc settings  
   
 0.1.0d  
 added ofLogToFile, changes at ofFullscreen support.  

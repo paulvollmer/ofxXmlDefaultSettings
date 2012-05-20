@@ -1,5 +1,5 @@
 /**
- *  ofxXmlDefaultSettings.h
+ *  ofxXmlDefaultSettings
  *
  *  
  *  The MIT License
@@ -34,45 +34,26 @@
  *  @version            0.1.1
  */
 
-#include "ofxXmlSettings.h"
-
-// If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
-//#define OFXXMLDEFAULTSETTINGS_LOG
-
-
+#include "ofMain.h"
+#include "ofxXmlDefaultSettings.h"
+#include "ofxXmlOscSettings.h"
+#include "ofxOsc.h"
 
 
+class testApp : public ofBaseApp{
 
-/**
- * This is our base class.
- * with this class we create a default xml file with default content.
- * From this defaul file we grab our setting values.
- */
-class ofxXmlDefaultSettings : public ofxXmlSettings {
-	
 	public:
-		ofxXmlDefaultSettings();
-		
-		
-		void load(string filepath);
-		void load();
+		void setup();
+		void update();
+		void draw();
+		void keyPressed(int key);
+		void exit();
+
+		ofxXmlDefaultSettings   defXML;
+		ofxXmlOscSettings       defXMLosc;
 	
-		bool saveSettings();
-	
-		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
-		
-		string filepath;
+		ofxOscSender sender;
+		ofxOscReceiver receiver;
 	
 	
-	private:
-		void createDefaultXml();
-		
 };
