@@ -59,6 +59,7 @@ void testApp::setup(){
 		tempVar2 = defXML.getValue("wng:myVar2", 0, 0);
 		tempVar3 = defXML.getValue("wng:myVar3", 0, 0);
 	} else {
+		// if no default parameter exist, let create some.
 		tempVar1 = 100;
 		tempVar2 = 200;
 		tempVar3 = 300;
