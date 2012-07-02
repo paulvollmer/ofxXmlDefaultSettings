@@ -25,13 +25,13 @@
  *  THE SOFTWARE.
  *
  *  
- *  @testet_oF          0.07
- *  @testet_plattform   MacOs 10.6
+ *  @testet_oF          0071
+ *  @testet_plattform   MacOs 10.6+
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.17
- *  @version            0.1.1
+ *  @modified           2012.07.02
+ *  @version            0.1.2
  */
 
 #ifndef _OFXXMLOSCSETTINGS
