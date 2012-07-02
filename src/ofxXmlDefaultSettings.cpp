@@ -25,13 +25,13 @@
  *  THE SOFTWARE.
  *
  *  
- *  @testet_oF          0.07
- *  @testet_plattform   MacOs 10.6
+ *  @testet_oF          0071
+ *  @testet_plattform   MacOs 10.6+
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.05.17
- *  @version            0.1.1
+ *  @modified           2012.07.02
+ *  @version            0.1.2
  */
 
 #include "ofxXmlDefaultSettings.h"
@@ -203,10 +203,10 @@ void ofxXmlDefaultSettings::setLogToFile(){
 			if(!dir.exists()){
 				dir.create(true);
 			}
-			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs"+"/"+tempName, 1);
+			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs"+"/"+ofGetTimestampString()+"_"+tempName, 1);
 			
 		} else {
-			ofLogToFile(tempPath+"/"+tempName, 1);
+			ofLogToFile(tempPath+"/"+ofGetTimestampString()+"_"+tempName, 1);
 		}
 
 	}

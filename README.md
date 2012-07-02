@@ -20,14 +20,14 @@ ofxOsc (ofxOscSender, ofxOscReceiver)
 Also you can use the xml to store other variables.  
   
 **Current Version:**  
-0.1.1 (stable and versioned using [semantic versioning](http://semver.org/))   
+0.1.2 (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
-MacOS 10.6   
+MacOS 10.6+   
 Win ???  
 Linux ???  
 **openFrameworks version:**  
-0.07  
+0071  
 **Dependencies**  
 ofxXmlSettings  
 
@@ -37,6 +37,9 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 
 ## Changelog  
 A detailed changelog, intended for programmers.  
+  
+0.1.2  
+added missing #ifndef  
   
 0.1.1  
 added ofxOsc settings  
