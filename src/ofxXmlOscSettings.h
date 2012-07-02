@@ -34,6 +34,9 @@
  *  @version            0.1.1
  */
 
+#ifndef _OFXXMLOSCSETTINGS
+#define _OFXXMLOSCSETTINGS
+
 #include "ofxXmlSettings.h"
 
 // If "OFXXMLOSCSETTINGS_LOG" is defined, the addon prints out ofLog messages.
@@ -77,3 +80,5 @@ class ofxXmlOscSettings : public ofxXmlSettings {
 	
 	
 };
+
+#endif

@@ -34,6 +34,9 @@
  *  @version            0.1.1
  */
 
+#ifndef _OFXXMLDEFAULTSETTINGS
+#define _OFXXMLDEFAULTSETTINGS
+
 #include "ofxXmlSettings.h"
 
 // If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages.
@@ -76,3 +79,5 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void createDefaultXml();
 		
 };
+
+#endif
