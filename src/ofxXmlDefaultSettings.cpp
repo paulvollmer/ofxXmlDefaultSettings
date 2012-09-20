@@ -44,15 +44,16 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	// the filepath will be used to save the xml file.
 	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
 	
-	// Set default xml settings version.
-	XML_VERSION = "0.2.0";
+	// Set default xml settings version and url.
+	XML_ATTRIBUTE_VERSION = "0.2.0";
+	XML_ATTRIBUTE_URL = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
 	
 	// Set default names of xml tags.
 	XML_TAG_MAIN = "ofxXmlDefaultSettings";
 	XML_TAG_OFCORE = "ofCore";
 	XML_TAG_OFADDONS = "ofAddons";
 	XML_TAG_CUSTOM = "custom";
-	XML_TAG_DEFAULT = "item";
+	//XML_TAG_DEFAULT = "item";
 }
 
 
@@ -75,7 +76,7 @@ void ofxXmlDefaultSettings::load(string filepath){
 	this->filepath = filepath;
 	
 	if(loadFile(filepath)){
-		if(getAttribute(XML_TAG_MAIN, "version", "0", 0) == XML_VERSION){
+		if(getAttribute(XML_TAG_MAIN, "version", "0", 0) == XML_ATTRIBUTE_VERSION){
 			statusMessage = "Default xml loaded!";
 		} else {
 			statusMessage = "Default xml loaded! Not correct file version!";
@@ -244,26 +245,40 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	
 	// Add the main tag and a version attribute to xml file.
 	xml.addTag(XML_TAG_MAIN);
-	xml.addAttribute(XML_TAG_MAIN, "version", XML_VERSION, 0);
+	xml.addAttribute(XML_TAG_MAIN, "version", XML_ATTRIBUTE_VERSION, 0);
+	xml.addAttribute(XML_TAG_MAIN, "url", XML_ATTRIBUTE_URL, 0);
 	xml.pushTag(XML_TAG_MAIN, 0);
 	
-		xml.addTag(XML_TAG_OFCORE);
-		xml.pushTag(XML_TAG_OFCORE, 0);
-			xml.addValue("ofFrameRate", 60);
-			xml.addValue("ofFullscreen", false);
-			xml.addTag("ofWindowShape");
-			xml.addAttribute("ofWindowShape", "width", 1024, 0);
-			xml.addAttribute("ofWindowShape", "height", 768, 0);
-			xml.addTag("ofWindowPosition");
-			xml.addAttribute("ofWindowPosition", "x", 0, 0);
-			xml.addAttribute("ofWindowPosition", "y", 44, 0);
-			xml.addValue("ofWindowTitle", "openFrameworks Application");
-			xml.addValue("ofCursor", false);
-			xml.addValue("ofEscapeQuitsApp", false);
-			xml.addValue("ofLogToFile", true);
-			xml.addAttribute("ofLogToFile", "filepath", "NULL", 0);
-			xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
-		xml.popTag(); // End XML_TAG_OFCORE
+	// Core stuff
+	xml.addTag(XML_TAG_OFCORE);
+	xml.pushTag(XML_TAG_OFCORE, 0);
+	xml.addValue("ofFrameRate", 60);
+	xml.addValue("ofFullscreen", false);
+	xml.addTag("ofWindowShape");
+	xml.addAttribute("ofWindowShape", "width", 1024, 0);
+	xml.addAttribute("ofWindowShape", "height", 768, 0);
+	xml.addTag("ofWindowPosition");
+	xml.addAttribute("ofWindowPosition", "x", 0, 0);
+	xml.addAttribute("ofWindowPosition", "y", 44, 0);
+	xml.addValue("ofWindowTitle", "openFrameworks Application");
+	xml.addValue("ofCursor", false);
+	xml.addValue("ofEscapeQuitsApp", false);
+	xml.addValue("ofLogToFile", true);
+	xml.addAttribute("ofLogToFile", "filepath", "NULL", 0);
+	xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
+	xml.popTag(); // End XML_TAG_OFCORE
+	
+	// Addons stuff
+	xml.addTag(XML_TAG_OFADDONS);
+	xml.pushTag(XML_TAG_OFADDONS, 0);
+	xml.addValue("addon", 60);
+	xml.popTag(); // End XML_TAG_OFADDONS
+	
+	// Addons stuff
+	xml.addTag(XML_TAG_CUSTOM);
+	xml.pushTag(XML_TAG_CUSTOM, 0);
+	xml.addValue("custom", 60);
+	xml.popTag(); // End XML_TAG_CUSTOM
 	
 	xml.popTag(); // End XML_TAG_MAIN
 	

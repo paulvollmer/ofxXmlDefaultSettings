@@ -72,12 +72,13 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 	
 		string filepath;
 		
-		string XML_VERSION;
+		string XML_ATTRIBUTE_VERSION;
+		string XML_ATTRIBUTE_URL;
 		string XML_TAG_MAIN;
 		string XML_TAG_OFCORE;
 		string XML_TAG_OFADDONS;
 		string XML_TAG_CUSTOM;
-		string XML_TAG_DEFAULT;
+		//string XML_TAG_DEFAULT;
 	
 	
 	private:
