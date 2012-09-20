@@ -75,10 +75,14 @@ void ofxXmlDefaultSettings::load(string filepath){
 	this->filepath = filepath;
 	
 	if(loadFile(filepath)){
-		statusMessage = "Default xml loaded!";
+		if(getAttribute(XML_TAG_MAIN, "version", "0", 0) == XML_VERSION){
+			statusMessage = "Default xml loaded!";
+		} else {
+			statusMessage = "Default xml loaded! Not correct file version!";
+		}
 	}
 	else {
-		statusMessage = "Unable to load default xml!";
+		statusMessage = "Unable to load xml file! Generate and save file.";;
 		createDefaultXml();
 		loadFile(filepath);
 	}
@@ -97,12 +101,12 @@ void ofxXmlDefaultSettings::load(string filepath){
  */
 bool ofxXmlDefaultSettings::saveSettings(){
 	if(ofGetWindowMode() == 0){
-		setAttribute(XML_TAG_OFCORE+":ofWindowShape", "width", ofGetWidth(), 0);
-		setAttribute(XML_TAG_OFCORE+":ofWindowShape", "height", ofGetHeight(), 0);
-		setAttribute(XML_TAG_OFCORE+":ofWindowPosition", "x", ofGetWindowPositionX(), 0);
-		setAttribute(XML_TAG_OFCORE+":ofWindowPosition", "y", ofGetWindowPositionY(), 0);
+		setAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowShape", "width", ofGetWidth(), 0);
+		setAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowShape", "height", ofGetHeight(), 0);
+		setAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowPosition", "x", ofGetWindowPositionX(), 0);
+		setAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowPosition", "y", ofGetWindowPositionY(), 0);
 	}
-	setValue(XML_TAG_OFCORE+":ofFullscreen", ofGetWindowMode(), 0);
+	setValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofFullscreen", ofGetWindowMode(), 0);
 	saveFile(filepath);
 	
 	statusMessage = "Save settings to default xml file.";
@@ -137,37 +141,37 @@ void ofxXmlDefaultSettings::setSettings(){
  * Set the framerate from xml file.
  */
 void ofxXmlDefaultSettings::setFrameRate(){
-	 ofSetFrameRate(getValue(XML_TAG_OFCORE+":ofFrameRate", 60, 0));
+	 ofSetFrameRate(getValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofFrameRate", 60, 0));
 }
 
 /**
  * Set the window size from xml file.
  */
 void ofxXmlDefaultSettings::setWindowShape(){
-	ofSetWindowShape(getAttribute(XML_TAG_OFCORE+":ofWindowShape", "width", 1024, 0),
-					 getAttribute(XML_TAG_OFCORE+":ofWindowShape", "height", 768, 0));
+	ofSetWindowShape(getAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowShape", "width", 1024, 0),
+					 getAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowShape", "height", 768, 0));
 }
 
 /**
  * Set the window position from xml file.
  */
 void ofxXmlDefaultSettings::setWindowPosition(){
-	ofSetWindowPosition(getAttribute(XML_TAG_OFCORE+":ofWindowPosition", "x", 30, 0),
-						getAttribute(XML_TAG_OFCORE+":ofWindowPosition", "y", 30, 0));
+	ofSetWindowPosition(getAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowPosition", "x", 30, 0),
+						getAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowPosition", "y", 30, 0));
 }
 
 /**
  * Set the window title from xml file.
  */
 void ofxXmlDefaultSettings::setWindowTitle(){
-	ofSetWindowTitle(getValue(XML_TAG_OFCORE+":ofWindowTitle", "openFrameworks Application", 0));
+	ofSetWindowTitle(getValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofWindowTitle", "openFrameworks Application", 0));
 }
 
 /**
  * Set the cursor mode from xml file.
  */
 void ofxXmlDefaultSettings::setCursor(){
-	int temp = getValue(XML_TAG_OFCORE+":ofCursor", false, 0);
+	int temp = getValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofCursor", false, 0);
 	if(temp == 1){
 		ofHideCursor();
 	} else {
@@ -179,7 +183,7 @@ void ofxXmlDefaultSettings::setCursor(){
  * Set the fullscreen mode from xml file.
  */
 void ofxXmlDefaultSettings::setFullscreen(){
-	int temp = getValue(XML_TAG_OFCORE+":ofFullscreen", false, 0);
+	int temp = getValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofFullscreen", false, 0);
 	if(temp == 0){
 		ofSetFullscreen(false);
 	} else {
@@ -191,7 +195,7 @@ void ofxXmlDefaultSettings::setFullscreen(){
  * Set the ofSetEscapeQuitsApp from xml file.
  */
 void ofxXmlDefaultSettings::setEscapeQuitsApp(){
-	int temp = getValue(XML_TAG_OFCORE+":ofEscapeQuitsApp", false, 0);
+	int temp = getValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofEscapeQuitsApp", false, 0);
 	if(temp == 0){
 		ofSetEscapeQuitsApp(false);
 	} else {
@@ -203,9 +207,9 @@ void ofxXmlDefaultSettings::setEscapeQuitsApp(){
  * Set the ofLogToFile from xml file.
  */
 void ofxXmlDefaultSettings::setLogToFile(){
-	int temp = getValue(XML_TAG_OFCORE+":ofLogToFile", true, 0);
-	string tempPath = getAttribute(XML_TAG_OFCORE+":ofLogToFile", "filepath", "NULL", 0);
-	string tempName = getAttribute(XML_TAG_OFCORE+":ofLogToFile", "filename", "logs.txt", 0);
+	int temp = getValue(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofLogToFile", true, 0);
+	string tempPath = getAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofLogToFile", "filepath", "NULL", 0);
+	string tempName = getAttribute(XML_TAG_MAIN+":"+XML_TAG_OFCORE+":ofLogToFile", "filename", "logs.txt", 0);
 	if(temp == 1){
 		
 		// If the filepath attribute is NULL, 
@@ -237,35 +241,31 @@ void ofxXmlDefaultSettings::setLogToFile(){
  */
 void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
+	
+	// Add the main tag and a version attribute to xml file.
 	xml.addTag(XML_TAG_MAIN);
 	xml.addAttribute(XML_TAG_MAIN, "version", XML_VERSION, 0);
 	xml.pushTag(XML_TAG_MAIN, 0);
-	xml.addValue("test1", 123);
-	xml.popTag();
 	
-	xml.addTag(XML_TAG_OFCORE);
-	xml.pushTag(XML_TAG_OFCORE, 0);
-		xml.addValue("ofFrameRate", 60);
-		xml.addValue("ofFullscreen", false);
-		xml.addTag("ofWindowShape");
-		xml.addAttribute("ofWindowShape", "width", 1024, 0);
-		xml.addAttribute("ofWindowShape", "height", 768, 0);
-		xml.addTag("ofWindowPosition");
-		xml.addAttribute("ofWindowPosition", "x", 0, 0);
-		xml.addAttribute("ofWindowPosition", "y", 44, 0);
-		xml.addValue("ofWindowTitle", "openFrameworks Application");
-		xml.addValue("ofCursor", false);
-		xml.addValue("ofEscapeQuitsApp", false);
-		xml.addValue("ofLogToFile", true);
-		xml.addAttribute("ofLogToFile", "filepath", "NULL", 0);
-		xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
-	xml.popTag(); // pop XML_TAG_OFCORE
+		xml.addTag(XML_TAG_OFCORE);
+		xml.pushTag(XML_TAG_OFCORE, 0);
+			xml.addValue("ofFrameRate", 60);
+			xml.addValue("ofFullscreen", false);
+			xml.addTag("ofWindowShape");
+			xml.addAttribute("ofWindowShape", "width", 1024, 0);
+			xml.addAttribute("ofWindowShape", "height", 768, 0);
+			xml.addTag("ofWindowPosition");
+			xml.addAttribute("ofWindowPosition", "x", 0, 0);
+			xml.addAttribute("ofWindowPosition", "y", 44, 0);
+			xml.addValue("ofWindowTitle", "openFrameworks Application");
+			xml.addValue("ofCursor", false);
+			xml.addValue("ofEscapeQuitsApp", false);
+			xml.addValue("ofLogToFile", true);
+			xml.addAttribute("ofLogToFile", "filepath", "NULL", 0);
+			xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
+		xml.popTag(); // End XML_TAG_OFCORE
+	
+	xml.popTag(); // End XML_TAG_MAIN
 	
 	xml.saveFile(filepath);
-	
-	statusMessage = "Default xml file generated and saved!";
-	
-	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] " << statusMessage;
-	#endif
 }
