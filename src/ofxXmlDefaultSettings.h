@@ -43,6 +43,24 @@
 
 
 /**
+ * The total size of xml syntax elements. This value
+ * will be used by the syntay array.
+ */
+#define XML_SYNTAX_SIZE 6
+/**
+ * The XML_SYNTAX enum is used to navigate the syntax string array.
+ */
+enum XML_SYNTAX {
+	XML_VERSION = 0,
+	XML_URL = 1,
+	XML_MAIN_TAG = 2,
+	XML_CORE_TAG = 3,
+	XML_ADDONS_TAG = 4,
+	XML_CUSTOM_TAG = 5
+};
+
+
+/**
  * This is our base class.
  * with this class we create a default xml file with default content.
  * From this defaul file we grab our setting values.
@@ -67,22 +85,20 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void setEscapeQuitsApp();
 		void setLogToFile();
 		
+	
+		string getXmlSyntax(int ident);
+		void setXmlSyntax(int tag, string name);
+	
 		string statusMessage;
 	
 	
 		string filepath;
-		
-		string XML_ATTRIBUTE_VERSION;
-		string XML_ATTRIBUTE_URL;
-		string XML_TAG_MAIN;
-		string XML_TAG_OFCORE;
-		string XML_TAG_OFADDONS;
-		string XML_TAG_CUSTOM;
-		//string XML_TAG_DEFAULT;
 	
 	
 	private:
 		void createDefaultXml();
+		string syntax[XML_SYNTAX_SIZE];
+	
 };
 
 #endif
