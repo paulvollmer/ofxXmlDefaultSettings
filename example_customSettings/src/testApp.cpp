@@ -37,44 +37,25 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+	/* Change the xml file version and tag names.
+	 */
+	defXML.XML_ATTRIBUTE_VERSION = "1.0alpha";
+	defXML.XML_ATTRIBUTE_URL = "http://www.wng.cc";
+	defXML.XML_TAG_MAIN = "myApp";
+	defXML.XML_TAG_OFCORE = "myCore";
 	
-	// Load our default xml file.
+	/* Load our default xml file.
+	 */
 	defXML.load();
-	//defXML.load("myDefaultSettings.xml");
 	
-	defXML.setFrameRate();
-	defXML.setFullscreen();
-	defXML.setWindowShape();
-	defXML.setWindowPosition();
-	ofSetWindowTitle("an other title, not from our default xml.");
-	//defXML.setWindowTitle();
+	/* Get a status message
+	 */
+	cout << "STATUS: " << defXML.statusMessage << endl;
 	
-	
-	// Add custom settings to the xml default file.
-	int tempVar1, tempVar2, tempVar3;
-	
-	if (defXML.tagExists("wng", 0)) {
-		tempVar1 = defXML.getValue("wng:myVar1", 0, 0);
-		tempVar2 = defXML.getValue("wng:myVar2", 0, 0);
-		tempVar3 = defXML.getValue("wng:myVar3", 0, 0);
-	} else {
-		// if no default parameter exist, let create some.
-		tempVar1 = 100;
-		tempVar2 = 200;
-		tempVar3 = 300;
-		defXML.addTag("wng");
-		defXML.pushTag("wng", 0);
-		defXML.addValue("myVar1", tempVar1);
-		defXML.addValue("myVar2", tempVar2);
-		defXML.addValue("myVar3", tempVar3);
-		defXML.popTag();
-		defXML.saveFile();
-	}
-	
-	ofLog() << "tempVar1 = " << tempVar1;
-	ofLog() << "tempVar2 = " << tempVar2;
-	ofLog() << "tempVar3 = " << tempVar3;
-	
+	/* and set the openFrameworks core settings from it.
+	 */
+	defXML.setSettings();
+	cout << "STATUS: " << defXML.statusMessage << endl;
 }
 
 //--------------------------------------------------------------
@@ -89,7 +70,6 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	
 	switch (key) {
 		case 'f':
 			ofToggleFullscreen();
@@ -97,15 +77,12 @@ void testApp::keyPressed(int key){
 		default:
 			break;
 	}
-	
 }
 
 //--------------------------------------------------------------
 void testApp::exit(){
-	
-	//defXML.setWindowPosition();
-	
-	// Save the current settings to xml.
+	/* Save the current settings to xml.
+	 */
 	defXML.saveSettings();
-	
+	cout << "STATUS: " << defXML.statusMessage << endl;
 }
