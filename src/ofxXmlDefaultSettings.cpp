@@ -1,28 +1,26 @@
 /**
- *  ofxXmlDefaultSettings.cpp
+ *  ofxXmlDefaultSettings.cpp is part of ofxXmlDefaultSettings.
+ *
+ *  Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
+ *  All rights reserved.
  *
  *  
  *  The MIT License
  *
- *  Copyright (c) 2012 Paul Vollmer, http://www.wng.cc
- *  
- *  Permission is hereby granted, free of charge, to any person obtaining a copy
- *  of this software and associated documentation files (the "Software"), to deal
- *  in the Software without restriction, including without limitation the rights
- *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *  copies of the Software, and to permit persons to whom the Software is
- *  furnished to do so, subject to the following conditions:
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+ *  and  associated documentation files  (the "Software"), to deal in the Software without
+ *  restriction, including without limitation the rights to use, copy, modify, merge, publish,
+ *  distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+ *  Software is furnished to do so, subject to the following conditions:
  *  
  *  The above copyright notice and this permission notice shall be included in
  *  all copies or substantial portions of the Software.
  *  
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- *  THE SOFTWARE.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ *  BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ *  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ *  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  
  *  @testet_oF          0071
@@ -30,12 +28,12 @@
  *                      ??? Win
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
- *  @modified           2012.07.02
- *  @version            0.1.2
+ *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
+ *  @modified           2012.09.20
+ *  @version            0.1.2b
  */
 
 #include "ofxXmlDefaultSettings.h"
-
 
 
 /**
@@ -45,9 +43,26 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	// Setting default filepath. if load() is called, 
 	// the filepath will be used to save the xml file.
 	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
-}	
 	
+	// Set default xml settings version.
+	XML_VERSION = "0.2.0";
 	
+	// Set default names of xml tags.
+	XML_TAG_MAIN = "ofxXmlDefaultSettings";
+	XML_TAG_OFCORE = "ofCore";
+	XML_TAG_OFADDONS = "ofAddons";
+	XML_TAG_CUSTOM = "custom";
+	XML_TAG_DEFAULT = "item";
+}
+
+
+/**
+ * Same as load(string filepath) but we use the default filepath.
+ */
+void ofxXmlDefaultSettings::load(){
+	load(filepath);
+}
+
 /**
  * This method checks if a default xml file exist.
  * if no file is found, the method "createDefaultXml()"
@@ -58,25 +73,19 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
  */
 void ofxXmlDefaultSettings::load(string filepath){
 	this->filepath = filepath;
+	
 	if(loadFile(filepath)){
-		#ifdef OFXXMLDEFAULTSETTINGS_LOG
-			ofLog() << "[ofxXmlDefaultSettings] Default xml loaded!";
-		#endif
-	} else {
-		#ifdef OFXXMLDEFAULTSETTINGS_LOG
-			ofLog() << "[ofxXmlDefaultSettings] Unable to load default xml!";
-			//ofLog() << "                        Filepath = " << filepath;
-		#endif
+		statusMessage = "Default xml loaded!";
+	}
+	else {
+		statusMessage = "Unable to load default xml!";
 		createDefaultXml();
 		loadFile(filepath);
 	}
-}
-
-/**
- * Same as load(string filepath) but we use the default filepath.
- */
-void ofxXmlDefaultSettings::load(){
-	load(filepath);
+	
+	#ifdef OFXXMLDEFAULTSETTINGS_LOG
+		ofLog() << "[ofxXmlDefaultSettings] " + statusMessage;
+	#endif
 }
 
 
@@ -88,16 +97,18 @@ void ofxXmlDefaultSettings::load(){
  */
 bool ofxXmlDefaultSettings::saveSettings(){
 	if(ofGetWindowMode() == 0){
-		setAttribute("ofCore:ofWindowShape", "width", ofGetWidth(), 0);
-		setAttribute("ofCore:ofWindowShape", "height", ofGetHeight(), 0);
-		setAttribute("ofCore:ofWindowPosition", "x", ofGetWindowPositionX(), 0);
-		setAttribute("ofCore:ofWindowPosition", "y", ofGetWindowPositionY(), 0);
+		setAttribute(XML_TAG_OFCORE+":ofWindowShape", "width", ofGetWidth(), 0);
+		setAttribute(XML_TAG_OFCORE+":ofWindowShape", "height", ofGetHeight(), 0);
+		setAttribute(XML_TAG_OFCORE+":ofWindowPosition", "x", ofGetWindowPositionX(), 0);
+		setAttribute(XML_TAG_OFCORE+":ofWindowPosition", "y", ofGetWindowPositionY(), 0);
 	}
-	setValue("ofCore:ofFullscreen", ofGetWindowMode(), 0);
+	setValue(XML_TAG_OFCORE+":ofFullscreen", ofGetWindowMode(), 0);
 	saveFile(filepath);
+	
+	statusMessage = "Save settings to default xml file.";
+	
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] Save settings to default xml file.";
-		//ofLog() << "                        Filepath = " << filepath;
+		ofLog() << "[ofxXmlDefaultSettings] " << statusMessage;
 	#endif
 }
 
@@ -114,8 +125,11 @@ void ofxXmlDefaultSettings::setSettings(){
 	setCursor();
 	setEscapeQuitsApp();
 	setLogToFile();
+	
+	statusMessage = "Set Settings from default xml file.";
+	
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] Set Settings from default xml file.";
+		ofLog() << "[ofxXmlDefaultSettings] " << statusMessage;
 	#endif
 }
 
@@ -123,37 +137,37 @@ void ofxXmlDefaultSettings::setSettings(){
  * Set the framerate from xml file.
  */
 void ofxXmlDefaultSettings::setFrameRate(){
-	 ofSetFrameRate(getValue("ofCore:ofFrameRate", 60, 0));
+	 ofSetFrameRate(getValue(XML_TAG_OFCORE+":ofFrameRate", 60, 0));
 }
 
 /**
  * Set the window size from xml file.
  */
 void ofxXmlDefaultSettings::setWindowShape(){
-	ofSetWindowShape(getAttribute("ofCore:ofWindowShape", "width", 1024, 0),
-					 getAttribute("ofCore:ofWindowShape", "height", 768, 0));
+	ofSetWindowShape(getAttribute(XML_TAG_OFCORE+":ofWindowShape", "width", 1024, 0),
+					 getAttribute(XML_TAG_OFCORE+":ofWindowShape", "height", 768, 0));
 }
 
 /**
  * Set the window position from xml file.
  */
 void ofxXmlDefaultSettings::setWindowPosition(){
-	ofSetWindowPosition(getAttribute("ofCore:ofWindowPosition", "x", 30, 0),
-						getAttribute("ofCore:ofWindowPosition", "y", 30, 0));
+	ofSetWindowPosition(getAttribute(XML_TAG_OFCORE+":ofWindowPosition", "x", 30, 0),
+						getAttribute(XML_TAG_OFCORE+":ofWindowPosition", "y", 30, 0));
 }
 
 /**
  * Set the window title from xml file.
  */
 void ofxXmlDefaultSettings::setWindowTitle(){
-	ofSetWindowTitle(getValue("ofCore:ofWindowTitle", "openFrameworks Application", 0));
+	ofSetWindowTitle(getValue(XML_TAG_OFCORE+":ofWindowTitle", "openFrameworks Application", 0));
 }
 
 /**
  * Set the cursor mode from xml file.
  */
 void ofxXmlDefaultSettings::setCursor(){
-	int temp = getValue("ofCore:ofCursor", false, 0);
+	int temp = getValue(XML_TAG_OFCORE+":ofCursor", false, 0);
 	if(temp == 1){
 		ofHideCursor();
 	} else {
@@ -165,7 +179,7 @@ void ofxXmlDefaultSettings::setCursor(){
  * Set the fullscreen mode from xml file.
  */
 void ofxXmlDefaultSettings::setFullscreen(){
-	int temp = getValue("ofCore:ofFullscreen", false, 0);
+	int temp = getValue(XML_TAG_OFCORE+":ofFullscreen", false, 0);
 	if(temp == 0){
 		ofSetFullscreen(false);
 	} else {
@@ -177,7 +191,7 @@ void ofxXmlDefaultSettings::setFullscreen(){
  * Set the ofSetEscapeQuitsApp from xml file.
  */
 void ofxXmlDefaultSettings::setEscapeQuitsApp(){
-	int temp = getValue("ofCore:ofEscapeQuitsApp", false, 0);
+	int temp = getValue(XML_TAG_OFCORE+":ofEscapeQuitsApp", false, 0);
 	if(temp == 0){
 		ofSetEscapeQuitsApp(false);
 	} else {
@@ -189,9 +203,9 @@ void ofxXmlDefaultSettings::setEscapeQuitsApp(){
  * Set the ofLogToFile from xml file.
  */
 void ofxXmlDefaultSettings::setLogToFile(){
-	int temp = getValue("ofCore:ofLogToFile", true, 0);
-	string tempPath = getAttribute("ofCore:ofLogToFile", "filepath", "NULL", 0);
-	string tempName = getAttribute("ofCore:ofLogToFile", "filename", "logs.txt", 0);
+	int temp = getValue(XML_TAG_OFCORE+":ofLogToFile", true, 0);
+	string tempPath = getAttribute(XML_TAG_OFCORE+":ofLogToFile", "filepath", "NULL", 0);
+	string tempName = getAttribute(XML_TAG_OFCORE+":ofLogToFile", "filename", "logs.txt", 0);
 	if(temp == 1){
 		
 		// If the filepath attribute is NULL, 
@@ -223,8 +237,14 @@ void ofxXmlDefaultSettings::setLogToFile(){
  */
 void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
-	xml.addTag("ofCore");
-	xml.pushTag("ofCore", 0);
+	xml.addTag(XML_TAG_MAIN);
+	xml.addAttribute(XML_TAG_MAIN, "version", XML_VERSION, 0);
+	xml.pushTag(XML_TAG_MAIN, 0);
+	xml.addValue("test1", 123);
+	xml.popTag();
+	
+	xml.addTag(XML_TAG_OFCORE);
+	xml.pushTag(XML_TAG_OFCORE, 0);
 		xml.addValue("ofFrameRate", 60);
 		xml.addValue("ofFullscreen", false);
 		xml.addTag("ofWindowShape");
@@ -239,10 +259,13 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 		xml.addValue("ofLogToFile", true);
 		xml.addAttribute("ofLogToFile", "filepath", "NULL", 0);
 		xml.addAttribute("ofLogToFile", "filename", "logs.txt", 0);
-	xml.popTag();
+	xml.popTag(); // pop XML_TAG_OFCORE
+	
 	xml.saveFile(filepath);
+	
+	statusMessage = "Default xml file generated and saved!";
+	
 	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] Default xml file generated and saved!";
-		//ofLog() << "                        Filepath = " << filepath;
+		ofLog() << "[ofxXmlDefaultSettings] " << statusMessage;
 	#endif
 }
