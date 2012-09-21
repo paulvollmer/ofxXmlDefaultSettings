@@ -40,16 +40,16 @@
 void testApp::setup(){
 	/* Load our default xml file.
 	 */
-	defXML.load();
+	XML.load();
 	
 	/* Get a status message
 	 */
-	cout << "STATUS: " << defXML.statusMessage << endl;
+	cout << "STATUS: " << XML.statusMessage << endl;
 	
 	/* and set the openFrameworks core settings from it.
 	 */
-	defXML.setSettings();
-	cout << "STATUS: " << defXML.statusMessage << endl;
+	XML.setSettings();
+	cout << "STATUS: " << XML.statusMessage << endl;
 }
 
 //--------------------------------------------------------------
@@ -77,6 +77,6 @@ void testApp::keyPressed(int key){
 void testApp::exit(){
 	/* Save the current settings to xml.
 	 */
-	defXML.saveSettings();
-	cout << "STATUS: " << defXML.statusMessage << endl;
+	XML.saveSettings();
+	cout << "STATUS: " << XML.statusMessage << endl;
 }
