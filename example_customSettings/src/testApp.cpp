@@ -37,12 +37,25 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	/* Change the xml file version and tag names.
+	
+	/* Set the xml tag names and version, url root attributes.
 	 */
-	defXML.XML_ATTRIBUTE_VERSION = "1.0alpha";
-	defXML.XML_ATTRIBUTE_URL = "http://www.wng.cc";
-	defXML.XML_TAG_MAIN = "myApp";
-	defXML.XML_TAG_OFCORE = "myCore";
+	defXML.setXmlSyntax(XML_ROOT_VERSION, "1.0alpha");
+	defXML.setXmlSyntax(XML_ROOT_URL, "http://www.wng.cc");
+	defXML.setXmlSyntax(XML_ROOT_TAG, "myApp");
+	defXML.setXmlSyntax(XML_CORE_TAG, "myCore");
+	defXML.setXmlSyntax(XML_ADDONS_TAG, "myAddons");
+	defXML.setXmlSyntax(XML_CUSTOM_TAG, "myCustom");
+	
+	/* Return the current syntax. with getXmlSyntax(tag_id);
+	 */
+	cout << "XML_ROOT_VERSION     = " << defXML.getXmlSyntax(XML_ROOT_VERSION) << endl;
+	cout << "XML_ROOT_URL         = " << defXML.getXmlSyntax(XML_ROOT_URL) << endl;
+	cout << "XML_ROOT_TAG    = " << defXML.getXmlSyntax(XML_ROOT_TAG) << endl;
+	cout << "XML_CORE_TAG    = " << defXML.getXmlSyntax(XML_CORE_TAG) << endl;
+	cout << "XML_ADDONS_TAG  = " << defXML.getXmlSyntax(XML_ADDONS_TAG) << endl;
+	cout << "XML_CUSTOM_TAG  = " << defXML.getXmlSyntax(XML_CUSTOM_TAG) << endl;
+	
 	
 	/* Load our default xml file.
 	 */
