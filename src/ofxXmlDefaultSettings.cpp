@@ -45,8 +45,8 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
 	
 	// Set default xml settings version and url.
-	syntax[XML_VERSION] = "0.2.0";
-	syntax[XML_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
+	syntax[XML_MAIN_VERSION] = "0.2.0";
+	syntax[XML_MAIN_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
 	
 	// Set default names of xml tags.
 	syntax[XML_MAIN_TAG] = "ofxXmlDefaultSettings";
@@ -75,7 +75,7 @@ void ofxXmlDefaultSettings::load(string filepath){
 	this->filepath = filepath;
 	
 	if(loadFile(filepath)){
-		if(getAttribute(syntax[XML_MAIN_TAG], "version", "0", 0) == syntax[XML_VERSION]){
+		if(getAttribute(syntax[XML_MAIN_TAG], "version", "0", 0) == syntax[XML_MAIN_VERSION]){
 			statusMessage = "Default xml loaded!";
 		} else {
 			statusMessage = "Default xml loaded! Not correct file version!";
@@ -266,8 +266,8 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	
 	// Add the main tag and a version attribute to xml file.
 	xml.addTag(syntax[XML_MAIN_TAG]);
-	xml.addAttribute(syntax[XML_MAIN_TAG], "version", syntax[XML_VERSION], 0);
-	xml.addAttribute(syntax[XML_MAIN_TAG], "url", syntax[XML_URL], 0);
+	xml.addAttribute(syntax[XML_MAIN_TAG], "version", syntax[XML_MAIN_VERSION], 0);
+	xml.addAttribute(syntax[XML_MAIN_TAG], "url", syntax[XML_MAIN_URL], 0);
 	xml.pushTag(syntax[XML_MAIN_TAG], 0);
 	
 	// Core stuff
