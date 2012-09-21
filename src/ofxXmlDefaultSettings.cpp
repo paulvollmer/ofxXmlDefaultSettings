@@ -29,8 +29,8 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.20
- *  @version            0.1.2b
+ *  @modified           2012.09.21
+ *  @version            0.1.2c
  */
 
 #include "ofxXmlDefaultSettings.h"
@@ -42,15 +42,18 @@
 ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	// Setting default filepath. if load() is called, 
 	// the filepath will be used to save the xml file.
-	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
+	this->filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
 	
  	// Set default xml syntax (names of xml tags, version and url).
-	syntax[XML_ROOT_TAG] = "ofxXmlDefaultSettings";
-	syntax[XML_ROOT_VERSION] = "0.2.0";
-	syntax[XML_ROOT_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
-	syntax[XML_CORE_TAG] = "ofCore";
-	syntax[XML_ADDONS_TAG] = "ofAddons";
-	syntax[XML_CUSTOM_TAG] = "custom";
+	syntax[CORE] = "ofCore";
+	syntax[CUSTOM] = "custom";
+	syntax[ROOT] = "ofxXmlDefaultSettings";
+	syntax[ROOT_VERSION] = "0.2.0";
+	syntax[ROOT_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
+	
+	
+	settingsActive[CORE] = true;
+	settingsActive[CUSTOM] = false;
 }
 
 
@@ -66,14 +69,14 @@ void ofxXmlDefaultSettings::load(){
  * if no file is found, the method "createDefaultXml()"
  * creats a xml file automaticly.
  *
- * @param filepath
+ * @param src
  *        Path to default xml file.
  */
-void ofxXmlDefaultSettings::load(string filepath){
-	this->filepath = filepath;
-	
-	if(loadFile(filepath)){
-		if(getAttribute(syntax[XML_ROOT_TAG], "version", "0", 0) == syntax[XML_ROOT_VERSION]){
+void ofxXmlDefaultSettings::load(string src){
+	this->filepath = src;
+	// Check if file exist
+	if(loadFile(src)){
+		if(getAttribute(syntax[ROOT], "version", "0", 0) == syntax[ROOT_VERSION]){
 			statusMessage = "Default xml loaded!";
 		} else {
 			statusMessage = "Default xml loaded! Not correct file version!";
@@ -82,8 +85,19 @@ void ofxXmlDefaultSettings::load(string filepath){
 	else {
 		statusMessage = "Unable to load xml file! Generate and save file.";;
 		createDefaultXml();
-		loadFile(filepath);
+		loadFile(src);
 	}
+}
+
+string ofxXmlDefaultSettings::getFilepath(){
+	return this->filepath;
+}
+void ofxXmlDefaultSettings::setFilepath(string src){
+	this->filepath = src;
+}
+
+string ofxXmlDefaultSettings::getStatusMessage(){
+	return this->statusMessage;
 }
 
 
@@ -93,14 +107,14 @@ void ofxXmlDefaultSettings::load(string filepath){
  * @param return
  *        Set boolean true, if file is saved.
  */
-bool ofxXmlDefaultSettings::saveSettings(){
+bool ofxXmlDefaultSettings::save(){
 	if(ofGetWindowMode() == 0){
-		setAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowShape", "width", ofGetWidth(), 0);
-		setAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowShape", "height", ofGetHeight(), 0);
-		setAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowPosition", "x", ofGetWindowPositionX(), 0);
-		setAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowPosition", "y", ofGetWindowPositionY(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "width", ofGetWidth(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "height", ofGetHeight(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "x", ofGetWindowPositionX(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "y", ofGetWindowPositionY(), 0);
 	}
-	setValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":fullscreen", ofGetWindowMode(), 0);
+	setValue(syntax[ROOT]+":"+syntax[CORE]+":fullscreen", ofGetWindowMode(), 0);
 	saveFile(filepath);
 	
 	statusMessage = "Save settings to default xml file.";
@@ -111,109 +125,112 @@ bool ofxXmlDefaultSettings::saveSettings(){
  * Set the openFrameworks core settings from xml file.
  */
 void ofxXmlDefaultSettings::setSettings(){
-	setFrameRate();
-	setFullscreen();
-	setWindowShape();
-	setWindowPosition();
-	setWindowTitle();
-	setCursor();
-	setEscapeQuitsApp();
-	setLogToFile();
-	
+	setSettings(FRAMERATE);
+	setSettings(WINDOW_SHAPE);
+	setSettings(WINDOW_POSITION);
+	setSettings(WINDOW_TITLE);
+	setSettings(CURSOR);
+	setSettings(FULLSCREEN);
+	setSettings(ESCAPE_QUITS_APP);
+	setSettings(LOG);
 	statusMessage = "Set Settings from default xml file.";
 }
 
 /**
- * Set the framerate from xml file.
+ * FRAMERATE
+ *    Set the framerate from xml file.
+ * WINDOW_SHAPE
+ *    Set the window size from xml file.
+ * WINDOW_POSITION
+ *    Set the window position from xml file.
+ * WINDOW_TITLE
+ *    Set the window title from xml file.
+ * CURSOR
+ *    Set the cursor mode from xml file.
+ * FULLSCREEN
+ *    Set the fullscreen mode from xml file.
+ * ESCAPE_QUITS_APP
+ *    Set the ofSetEscapeQuitsApp from xml file.
+ * LOG
+ *    Set the ofLogToFile from xml file.
  */
-void ofxXmlDefaultSettings::setFrameRate(){
-	 ofSetFrameRate(getValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":frameRate", 60, 0));
-}
-
-/**
- * Set the window size from xml file.
- */
-void ofxXmlDefaultSettings::setWindowShape(){
-	ofSetWindowShape(getAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowShape", "width", 1024, 0),
-					 getAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowShape", "height", 768, 0));
-}
-
-/**
- * Set the window position from xml file.
- */
-void ofxXmlDefaultSettings::setWindowPosition(){
-	ofSetWindowPosition(getAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowPosition", "x", 30, 0),
-						getAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowPosition", "y", 30, 0));
-}
-
-/**
- * Set the window title from xml file.
- */
-void ofxXmlDefaultSettings::setWindowTitle(){
-	ofSetWindowTitle(getValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":windowTitle", "openFrameworks Application", 0));
-}
-
-/**
- * Set the cursor mode from xml file.
- */
-void ofxXmlDefaultSettings::setCursor(){
-	int temp = getValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":cursor", false, 0);
-	if(temp == 1){
-		ofHideCursor();
-	} else {
-		ofShowCursor();
-	}
-}
-
-/**
- * Set the fullscreen mode from xml file.
- */
-void ofxXmlDefaultSettings::setFullscreen(){
-	int temp = getValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":fullscreen", false, 0);
-	if(temp == 0){
-		ofSetFullscreen(false);
-	} else {
-		ofSetFullscreen(true);
-	}
-}
-
-/**
- * Set the ofSetEscapeQuitsApp from xml file.
- */
-void ofxXmlDefaultSettings::setEscapeQuitsApp(){
-	int temp = getValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":escapeQuitsApp", false, 0);
-	if(temp == 0){
-		ofSetEscapeQuitsApp(false);
-	} else {
-		ofSetEscapeQuitsApp(true);
-	}
-}
-
-/**
- * Set the ofLogToFile from xml file.
- */
-void ofxXmlDefaultSettings::setLogToFile(){
-	int temp = getValue(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":logToFile", true, 0);
-	string tempPath = getAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":logToFile", "filepath", "NULL", 0);
-	string tempName = getAttribute(syntax[XML_ROOT_TAG]+":"+syntax[XML_CORE_TAG]+":logToFile", "filename", "logs.txt", 0);
-	if(temp == 1){
-		
-		// If the filepath attribute is NULL, 
-		// we run the default method and save the log file to current working directory.
-		if(tempPath == "NULL"){
-			// check if a logs folder exist.
-			// if no folder found, create one.
-			ofDirectory dir(ofFilePath::getCurrentWorkingDirectory()+"/logs");
-			if(!dir.exists()){
-				dir.create(true);
-			}
-			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs"+"/"+ofGetTimestampString()+"_"+tempName, 1);
+void ofxXmlDefaultSettings::setSettings(int ident){
+	switch (ident) {
+		case FRAMERATE:
+			ofSetFrameRate(getValue(syntax[ROOT]+":"+syntax[CORE]+":frameRate", 60, 0));
+			break;
 			
-		} else {
-			ofLogToFile(tempPath+"/"+ofGetTimestampString()+"_"+tempName, 1);
-		}
-
+		case WINDOW_SHAPE:
+			ofSetWindowShape(getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "width", 1024, 0),
+							 getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "height", 768, 0));
+			break;
+		
+		case WINDOW_POSITION:
+			ofSetWindowPosition(getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "x", 30, 0),
+								getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "y", 30, 0));
+			break;
+		
+		case WINDOW_TITLE:
+			ofSetWindowTitle(getValue(syntax[ROOT]+":"+syntax[CORE]+":windowTitle", "openFrameworks Application", 0));
+			break;
+		
+		case CURSOR:
+			if(getValue(syntax[ROOT]+":"+syntax[CORE]+":cursor", false, 0) == 1){
+				ofHideCursor();
+			} else {
+				ofShowCursor();
+			}
+			break;
+		
+		case FULLSCREEN:
+			if(getValue(syntax[ROOT]+":"+syntax[CORE]+":fullscreen", false, 0) == 0){
+				ofSetFullscreen(false);
+			} else {
+				ofSetFullscreen(true);
+			}
+			break;
+		
+		case ESCAPE_QUITS_APP:	
+			if(getValue(syntax[ROOT]+":"+syntax[CORE]+":escapeQuitsApp", false, 0) == 0){
+				ofSetEscapeQuitsApp(false);
+			} else {
+				ofSetEscapeQuitsApp(true);
+			}
+			break;
+		
+		case LOG:
+			static string tempPath = getAttribute(syntax[ROOT]+":"+syntax[CORE]+":logToFile", "filepath", "NULL", 0);
+			static string tempName = getAttribute(syntax[ROOT]+":"+syntax[CORE]+":logToFile", "filename", "logs.txt", 0);
+			if(getValue(syntax[ROOT]+":"+syntax[CORE]+":logToFile", true, 0) == 1){
+				// If the filepath attribute is NULL, 
+				// we run the default method and save the log file to current working directory.
+				if(tempPath == "NULL"){
+					// check if a logs folder exist.
+					// if no folder found, create one.
+					ofDirectory dir(ofFilePath::getCurrentWorkingDirectory()+"/logs");
+					if(!dir.exists()){
+						dir.create(true);
+					}
+					ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs"+"/"+ofGetTimestampString()+"_"+tempName, 1);
+				} else {
+					ofLogToFile(tempPath+"/"+ofGetTimestampString()+"_"+tempName, 1);
+				}
+			}
+			break;
+		
+		default:
+			cout << "failed" << endl;
+			break;
 	}
+}
+
+
+/**
+ * @param int ident
+ * @param bool state
+ */
+void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
+	settingsActive[ident] = state;
 }
 
 
@@ -239,9 +256,8 @@ void ofxXmlDefaultSettings::setXmlSyntax(int ident, string name){
 }
 
 
-
 /**
- * private method
+ * Private method
  * createDefaultXml
  *
  * Creating tags to store openFrameworks core settings.
@@ -251,14 +267,14 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
 	
 	// Add the main tag and a version attribute to xml file.
-	xml.addTag(syntax[XML_ROOT_TAG]);
-	xml.addAttribute(syntax[XML_ROOT_TAG], "version", syntax[XML_ROOT_VERSION], 0);
-	xml.addAttribute(syntax[XML_ROOT_TAG], "url", syntax[XML_ROOT_URL], 0);
-	xml.pushTag(syntax[XML_ROOT_TAG], 0);
+	xml.addTag(syntax[ROOT]);
+	xml.addAttribute(syntax[ROOT], "version", syntax[ROOT_VERSION], 0);
+	xml.addAttribute(syntax[ROOT], "url", syntax[ROOT_URL], 0);
+	xml.pushTag(syntax[ROOT], 0);
 	
 	// Core stuff
-	xml.addTag(syntax[XML_CORE_TAG]);
-	xml.pushTag(syntax[XML_CORE_TAG], 0);
+	xml.addTag(syntax[CORE]);
+	xml.pushTag(syntax[CORE], 0);
 	xml.addValue("frameRate", 60);
 	xml.addValue("fullscreen", false);
 	xml.addTag("windowShape");
@@ -275,17 +291,13 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	xml.addAttribute("logToFile", "filename", "logs.txt", 0);
 	xml.popTag(); // End XML_TAG_OFCORE
 	
-	// Addons stuff
-	xml.addTag(syntax[XML_ADDONS_TAG]);
-	xml.pushTag(syntax[XML_ADDONS_TAG], 0);
-	xml.addValue("addon", 60);
-	xml.popTag(); // End XML_TAG_OFADDONS
-	
-	// Addons stuff
-	xml.addTag(syntax[XML_CUSTOM_TAG]);
-	xml.pushTag(syntax[XML_CUSTOM_TAG], 0);
-	xml.addValue("custom", 60);
-	xml.popTag(); // End XML_TAG_CUSTOM
+	// Custom stuff
+	if(settingsActive[CUSTOM] == true){
+		xml.addTag(syntax[CUSTOM]);
+		xml.pushTag(syntax[CUSTOM], 0);
+		xml.addValue("custom", 60);
+		xml.popTag(); // End XML_TAG_CUSTOM
+	}
 	
 	xml.popTag(); // End XML_TAG_MAIN
 	

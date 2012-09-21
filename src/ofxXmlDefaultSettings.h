@@ -29,8 +29,8 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.20
- *  @version            0.1.2b
+ *  @modified           2012.09.21
+ *  @version            0.1.2c
  */
 
 #ifndef _OFXXMLDEFAULTSETTINGS_H
@@ -40,18 +40,31 @@
 
 
 // The total size of xml syntax elements. This value will be used by the syntay array.
-#define XML_SYNTAX_SIZE 6
+#define XML_SYNTAX_SIZE 5
 
 /**
  * The XML_SYNTAX enum is used to navigate the syntax string array.
  */
 enum XML_SYNTAX {
-	XML_ROOT_TAG = 0,
-	XML_ROOT_VERSION = 1,
-	XML_ROOT_URL = 2,
-	XML_CORE_TAG = 3,
-	XML_ADDONS_TAG = 4,
-	XML_CUSTOM_TAG = 5
+	CORE = 0,
+	CUSTOM = 1,
+	ROOT = 2,
+	ROOT_VERSION = 3,
+	ROOT_URL = 4
+};
+
+/**
+ * The CORE_SETTINGS enum is used to select a setting parameter.
+ */
+enum CORE_SETTINGS {
+	FRAMERATE = 0,
+	WINDOW_SHAPE = 1,
+	WINDOW_POSITION = 2,
+	WINDOW_TITLE = 3,
+	CURSOR = 4,
+	FULLSCREEN = 5,
+	ESCAPE_QUITS_APP = 6,
+	LOG = 7
 };
 
 
@@ -66,29 +79,29 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		ofxXmlDefaultSettings();
 		
 		void load();
-		void load(string filepath);
-		bool saveSettings();
+		void load(string src);
+		bool save();
+	
+		string getFilepath();
+		void setFilepath(string src);
+	
+		string getStatusMessage();
 	
 		void setSettings();
-		void setFrameRate();
-		void setWindowShape();
-		void setWindowPosition();
-		void setWindowTitle();
-		void setCursor();
-		void setFullscreen();
-		void setEscapeQuitsApp();
-		void setLogToFile();
+		void setSettings(int ident);
+	
+		void setSettingsActive(int ident, bool state);
 	
 		string getXmlSyntax(int ident);
 		void setXmlSyntax(int tag, string name);
 	
-		string statusMessage;
-		string filepath;
-	
 	
 	private:
 		void createDefaultXml();
+		string filepath;
+		string statusMessage;
 		string syntax[XML_SYNTAX_SIZE];
+		bool settingsActive[2];
 	
 };
 #endif
