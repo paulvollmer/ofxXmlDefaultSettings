@@ -46,9 +46,9 @@
  * The XML_SYNTAX enum is used to navigate the syntax string array.
  */
 enum XML_SYNTAX {
-	XML_MAIN_TAG = 0,
-	XML_MAIN_VERSION = 1,
-	XML_MAIN_URL = 2,
+	XML_ROOT_TAG = 0,
+	XML_ROOT_VERSION = 1,
+	XML_ROOT_URL = 2,
 	XML_CORE_TAG = 3,
 	XML_ADDONS_TAG = 4,
 	XML_CUSTOM_TAG = 5
