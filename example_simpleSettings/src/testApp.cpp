@@ -65,10 +65,10 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	switch (key) {
+		/* if key 'f' is pressed, toffle fullscreen mode.
+		 */
 		case 'f':
 			ofToggleFullscreen();
-			break;
-		default:
 			break;
 	}
 }
