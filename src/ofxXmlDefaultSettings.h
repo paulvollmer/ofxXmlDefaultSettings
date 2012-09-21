@@ -38,15 +38,10 @@
 
 #include "ofxXmlSettings.h"
 
-/* If "OFXXMLDEFAULTSETTINGS_LOG" is defined, the addon prints out ofLog messages. */
-//#define OFXXMLDEFAULTSETTINGS_LOG
 
-
-/**
- * The total size of xml syntax elements. This value
- * will be used by the syntay array.
- */
+// The total size of xml syntax elements. This value will be used by the syntay array.
 #define XML_SYNTAX_SIZE 6
+
 /**
  * The XML_SYNTAX enum is used to navigate the syntax string array.
  */
@@ -72,9 +67,8 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		
 		void load();
 		void load(string filepath);
-		
 		bool saveSettings();
-		
+	
 		void setSettings();
 		void setFrameRate();
 		void setWindowShape();
@@ -84,14 +78,11 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void setFullscreen();
 		void setEscapeQuitsApp();
 		void setLogToFile();
-		
 	
 		string getXmlSyntax(int ident);
 		void setXmlSyntax(int tag, string name);
 	
 		string statusMessage;
-	
-	
 		string filepath;
 	
 	
@@ -100,5 +91,4 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		string syntax[XML_SYNTAX_SIZE];
 	
 };
-
 #endif

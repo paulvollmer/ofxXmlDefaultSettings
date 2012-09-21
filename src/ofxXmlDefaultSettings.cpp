@@ -44,12 +44,10 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	// the filepath will be used to save the xml file.
 	filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
 	
-	// Set default xml settings version and url.
+	// Set default xml syntax (names of xml tags, version and url).
+	syntax[XML_MAIN_TAG] = "ofxXmlDefaultSettings";
 	syntax[XML_MAIN_VERSION] = "0.2.0";
 	syntax[XML_MAIN_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
-	
-	// Set default names of xml tags.
-	syntax[XML_MAIN_TAG] = "ofxXmlDefaultSettings";
 	syntax[XML_CORE_TAG] = "ofCore";
 	syntax[XML_ADDONS_TAG] = "ofAddons";
 	syntax[XML_CUSTOM_TAG] = "custom";
@@ -86,10 +84,6 @@ void ofxXmlDefaultSettings::load(string filepath){
 		createDefaultXml();
 		loadFile(filepath);
 	}
-	
-	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] " + statusMessage;
-	#endif
 }
 
 
@@ -110,10 +104,6 @@ bool ofxXmlDefaultSettings::saveSettings(){
 	saveFile(filepath);
 	
 	statusMessage = "Save settings to default xml file.";
-	
-	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] " << statusMessage;
-	#endif
 }
 
 
@@ -131,10 +121,6 @@ void ofxXmlDefaultSettings::setSettings(){
 	setLogToFile();
 	
 	statusMessage = "Set Settings from default xml file.";
-	
-	#ifdef OFXXMLDEFAULTSETTINGS_LOG
-		ofLog() << "[ofxXmlDefaultSettings] " << statusMessage;
-	#endif
 }
 
 /**
