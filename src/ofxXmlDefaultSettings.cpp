@@ -89,17 +89,6 @@ void ofxXmlDefaultSettings::load(string src){
 	}
 }
 
-string ofxXmlDefaultSettings::getFilepath(){
-	return this->filepath;
-}
-void ofxXmlDefaultSettings::setFilepath(string src){
-	this->filepath = src;
-}
-
-string ofxXmlDefaultSettings::getStatusMessage(){
-	return this->statusMessage;
-}
-
 
 /**
  * Get the openFrameworks core settings and save values into xml.
@@ -109,10 +98,10 @@ string ofxXmlDefaultSettings::getStatusMessage(){
  */
 bool ofxXmlDefaultSettings::save(){
 	if(ofGetWindowMode() == 0){
-		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "width", ofGetWidth(), 0);
-		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "height", ofGetHeight(), 0);
-		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "x", ofGetWindowPositionX(), 0);
-		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "y", ofGetWindowPositionY(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "width", ofGetWidth(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "height", ofGetHeight(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "x", ofGetWindowPositionX(), 0);
+		setAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "y", ofGetWindowPositionY(), 0);
 	}
 	setValue(syntax[ROOT]+":"+syntax[CORE]+":fullscreen", ofGetWindowMode(), 0);
 	saveFile(filepath);
@@ -161,17 +150,17 @@ void ofxXmlDefaultSettings::setSettings(int ident){
 			break;
 			
 		case WINDOW_SHAPE:
-			ofSetWindowShape(getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "width", 1024, 0),
-							 getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowShape", "height", 768, 0));
+			ofSetWindowShape(getAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "width", 1024, 0),
+							 getAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "height", 768, 0));
 			break;
 		
 		case WINDOW_POSITION:
-			ofSetWindowPosition(getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "x", 30, 0),
-								getAttribute(syntax[ROOT]+":"+syntax[CORE]+":windowPosition", "y", 30, 0));
+			ofSetWindowPosition(getAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "x", 30, 0),
+								getAttribute(syntax[ROOT]+":"+syntax[CORE]+":window", "y", 30, 0));
 			break;
 		
 		case WINDOW_TITLE:
-			ofSetWindowTitle(getValue(syntax[ROOT]+":"+syntax[CORE]+":windowTitle", "openFrameworks Application", 0));
+			ofSetWindowTitle(getValue(syntax[ROOT]+":"+syntax[CORE]+":window", "openFrameworks Application", 0));
 			break;
 		
 		case CURSOR:
@@ -226,11 +215,17 @@ void ofxXmlDefaultSettings::setSettings(int ident){
 
 
 /**
- * @param int ident
- * @param bool state
+ *
  */
-void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
-	settingsActive[ident] = state;
+string ofxXmlDefaultSettings::getFilepath(){
+	return this->filepath;
+}
+
+/**
+ *
+ */
+void ofxXmlDefaultSettings::setFilepath(string src){
+	this->filepath = src;
 }
 
 
@@ -264,6 +259,21 @@ void ofxXmlDefaultSettings::popRoot(){
 }
 
 
+/**
+ * Return a message set by the last method that was used.
+ */
+string ofxXmlDefaultSettings::getStatusMessage(){
+	return this->statusMessage;
+}
+
+/**
+ * @param int ident
+ * @param bool state
+ *
+ void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
+ settingsActive[ident] = state;
+ }*/
+
 
 
 /**
@@ -287,29 +297,27 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	xml.pushTag(syntax[CORE], 0);
 	xml.addValue("frameRate", 60);
 	xml.addValue("fullscreen", false);
-	xml.addTag("windowShape");
-	xml.addAttribute("windowShape", "width", 1024, 0);
-	xml.addAttribute("windowShape", "height", 768, 0);
-	xml.addTag("windowPosition");
-	xml.addAttribute("windowPosition", "x", 0, 0);
-	xml.addAttribute("windowPosition", "y", 44, 0);
-	xml.addValue("windowTitle", "openFrameworks Application");
+	xml.addValue("window", "openFrameworks Application");
+	xml.addAttribute("window", "x", 0, 0);
+	xml.addAttribute("window", "y", 44, 0);
+	xml.addAttribute("window", "width", 1024, 0);
+	xml.addAttribute("window", "height", 768, 0);
 	xml.addValue("cursor", false);
 	xml.addValue("escapeQuitsApp", false);
 	xml.addValue("logToFile", true);
 	xml.addAttribute("logToFile", "filepath", "NULL", 0);
 	xml.addAttribute("logToFile", "filename", "logs.txt", 0);
-	xml.popTag(); // End XML_TAG_OFCORE
+	xml.popTag(); // End CORE
 	
 	// Custom stuff
 	if(settingsActive[CUSTOM] == true){
 		xml.addTag(syntax[CUSTOM]);
 		xml.pushTag(syntax[CUSTOM], 0);
 		xml.addValue("custom", 60);
-		xml.popTag(); // End XML_TAG_CUSTOM
+		xml.popTag(); // End CUSTOM
 	}
 	
-	xml.popTag(); // End XML_TAG_MAIN
+	xml.popTag(); // End ROOT
 	
 	xml.saveFile(filepath);
 }

@@ -81,22 +81,22 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void load();
 		void load(string src);
 		bool save();
-	
-		string getFilepath();
-		void setFilepath(string src);
-	
-		string getStatusMessage();
-	
+		
 		void setSettings();
 		void setSettings(int ident);
-	
-		void setSettingsActive(int ident, bool state);
-	
+		
+		string getFilepath();
+		void setFilepath(string src);
+		
 		string getXmlSyntax(int ident);
 		void setXmlSyntax(int tag, string name);
-	
+		
 		void pushRoot();
 		void popRoot();
+		
+		string getStatusMessage();
+		
+		//void setSettingsActive(int ident, bool state);
 	
 	
 	private:
@@ -104,7 +104,7 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		string filepath;
 		string statusMessage;
 		string syntax[XML_SYNTAX_SIZE];
-		bool settingsActive[2];
+		//bool settingsActive[2];
 	
 };
 #endif

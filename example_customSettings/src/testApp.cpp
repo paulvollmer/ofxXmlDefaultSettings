@@ -55,12 +55,13 @@ void testApp::setup(){
 	
 	/* Load the xml file from our custom path.
 	 */
-	XML.load("test.xml");
+	XML.load("mySettings.xml");
 	
 	/* Set the openFrameworks app settings.
 	 */
 	XML.setSettings(WINDOW_SHAPE);
 	XML.setSettings(WINDOW_POSITION);
+	XML.setSettings(WINDOW_TITLE);
 }
 
 //--------------------------------------------------------------
