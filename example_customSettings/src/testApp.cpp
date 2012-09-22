@@ -44,14 +44,12 @@ void testApp::setup(){
 	XML.setXmlSyntax(ROOT_VERSION, "1.0alpha");
 	XML.setXmlSyntax(ROOT_URL, "http://www.wng.cc");
 	XML.setXmlSyntax(CORE, "myCore");
-	XML.setXmlSyntax(CUSTOM, "myCustom");
 	/* Return the current syntax. with getXmlSyntax(tag_id);
 	 */
 	cout << "ROOT         = " << XML.getXmlSyntax(ROOT) << endl;
 	cout << "ROOT_VERSION = " << XML.getXmlSyntax(ROOT_VERSION) << endl;
 	cout << "ROOT_URL     = " << XML.getXmlSyntax(ROOT_URL) << endl;
 	cout << "CORE         = " << XML.getXmlSyntax(CORE) << endl;
-	cout << "CUSTOM       = " << XML.getXmlSyntax(CUSTOM) << endl;
 	
 	/* Load the xml file from our custom path.
 	 */

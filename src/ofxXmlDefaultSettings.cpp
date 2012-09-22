@@ -45,15 +45,10 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	this->filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
 	
  	// Set default xml syntax (names of xml tags, version and url).
-	syntax[CORE] = "ofCore";
-	syntax[CUSTOM] = "custom";
 	syntax[ROOT] = "ofxXmlDefaultSettings";
 	syntax[ROOT_VERSION] = "0.2.0";
 	syntax[ROOT_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
-	
-	
-	settingsActive[CORE] = true;
-	settingsActive[CUSTOM] = false;
+	syntax[CORE] = "ofCore";
 }
 
 
@@ -286,7 +281,7 @@ string ofxXmlDefaultSettings::getStatusMessage(){
 void ofxXmlDefaultSettings::createDefaultXml(){
 	ofxXmlSettings xml;
 	
-	// Add the main tag and a version attribute to xml file.
+	// Add the root tag and a version, url attribute to xml file.
 	xml.addTag(syntax[ROOT]);
 	xml.addAttribute(syntax[ROOT], "version", syntax[ROOT_VERSION], 0);
 	xml.addAttribute(syntax[ROOT], "url", syntax[ROOT_URL], 0);
@@ -308,14 +303,6 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	xml.addAttribute("logToFile", "filepath", "NULL", 0);
 	xml.addAttribute("logToFile", "filename", "logs.txt", 0);
 	xml.popTag(); // End CORE
-	
-	// Custom stuff
-	if(settingsActive[CUSTOM] == true){
-		xml.addTag(syntax[CUSTOM]);
-		xml.pushTag(syntax[CUSTOM], 0);
-		xml.addValue("custom", 60);
-		xml.popTag(); // End CUSTOM
-	}
 	
 	xml.popTag(); // End ROOT
 	

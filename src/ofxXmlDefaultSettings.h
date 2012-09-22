@@ -40,17 +40,16 @@
 
 
 // The total size of xml syntax elements. This value will be used by the syntay array.
-#define XML_SYNTAX_SIZE 5
+#define XML_SYNTAX_SIZE 4
 
 /**
  * The XML_SYNTAX enum is used to navigate the syntax string array.
  */
 enum XML_SYNTAX {
-	CORE = 0,
-	CUSTOM = 1,
-	ROOT = 2,
-	ROOT_VERSION = 3,
-	ROOT_URL = 4
+	ROOT = 0,
+	ROOT_VERSION = 1,
+	ROOT_URL = 2,
+	CORE = 3
 };
 
 /**
@@ -95,8 +94,6 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		void popRoot();
 		
 		string getStatusMessage();
-		
-		//void setSettingsActive(int ident, bool state);
 	
 	
 	private:
@@ -104,7 +101,6 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		string filepath;
 		string statusMessage;
 		string syntax[XML_SYNTAX_SIZE];
-		//bool settingsActive[2];
-	
+		
 };
 #endif
