@@ -38,18 +38,18 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	/* Load our default xml file.
+	/* Load the xml file from default path.
 	 */
 	XML.load();
 	
-	/* Get a status message
+	/* Get a status message from last method.
 	 */
-	cout << "STATUS: " << XML.statusMessage << endl;
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 	
-	/* and set the openFrameworks core settings from it.
+	/* Set the openFrameworks app settings.
 	 */
 	XML.setSettings();
-	cout << "STATUS: " << XML.statusMessage << endl;
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 }
 
 //--------------------------------------------------------------
@@ -65,7 +65,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	switch (key) {
-		/* if key 'f' is pressed, toffle fullscreen mode.
+		/* If key 'f' is pressed, toggle fullscreen mode.
 		 */
 		case 'f':
 			ofToggleFullscreen();
@@ -75,8 +75,8 @@ void testApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void testApp::exit(){
-	/* Save the current settings to xml.
+	/* Save the current settings to xml file.
 	 */
-	XML.saveSettings();
-	cout << "STATUS: " << XML.statusMessage << endl;
+	XML.save();
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 }
