@@ -29,8 +29,8 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.20
- *  @version            0.1.2b
+ *  @modified           2012.09.22
+ *  @version            0.1.2c
  */
 
 #include "testApp.h"
@@ -52,9 +52,6 @@ void testApp::setup(){
 	cout << "ROOT_URL     = " << XML.getXmlSyntax(ROOT_URL) << endl;
 	cout << "CORE         = " << XML.getXmlSyntax(CORE) << endl;
 	cout << "CUSTOM       = " << XML.getXmlSyntax(CUSTOM) << endl;
-	 
-	//XML.setSettingsActive(ADDONS, true);
-	
 	
 	/* Load the xml file from our custom path.
 	 */
@@ -62,10 +59,8 @@ void testApp::setup(){
 	
 	/* Set the openFrameworks app settings.
 	 */
-	XML.setSettings();
-	//defXML.setSettings(WINDOW_SHAPE);
-	//defXML.setSettings(WINDOW_POSITION);
-	//defXML.setSettings(WINDOW_TITLE);
+	XML.setSettings(WINDOW_SHAPE);
+	XML.setSettings(WINDOW_POSITION);
 }
 
 //--------------------------------------------------------------

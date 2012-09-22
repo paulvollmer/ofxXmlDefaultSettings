@@ -29,7 +29,7 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.21
+ *  @modified           2012.09.22
  *  @version            0.1.2c
  */
 
