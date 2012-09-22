@@ -95,6 +95,9 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		string getXmlSyntax(int ident);
 		void setXmlSyntax(int tag, string name);
 	
+		void pushRoot();
+		void popRoot();
+	
 	
 	private:
 		void createDefaultXml();

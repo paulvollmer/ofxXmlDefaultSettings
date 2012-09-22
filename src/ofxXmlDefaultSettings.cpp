@@ -255,6 +255,16 @@ void ofxXmlDefaultSettings::setXmlSyntax(int ident, string name){
 	this->syntax[ident] = name;
 }
 
+void ofxXmlDefaultSettings::pushRoot(){
+	pushTag(syntax[ROOT], 0);
+}
+
+void ofxXmlDefaultSettings::popRoot(){
+	popTag();
+}
+
+
+
 
 /**
  * Private method
