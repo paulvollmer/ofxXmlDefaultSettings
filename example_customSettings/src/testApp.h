@@ -46,6 +46,6 @@ class testApp : public ofBaseApp{
 		void keyPressed(int key);
 		void exit();
 
-		ofxXmlDefaultSettings defXML;
+		ofxXmlDefaultSettings XML;
 	
 };

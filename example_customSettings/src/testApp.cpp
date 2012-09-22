@@ -35,40 +35,37 @@
 
 #include "testApp.h"
 
+
 //--------------------------------------------------------------
 void testApp::setup(){
-	
 	/* Set the xml tag names and version, url root attributes.
 	 */
-	defXML.setXmlSyntax(XML_ROOT_VERSION, "1.0alpha");
-	defXML.setXmlSyntax(XML_ROOT_URL, "http://www.wng.cc");
-	defXML.setXmlSyntax(XML_ROOT_TAG, "myApp");
-	defXML.setXmlSyntax(XML_CORE_TAG, "myCore");
-	defXML.setXmlSyntax(XML_ADDONS_TAG, "myAddons");
-	defXML.setXmlSyntax(XML_CUSTOM_TAG, "myCustom");
-	
+	XML.setXmlSyntax(ROOT, "myApp");
+	XML.setXmlSyntax(ROOT_VERSION, "1.0alpha");
+	XML.setXmlSyntax(ROOT_URL, "http://www.wng.cc");
+	XML.setXmlSyntax(CORE, "myCore");
+	XML.setXmlSyntax(CUSTOM, "myCustom");
 	/* Return the current syntax. with getXmlSyntax(tag_id);
 	 */
-	cout << "XML_ROOT_VERSION     = " << defXML.getXmlSyntax(XML_ROOT_VERSION) << endl;
-	cout << "XML_ROOT_URL         = " << defXML.getXmlSyntax(XML_ROOT_URL) << endl;
-	cout << "XML_ROOT_TAG    = " << defXML.getXmlSyntax(XML_ROOT_TAG) << endl;
-	cout << "XML_CORE_TAG    = " << defXML.getXmlSyntax(XML_CORE_TAG) << endl;
-	cout << "XML_ADDONS_TAG  = " << defXML.getXmlSyntax(XML_ADDONS_TAG) << endl;
-	cout << "XML_CUSTOM_TAG  = " << defXML.getXmlSyntax(XML_CUSTOM_TAG) << endl;
+	cout << "ROOT         = " << XML.getXmlSyntax(ROOT) << endl;
+	cout << "ROOT_VERSION = " << XML.getXmlSyntax(ROOT_VERSION) << endl;
+	cout << "ROOT_URL     = " << XML.getXmlSyntax(ROOT_URL) << endl;
+	cout << "CORE         = " << XML.getXmlSyntax(CORE) << endl;
+	cout << "CUSTOM       = " << XML.getXmlSyntax(CUSTOM) << endl;
+	 
+	//XML.setSettingsActive(ADDONS, true);
 	
 	
-	/* Load our default xml file.
+	/* Load the xml file from our custom path.
 	 */
-	defXML.load();
+	XML.load("test.xml");
 	
-	/* Get a status message
+	/* Set the openFrameworks app settings.
 	 */
-	cout << "STATUS: " << defXML.statusMessage << endl;
-	
-	/* and set the openFrameworks core settings from it.
-	 */
-	defXML.setSettings();
-	cout << "STATUS: " << defXML.statusMessage << endl;
+	XML.setSettings();
+	//defXML.setSettings(WINDOW_SHAPE);
+	//defXML.setSettings(WINDOW_POSITION);
+	//defXML.setSettings(WINDOW_TITLE);
 }
 
 //--------------------------------------------------------------
@@ -83,19 +80,13 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	switch (key) {
-		case 'f':
-			ofToggleFullscreen();
-			break;
-		default:
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------
 void testApp::exit(){
-	/* Save the current settings to xml.
+	/* Save the current settings to xml file.
 	 */
-	defXML.saveSettings();
-	cout << "STATUS: " << defXML.statusMessage << endl;
+	XML.save();
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 }
