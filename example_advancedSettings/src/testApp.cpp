@@ -29,7 +29,7 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.20
+ *  @modified           2012.09.22
  *  @version            0.1.2b
  */
 
@@ -37,57 +37,50 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	// Print out the current XML tag names.
-	cout << "XML_TAG_MAIN     = " << defXML.XML_TAG_MAIN << endl;
-	cout << "XML_TAG_OFCORE   = " << defXML.XML_TAG_OFCORE << endl;
-	cout << "XML_TAG_OFADDONS = " << defXML.XML_TAG_OFADDONS << endl;
-	cout << "XML_TAG_CUSTOM   = " << defXML.XML_TAG_CUSTOM << endl;
-	cout << "XML_TAG_DEFAULT  = " << defXML.XML_TAG_DEFAULT << endl;
-	// Change the XML tag names.
-	defXML.XML_TAG_MAIN = "myAppSettings";
-	defXML.XML_TAG_OFCORE = "myCore";
-	defXML.XML_TAG_OFADDONS = "myAddons";
-	defXML.XML_TAG_CUSTOM = "myCustom";
-	defXML.XML_TAG_DEFAULT = "myItem";
+	/* Load the xml file from default path.
+	 */
+	XML.load("mySettings.xml");
+	
+	/* Set the openFrameworks app settings.
+	 */
+	XML.setSettings(FRAMERATE);
+	XML.setSettings(FULLSCREEN);
+	XML.setSettings(WINDOW_SHAPE);
+	XML.setSettings(WINDOW_POSITION);
+	ofSetWindowTitle("an other title, not from default xml file.");
 	
 	
-	// Load our default xml file.
-	defXML.load();
-	//defXML.load("myDefaultSettings.xml");
-	
-	defXML.setFrameRate();
-	defXML.setFullscreen();
-	defXML.setWindowShape();
-	defXML.setWindowPosition();
-	ofSetWindowTitle("an other title, not from our default xml.");
-	//defXML.setWindowTitle();
-	
-	
-	// Add custom settings to the xml default file.
+	/* Add custom settings to the xml default file.
+	 */
 	int tempVar1, tempVar2, tempVar3;
-	
-	if (defXML.tagExists("wng", 0)) {
-		tempVar1 = defXML.getValue("wng:myVar1", 0, 0);
-		tempVar2 = defXML.getValue("wng:myVar2", 0, 0);
-		tempVar3 = defXML.getValue("wng:myVar3", 0, 0);
+	/* Push into root xml tag.
+	 */
+	XML.pushRoot();
+	if(XML.tagExists("wng", 0)) {
+		tempVar1 = XML.getValue("wng:myVar1", 0, 0);
+		tempVar2 = XML.getValue("wng:myVar2", 0, 0);
+		tempVar3 = XML.getValue("wng:myVar3", 0, 0);
 	} else {
-		// if no default parameter exist, let create some.
+		/* if no default parameter exist, let create some.
+		 */
 		tempVar1 = 100;
 		tempVar2 = 200;
 		tempVar3 = 300;
-		defXML.addTag("wng");
-		defXML.pushTag("wng", 0);
-		defXML.addValue("myVar1", tempVar1);
-		defXML.addValue("myVar2", tempVar2);
-		defXML.addValue("myVar3", tempVar3);
-		defXML.popTag();
-		defXML.saveFile();
+		XML.addTag("wng");
+		XML.pushTag("wng", 0);
+		XML.addValue("myVar1", tempVar1);
+		XML.addValue("myVar2", tempVar2);
+		XML.addValue("myVar3", tempVar3);
+		XML.popTag();
+		XML.popRoot();
 	}
+	/* Pop root xml tag.
+	 */
+	XML.popRoot();
 	
 	ofLog() << "tempVar1 = " << tempVar1;
 	ofLog() << "tempVar2 = " << tempVar2;
 	ofLog() << "tempVar3 = " << tempVar3;
-	
 }
 
 //--------------------------------------------------------------
@@ -102,23 +95,19 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	
 	switch (key) {
+		/* If key 'f' is pressed, toggle fullscreen mode.
+		 */
 		case 'f':
 			ofToggleFullscreen();
 			break;
-		default:
-			break;
 	}
-	
 }
 
 //--------------------------------------------------------------
 void testApp::exit(){
-	
-	//defXML.setWindowPosition();
-	
-	// Save the current settings to xml.
-	defXML.saveSettings();
-	
+	/* Save the current settings to xml file.
+	 */
+	XML.save();
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 }

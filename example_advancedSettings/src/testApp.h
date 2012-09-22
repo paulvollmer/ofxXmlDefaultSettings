@@ -29,7 +29,7 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.20
+ *  @modified           2012.09.22
  *  @version            0.1.2b
  */
 
@@ -46,6 +46,6 @@ class testApp : public ofBaseApp{
 		void keyPressed(int key);
 		void exit();
 
-		ofxXmlDefaultSettings defXML;
+		ofxXmlDefaultSettings XML;
 	
 };
