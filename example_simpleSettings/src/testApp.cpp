@@ -59,7 +59,12 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	
+	/* Draw a gray ground and a white rectangle.
+	 */
+	ofBackground(ofColor::gray);
+	ofFill();
+	ofSetColor(ofColor::white);
+	ofRect(20, 20, ofGetWidth()-40, ofGetHeight()-40);
 }
 
 //--------------------------------------------------------------
