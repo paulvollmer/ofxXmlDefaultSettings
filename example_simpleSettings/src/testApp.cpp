@@ -29,8 +29,8 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.20
- *  @version            0.1.2b
+ *  @modified           2012.09.24
+ *  @version            0.1.3a
  */
 
 #include "testApp.h"
@@ -59,12 +59,33 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	/* Draw a gray ground and a white rectangle.
+	/* Draw a gray background and a white rectangle above.
+	 * This is not used by the ofxXmlDefaultSettings addon.
 	 */
 	ofBackground(ofColor::gray);
 	ofFill();
 	ofSetColor(ofColor::white);
-	ofRect(20, 20, ofGetWidth()-40, ofGetHeight()-40);
+	ofRect(10, 10, ofGetWidth()-20, ofGetHeight()-20);
+	
+	/* A small description about the example.
+	 */
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("This is a simple ofxXmlDefaultSettigs addon example. The simple example\n"
+					   "create a default xml file with default openFrameworks settings.", 20, 30);
+	/* Display some information about the default xml file.
+	 */
+	ofDrawBitmapStringHighlight("general information", 20, 70, ofColor::gray, ofColor::white);
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("status message   = "+XML.getStatusMessage(), 20, 90);
+	ofDrawBitmapString("filepath         = "+XML.getFilepath(), 20, 105);
+	/* Return the current xml syntax with the getXmlSyntax(tag_id) method;
+	 */
+	ofDrawBitmapStringHighlight("xml syntax information", 20, 130, ofColor::gray, ofColor::white);
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("ROOT             = "+XML.getSyntax(ROOT), 20, 150);
+	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(ROOT_VERSION), 20, 165);
+	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(ROOT_URL), 20, 180);
+	ofDrawBitmapString("CORE             = "+XML.getSyntax(CORE), 20, 195);
 }
 
 //--------------------------------------------------------------
