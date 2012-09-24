@@ -29,8 +29,8 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.22
- *  @version            0.1.2c
+ *  @modified           2012.09.24
+ *  @version            0.1.3a
  */
 
 #ifndef _OFXXMLDEFAULTSETTINGS_H
@@ -38,9 +38,6 @@
 
 #include "ofxXmlSettings.h"
 
-
-// The total size of xml syntax elements. This value will be used by the syntay array.
-#define XML_SYNTAX_SIZE 4
 
 /**
  * The XML_SYNTAX enum is used to navigate the syntax string array.
@@ -51,19 +48,23 @@ enum XML_SYNTAX {
 	ROOT_URL = 2,
 	CORE = 3
 };
+// The total size of xml syntax elements. This value will be used by the syntay array.
+#define XML_SYNTAX_SIZE 4
 
 /**
- * The CORE_SETTINGS enum is used to select a setting parameter.
+ * The DefaultSettings struct is used to change the setting parameter.
  */
-enum CORE_SETTINGS {
-	FRAMERATE = 0,
-	WINDOW_SHAPE = 1,
-	WINDOW_POSITION = 2,
-	WINDOW_TITLE = 3,
-	CURSOR = 4,
-	FULLSCREEN = 5,
-	ESCAPE_QUITS_APP = 6,
-	LOG = 7
+struct DefaultSettings {
+	int frameRate;
+	int windowWidth;
+	int windowHeight;
+	int windowX;
+	int windowY;
+	string windowTitle;
+	bool cursor;
+	bool fullscreen;
+	bool escapeQuitsApp;
+	bool log;
 };
 
 
@@ -82,18 +83,36 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		bool save();
 		
 		void setSettings();
-		void setSettings(int ident);
-		
+		void setFrameRate();
+		void setWindowShape();
+		void setWindowPosition();
+		void setWindowTitle();
+		void setCursor();
+		void setFullscreen();
+		void setEscapeQuitsApp();
+		void setLog();
+	
 		string getFilepath();
 		void setFilepath(string src);
 		
-		string getXmlSyntax(int ident);
-		void setXmlSyntax(int tag, string name);
-		
+		void changeSyntax(int xmlSyntax, string name);
+		string getSyntax(int xmlSyntax);
+	
+		/*void changeDefaultSettings(int ident, int val);
+		void changeDefaultSettings(int ident, int val1, int val2);
+		void changeDefaultSettings(int ident, bool val);
+		void changeDefaultSettings(int ident, string val);*/
+		DefaultSettings defaultSettings;
+	
+	
+	
 		void pushRoot();
 		void popRoot();
 		
 		string getStatusMessage();
+	
+		//void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
+		//settingsActive[ident] = state;
 	
 	
 	private:
