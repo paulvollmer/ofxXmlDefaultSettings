@@ -55,14 +55,14 @@ enum XML_SYNTAX {
  * The DefaultSettings struct is used to change the setting parameter.
  */
 struct DefaultSettings {
-	int frameRate;
 	int windowWidth;
 	int windowHeight;
 	int windowX;
 	int windowY;
 	string windowTitle;
-	bool cursor;
+	int frameRate;
 	bool fullscreen;
+	bool cursor;
 	bool escapeQuitsApp;
 	bool log;
 };
@@ -83,34 +83,29 @@ class ofxXmlDefaultSettings : public ofxXmlSettings {
 		bool save();
 		
 		void setSettings();
-		void setFrameRate();
 		void setWindowShape();
 		void setWindowPosition();
 		void setWindowTitle();
-		void setCursor();
+		void setFrameRate();
 		void setFullscreen();
+		void setCursor();
 		void setEscapeQuitsApp();
 		void setLog();
-	
+		
 		string getFilepath();
 		void setFilepath(string src);
 		
 		void changeSyntax(int xmlSyntax, string name);
 		string getSyntax(int xmlSyntax);
-	
-		/*void changeDefaultSettings(int ident, int val);
-		void changeDefaultSettings(int ident, int val1, int val2);
-		void changeDefaultSettings(int ident, bool val);
-		void changeDefaultSettings(int ident, string val);*/
-		DefaultSettings defaultSettings;
-	
-	
-	
+		
 		void pushRoot();
 		void popRoot();
 		
 		string getStatusMessage();
-	
+		
+		DefaultSettings defaultSettings;
+		
+		// TODO
 		//void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
 		//settingsActive[ident] = state;
 	

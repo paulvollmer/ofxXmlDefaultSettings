@@ -29,8 +29,8 @@
  *                      ??? Linux
  *  @dependencies       ofxXmlSettings
  *  @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- *  @modified           2012.09.22
- *  @version            0.1.2c
+ *  @modified           2012.09.24
+ *  @version            0.1.3a
  */
 
 #include "testApp.h"
@@ -38,18 +38,25 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	/* Set the xml tag names and version, url root attributes.
+	/* Set the xml tag names and root-version, -url attributes.
 	 */
-	XML.setXmlSyntax(ROOT, "myApp");
-	XML.setXmlSyntax(ROOT_VERSION, "1.0alpha");
-	XML.setXmlSyntax(ROOT_URL, "http://www.wng.cc");
-	XML.setXmlSyntax(CORE, "myCore");
-	/* Return the current syntax. with getXmlSyntax(tag_id);
+	XML.changeSyntax(ROOT, "myApp");
+	XML.changeSyntax(ROOT_VERSION, "1.0alpha");
+	XML.changeSyntax(ROOT_URL, "http://www.wng.cc");
+	XML.changeSyntax(CORE, "myCore");
+	
+	/* Set the default Settings parameter.
 	 */
-	cout << "ROOT         = " << XML.getXmlSyntax(ROOT) << endl;
-	cout << "ROOT_VERSION = " << XML.getXmlSyntax(ROOT_VERSION) << endl;
-	cout << "ROOT_URL     = " << XML.getXmlSyntax(ROOT_URL) << endl;
-	cout << "CORE         = " << XML.getXmlSyntax(CORE) << endl;
+	XML.defaultSettings.frameRate = 60;
+	XML.defaultSettings.windowX = 600;
+	XML.defaultSettings.windowY = 400;
+	XML.defaultSettings.windowWidth = 600;
+	XML.defaultSettings.windowHeight = 400;
+	XML.defaultSettings.windowTitle = "Hello Window";
+	XML.defaultSettings.cursor = false;
+	XML.defaultSettings.fullscreen = false;
+	XML.defaultSettings.escapeQuitsApp = true;
+	XML.defaultSettings.log = true;
 	
 	/* Load the xml file from our custom path.
 	 */
@@ -57,9 +64,9 @@ void testApp::setup(){
 	
 	/* Set the openFrameworks app settings.
 	 */
-	XML.setSettings(WINDOW_SHAPE);
-	XML.setSettings(WINDOW_POSITION);
-	XML.setSettings(WINDOW_TITLE);
+	XML.setWindowShape();
+	XML.setWindowPosition();
+	XML.setWindowTitle();
 }
 
 //--------------------------------------------------------------
@@ -69,7 +76,46 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	/* Draw a gray background and a white rectangle above.
+	 * This is not used by the ofxXmlDefaultSettings addon.
+	 */
+	ofBackground(ofColor::gray);
+	ofFill();
+	ofSetColor(ofColor::white);
+	ofRect(10, 10, ofGetWidth()-20, ofGetHeight()-20);
 	
+	/* A small description about the example.
+	 */
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("At this example , we want to change the root and core xml syntax.\n"
+					   "Also we wil change the default settings to customize the core settings.", 20, 30);
+	/* Display some information about the default xml file.
+	 */
+	ofDrawBitmapStringHighlight("general information", 20, 70, ofColor::gray, ofColor::white);
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("status message   = "+XML.getStatusMessage(), 20, 90);
+	ofDrawBitmapString("filepath         = "+XML.getFilepath(), 20, 105);
+	/* Return the current xml syntax with the getXmlSyntax(tag_id) method;
+	 */
+	ofDrawBitmapStringHighlight("xml syntax information", 20, 130, ofColor::gray, ofColor::white);
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("ROOT             = "+XML.getSyntax(ROOT), 20, 150);
+	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(ROOT_VERSION), 20, 165);
+	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(ROOT_URL), 20, 180);
+	ofDrawBitmapString("CORE             = "+XML.getSyntax(CORE), 20, 195);
+	/* Return information about the default settings paramter.
+	 */
+	ofDrawBitmapStringHighlight("default settings information", 20, 220, ofColor::gray, ofColor::white);
+	ofSetColor(ofColor::black);
+	ofDrawBitmapString("frameRate        = "+ofToString(XML.defaultSettings.frameRate), 20, 240);
+	ofDrawBitmapString("window width     = "+ofToString(XML.defaultSettings.windowWidth), 20, 255);
+	ofDrawBitmapString("window height    = "+ofToString(XML.defaultSettings.windowHeight), 20, 270);
+	ofDrawBitmapString("window x         = "+ofToString(XML.defaultSettings.windowX), 20, 285);
+	ofDrawBitmapString("window y         = "+ofToString(XML.defaultSettings.windowY), 20, 300);
+	ofDrawBitmapString("window title     = "+ofToString(XML.defaultSettings.windowTitle), 20, 315);
+	ofDrawBitmapString("cursor           = "+ofToString(XML.defaultSettings.cursor), 20, 330);
+	ofDrawBitmapString("fullscreen       = "+ofToString(XML.defaultSettings.fullscreen), 20, 345);
+	ofDrawBitmapString("log              = "+ofToString(XML.defaultSettings.log), 20, 360);
 }
 
 //--------------------------------------------------------------

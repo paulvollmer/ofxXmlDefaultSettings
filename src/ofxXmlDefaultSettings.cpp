@@ -51,14 +51,14 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings(){
 	syntax[CORE] = "ofCore";
 	
 	// Set default settings values.
-	defaultSettings.frameRate = 30;
 	defaultSettings.windowWidth = 1024;
 	defaultSettings.windowHeight = 768;
 	defaultSettings.windowX = 0;
 	defaultSettings.windowY = 44;
 	defaultSettings.windowTitle = "wng openFrameworks Application";
-	defaultSettings.cursor = true;
+	defaultSettings.frameRate = 30;
 	defaultSettings.fullscreen = false;
+	defaultSettings.cursor = true;
 	defaultSettings.escapeQuitsApp = true;
 	defaultSettings.log = true;
 }
@@ -132,13 +132,6 @@ void ofxXmlDefaultSettings::setSettings(){
 }
 
 /**
- * Set the framerate from xml file.
- */
-void ofxXmlDefaultSettings::setFrameRate(){
-	ofSetFrameRate(getValue(syntax[ROOT]+":"+syntax[CORE]+":frameRate", defaultSettings.frameRate, 0));
-}
-
-/**
  * Set the window size from xml file.
  */
 void ofxXmlDefaultSettings::setWindowShape(){
@@ -162,14 +155,10 @@ void ofxXmlDefaultSettings::setWindowTitle(){
 }
 
 /**
- * Set the cursor mode from xml file.
+ * Set the framerate from xml file.
  */
-void ofxXmlDefaultSettings::setCursor(){
-	if(getValue(syntax[ROOT]+":"+syntax[CORE]+":cursor", defaultSettings.cursor, 0) == 1){
-		ofHideCursor();
-	} else {
-		ofShowCursor();
-	}
+void ofxXmlDefaultSettings::setFrameRate(){
+	ofSetFrameRate(getValue(syntax[ROOT]+":"+syntax[CORE]+":frameRate", defaultSettings.frameRate, 0));
 }
 
 /**
@@ -180,6 +169,17 @@ void ofxXmlDefaultSettings::setFullscreen(){
 		ofSetFullscreen(false);
 	} else {
 		ofSetFullscreen(true);
+	}
+}
+
+/**
+ * Set the cursor mode from xml file.
+ */
+void ofxXmlDefaultSettings::setCursor(){
+	if(getValue(syntax[ROOT]+":"+syntax[CORE]+":cursor", defaultSettings.cursor, 0) == 1){
+		ofHideCursor();
+	} else {
+		ofShowCursor();
 	}
 }
 
@@ -321,13 +321,13 @@ void ofxXmlDefaultSettings::createDefaultXml(){
 	// Core stuff
 	xml.addTag(syntax[CORE]);
 	xml.pushTag(syntax[CORE], 0);
-	xml.addValue("frameRate", defaultSettings.frameRate);
-	xml.addValue("fullscreen", defaultSettings.fullscreen);
 	xml.addValue("window", defaultSettings.windowTitle);
 	xml.addAttribute("window", "x", defaultSettings.windowX, 0);
 	xml.addAttribute("window", "y", defaultSettings.windowY, 0);
 	xml.addAttribute("window", "width", defaultSettings.windowWidth, 0);
 	xml.addAttribute("window", "height", defaultSettings.windowHeight, 0);
+	xml.addValue("frameRate", defaultSettings.frameRate);
+	xml.addValue("fullscreen", defaultSettings.fullscreen);
 	xml.addValue("cursor", defaultSettings.cursor);
 	xml.addValue("escapeQuitsApp", defaultSettings.escapeQuitsApp);
 	xml.addValue("logToFile", defaultSettings.log);
