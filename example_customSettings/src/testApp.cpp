@@ -40,10 +40,10 @@
 void testApp::setup(){
 	/* Set the xml tag names and root-version, -url attributes.
 	 */
-	XML.changeSyntax(ROOT, "myApp");
-	XML.changeSyntax(ROOT_VERSION, "1.0alpha");
-	XML.changeSyntax(ROOT_URL, "http://www.wng.cc");
-	XML.changeSyntax(CORE, "myCore");
+	XML.changeSyntax(XML.ROOT, "myApp");
+	XML.changeSyntax(XML.ROOT_VERSION, "1.0alpha");
+	XML.changeSyntax(XML.ROOT_URL, "http://www.wng.cc");
+	XML.changeSyntax(XML.CORE, "myCore");
 	
 	/* Set the default Settings parameter.
 	 */
@@ -99,10 +99,10 @@ void testApp::draw(){
 	 */
 	ofDrawBitmapStringHighlight("xml syntax information", 20, 130, ofColor::gray, ofColor::white);
 	ofSetColor(ofColor::black);
-	ofDrawBitmapString("ROOT             = "+XML.getSyntax(ROOT), 20, 150);
-	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(ROOT_VERSION), 20, 165);
-	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(ROOT_URL), 20, 180);
-	ofDrawBitmapString("CORE             = "+XML.getSyntax(CORE), 20, 195);
+	ofDrawBitmapString("ROOT             = "+XML.getSyntax(XML.ROOT), 20, 150);
+	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(XML.ROOT_VERSION), 20, 165);
+	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(XML.ROOT_URL), 20, 180);
+	ofDrawBitmapString("CORE             = "+XML.getSyntax(XML.CORE), 20, 195);
 	/* Return information about the default settings paramter.
 	 */
 	ofDrawBitmapStringHighlight("default settings information", 20, 220, ofColor::gray, ofColor::white);

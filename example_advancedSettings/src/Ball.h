@@ -1,5 +1,5 @@
 //
-// testApp.h
+// ball.h
 // ofxXmlDefaultSettings is released under the MIT License.
 //
 // Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
@@ -23,24 +23,33 @@
 // THE SOFTWARE.
 //
 
+#ifndef BALL_H
+#define BALL_H
+
 #include "ofMain.h"
-#include "ofxXmlDefaultSettings.h"
-#include "Ball.h"
+#include "ofxXmlSettings.h"
 
-
-class testApp : public ofBaseApp{
-
-	public:
-		void setup();
-		void update();
-		void draw();
-		void mouseMoved(int x, int y);
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void exit();
-
-		ofxXmlDefaultSettings XML;
-		Ball ball[3];
+/**
+ * For this little Example we use a xml structure like:
+ *
+ *   <balls>
+ *     <ball x="100" y="100" size="100">
+ *       <color r="255" g="0" b="0" a="255"></color>
+ *     </ball>
+ *   </balls>
+ */
+class Ball {
+public:
+	Ball();
 	
+	void init(int posX, int posY, int s, int colorR, int colorG, int colorB, int colorAlpha);
+	void draw();
+	void createXml(ofxXmlSettings xml, int which);
+	void readXml(ofxXmlSettings xml, int which);
+	ofxXmlSettings updateXml(int which);
+	
+	ofVec2f pos;
+	int size;
+	ofColor color;
 };
+#endif
