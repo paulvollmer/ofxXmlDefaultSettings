@@ -48,8 +48,8 @@ void testApp::setup(){
 	/* Set the default Settings parameter.
 	 */
 	XML.defaultSettings.frameRate = 60;
-	XML.defaultSettings.windowX = 600;
-	XML.defaultSettings.windowY = 400;
+	XML.defaultSettings.windowX = 200;
+	XML.defaultSettings.windowY = 200;
 	XML.defaultSettings.windowWidth = 600;
 	XML.defaultSettings.windowHeight = 400;
 	XML.defaultSettings.windowTitle = "Hello Window";
