@@ -23,6 +23,19 @@
 // THE SOFTWARE.
 //
 
+/**
+ * advancedSettings example
+ *
+ * @testet_oF          0071
+ * @testet_plattform   MacOs 10.6+
+ *                     ??? Win
+ *                     ??? Linux
+ * @dependencies       ofxXmlSettings
+ * @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
+ * @modified           2012.10.08
+ * @version            0.1.4
+ */
+
 #include "ofMain.h"
 #include "testApp.h"
 #include "ofAppGlutWindow.h"

@@ -1,5 +1,5 @@
 //
-// ball.cpp
+// Ball.cpp
 // ofxXmlDefaultSettings is released under the MIT License.
 //
 // Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
@@ -34,14 +34,11 @@ Ball::Ball(){
 }
 
 
-void Ball::init(int pX, int pY, int s, int cR, int cG, int cB, int cA){
+void Ball::init(int pX, int pY, int s, ofColor c){
 	pos[0] = pX;
 	pos[1] = pY;
 	size = s;
-	color[0] = cR;
-	color[1] = cG;
-	color[2] = cB;
-	color[3] = cA;
+	color = c;
 }
 
 
@@ -66,7 +63,7 @@ void Ball::createXml(ofxXmlSettings xml, int which){
 	xml.addAttribute("color", "g", color[1], 0);
 	xml.addAttribute("color", "b", color[2], 0);
 	xml.addAttribute("color", "a", color[3], 0);
-	xml.popTag(); // ball
+	xml.popTag(); // pop ball
 }
 
 
@@ -80,14 +77,10 @@ void Ball::readXml(ofxXmlSettings xml, int which){
 			  xml.getAttribute("ball:color", "g", 255, which),
 			  xml.getAttribute("ball:color", "b", 255, which),
 			  xml.getAttribute("ball:color", "a", 255, which));
-	color[0] = xml.getAttribute("ball:color", "r", 255, which);
+	//color[0] = xml.getAttribute("ball:color", "r", 255, which);
 	
 	cout << "x" << pos[0] << endl;
 	cout << "y" << pos[1] << endl;
 	cout << "size" << size << endl;
 	cout << "color" << color << endl;	
-}
-
-ofxXmlSettings Ball::updateXml(int which){
-	//return 
 }

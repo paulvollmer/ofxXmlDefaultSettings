@@ -44,36 +44,43 @@ void testApp::setup(){
 	/* Add custom settings to the xml default file.
 	 * For this all used xml content need variables to store values.
 	 *
-	 * To read/write content from the root directory, you can use
+	 * To read/write content from the XML.ROOT directory, you can use
 	 * the pushRoot/popRoot methods.
 	 */
 	XML.pushRoot();
-	if(XML.tagExists("balls", 0)){
-		/* Push into balls tag and read ball item content.
+	
+	/* Check if the default xml file exist at app start.
+	 */
+	if (XML.fileExist) {
+		/* Check if <balls> tag exist and push into <balls> tag.
+		 * Read the xml content.
 		 */
-		XML.pushTag("balls", 0);
-		for(int i=0; i<=2; i++){
-			ball[i].readXml(XML, i);
+		if (XML.tagExists("balls", 0)) {
+			XML.pushTag("balls", 0);
+			for (int i=0; i<=2; i++) {
+				ball[i].readXml(XML, i);
+			}
+			XML.popTag(); // pop balls
 		}
-		XML.popTag(); // balls
 	}
-	/* if no default parameter exist, let create some.
+	/* If no xml file exist, create the <balls> tag and add some parameter.
 	 */
 	else {
 		/* Set the ball properties. The following parameter will be set
-		 * x, y, size, r, g, b, a
+		 * x, y, size and the color.
 		 */
-		ball[0].init(200, 100, 100, 255, 0, 0, 0);
-		ball[1].init(100, 300, 100, 0, 255, 0, 0);
-		ball[2].init(300, 300, 100, 0, 0, 255, 0);
+		ball[0].init(200, 100, 100, ofColor::red);
+		ball[1].init(100, 300, 100, ofColor::green);
+		ball[2].init(300, 300, 100, ofColor::blue);
 		
 		XML.addTag("balls");
 		XML.pushTag("balls", 0);
 		for(int i=0; i<=2; i++){
 			ball[i].createXml(XML, i);
 		}
-		XML.popTag(); // balls
+		XML.popTag(); // pop balls
 	}
+
 	/* Pop root xml tag.
 	 */
 	XML.popRoot();
@@ -131,13 +138,14 @@ void testApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::exit(){
-	/* Save the position from ball 1 to the xml file.
+	/* Push into the root tag and save the position from
+	 * ball 1 to the xml file.
 	 */
 	XML.pushRoot();
 	XML.pushTag("balls", 0);
 	XML.setAttribute("ball", "x", ball[0].pos[0], 0);
 	XML.setAttribute("ball", "y", ball[0].pos[1], 0);
-	XML.popTag(); // balls
+	XML.popTag(); // pop balls
 	XML.popRoot();
 	
 	/* Save the current settings to xml file.

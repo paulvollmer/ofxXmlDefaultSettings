@@ -1,5 +1,5 @@
 //
-// ball.h
+// Ball.h
 // ofxXmlDefaultSettings is released under the MIT License.
 //
 // Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
@@ -42,11 +42,10 @@ class Ball {
 public:
 	Ball();
 	
-	void init(int posX, int posY, int s, int colorR, int colorG, int colorB, int colorAlpha);
+	void init(int posX, int posY, int s, ofColor c);
 	void draw();
 	void createXml(ofxXmlSettings xml, int which);
 	void readXml(ofxXmlSettings xml, int which);
-	ofxXmlSettings updateXml(int which);
 	
 	ofVec2f pos;
 	int size;

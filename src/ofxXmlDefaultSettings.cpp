@@ -59,12 +59,15 @@ void ofxXmlDefaultSettings::load(string src) {
 	// Check if file exist
 	if (loadFile(src)) {
 		if (getAttribute(syntax[ROOT], "version", "0", 0) == syntax[ROOT_VERSION]) {
+			fileExist = true;
 			statusMessage = "Default xml loaded!";
 		} else {
+			fileExist = false;
 			statusMessage = "Default xml loaded! Not correct file version!";
 		}
 	}
 	else {
+		fileExist = false;
 		statusMessage = "Unable to load xml file! Generate and save file.";;
 		createDefaultXml();
 		loadFile(src);

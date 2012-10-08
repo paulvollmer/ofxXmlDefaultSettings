@@ -33,8 +33,8 @@
  * @tableofcontents
  * @author      Paul Vollmer <paul.vollmer@fh-potsdam.de><br>
  *              wrong-entertainment.com
- * @date        2012.09.26
- * @version     0.1.3b
+ * @date        2012.10.08
+ * @version     0.1.4
  * @copyright   <a href="http://opensource.org/licenses/MIT">MIT License</a>
  * 
  * @section GeneralInformation General Information
@@ -259,6 +259,13 @@ public:
 		bool log;
 	};
 	DefaultSettings defaultSettings;
+	
+	/**
+	 * True if a default xml file exist at the application launch.
+	 * If a default xml file was generated, the fileExist parameter is also false.
+	 * This can be used for advanced thinks like adding more tags to the xml file.
+	 */
+	bool fileExist;
 	
 	// TODO
 	//void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
