@@ -2,7 +2,7 @@
 
 
 **General Information**  
-ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings.  
+ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings. Also you can use the xml to store other variables.  
   
 openFrameworks core variables:  
 - window position  
@@ -13,11 +13,9 @@ openFrameworks core variables:
 - cursor  
 - escape quits app  
 - log to file  
-  
-Also you can use the xml to store other variables.  
-  
+   
 **Current Version:**  
-0.1.3b (stable and versioned using [semantic versioning](http://semver.org/))   
+0.2.0 (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
 MacOS 10.6+   
@@ -35,9 +33,12 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 ## Changelog  
 A detailed changelog, intended for programmers.  
   
+0.2.0  
+redesign of logging support. Testing.  
+
 0.1.3b  
 Lot of changes at the whole implementation.  
-- Added SmlSyntax enum  
+- Added XmlSyntax enum  
 - Added DefaultSettings struct  
 - Added statusMessage and delete #ifdef DEBUG stuff  
 - Added doxygen support  

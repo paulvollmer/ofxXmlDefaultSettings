@@ -32,8 +32,8 @@
  *                     ??? Linux
  * @dependencies       ofxXmlSettings
  * @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * @modified           2012.10.08
- * @version            0.1.4
+ * @modified           2012.10.09
+ * @version            0.2.0
  */
 
 #include "ofMain.h"

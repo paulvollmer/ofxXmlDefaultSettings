@@ -33,8 +33,8 @@
  * @tableofcontents
  * @author      Paul Vollmer <paul.vollmer@fh-potsdam.de><br>
  *              wrong-entertainment.com
- * @date        2012.10.08
- * @version     0.1.4b
+ * @date        2012.10.09
+ * @version     0.2.0
  * @copyright   <a href="http://opensource.org/licenses/MIT">MIT License</a>
  * 
  * @section GeneralInformation General Information
