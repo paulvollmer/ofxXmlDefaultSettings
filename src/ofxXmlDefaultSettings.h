@@ -267,10 +267,6 @@ public:
 	 */
 	bool fileExist;
 	
-	// TODO
-	//void ofxXmlDefaultSettings::setSettingsActive(int ident, bool state){
-	//settingsActive[ident] = state;
-	
 	
 private:
 	void createDefaultXml();
