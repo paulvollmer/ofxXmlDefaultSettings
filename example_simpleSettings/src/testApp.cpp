@@ -72,10 +72,10 @@ void testApp::draw(){
 	 */
 	ofDrawBitmapStringHighlight("xml syntax information", 20, 130, ofColor::gray, ofColor::white);
 	ofSetColor(ofColor::black);
-	ofDrawBitmapString("ROOT             = "+XML.getSyntax(ROOT), 20, 150);
-	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(ROOT_VERSION), 20, 165);
-	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(ROOT_URL), 20, 180);
-	ofDrawBitmapString("CORE             = "+XML.getSyntax(CORE), 20, 195);
+	ofDrawBitmapString("ROOT             = "+XML.getSyntax(XML.ROOT), 20, 150);
+	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(XML.ROOT_VERSION), 20, 165);
+	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(XML.ROOT_URL), 20, 180);
+	ofDrawBitmapString("CORE             = "+XML.getSyntax(XML.CORE), 20, 195);
 }
 
 //--------------------------------------------------------------
