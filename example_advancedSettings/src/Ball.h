@@ -1,5 +1,5 @@
 //
-// testApp.h
+// Ball.h
 // ofxXmlDefaultSettings is released under the MIT License.
 //
 // Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
@@ -23,32 +23,32 @@
 // THE SOFTWARE.
 //
 
-/**
- * customSettings example
- *
- * @testet_oF          0071
- * @testet_plattform   MacOs 10.6+
- *                     ??? Win
- *                     ??? Linux
- * @dependencies       ofxXmlSettings
- * @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * @modified           2012.10.09
- * @version            0.2.0
- */
+#ifndef BALL_H
+#define BALL_H
 
 #include "ofMain.h"
-#include "testApp.h"
-#include "ofAppGlutWindow.h"
+#include "ofxXmlSettings.h"
 
-//========================================================================
-int main( ){
-
-    ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);			// <-------- setup the GL context
-
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
-	ofRunApp( new testApp());
-
-}
+/**
+ * For this little Example we use a xml structure like:
+ *
+ *   <balls>
+ *     <ball x="100" y="100" size="100">
+ *       <color r="255" g="0" b="0" a="255"></color>
+ *     </ball>
+ *   </balls>
+ */
+class Ball {
+public:
+	Ball();
+	
+	void init(int posX, int posY, int s, ofColor c);
+	void draw();
+	void createXml(ofxXmlSettings xml, int which);
+	void readXml(ofxXmlSettings xml, int which);
+	
+	ofVec2f pos;
+	int size;
+	ofColor color;
+};
+#endif

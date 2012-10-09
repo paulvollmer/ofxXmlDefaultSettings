@@ -23,32 +23,24 @@
 // THE SOFTWARE.
 //
 
-/**
- * customSettings example
- *
- * @testet_oF          0071
- * @testet_plattform   MacOs 10.6+
- *                     ??? Win
- *                     ??? Linux
- * @dependencies       ofxXmlSettings
- * @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * @modified           2012.10.09
- * @version            0.2.0
- */
-
 #include "ofMain.h"
-#include "testApp.h"
-#include "ofAppGlutWindow.h"
+#include "ofxXmlDefaultSettings.h"
+#include "Ball.h"
 
-//========================================================================
-int main( ){
 
-    ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);			// <-------- setup the GL context
+class testApp : public ofBaseApp{
 
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
-	ofRunApp( new testApp());
+	public:
+		void setup();
+		void update();
+		void draw();
+		void mouseMoved(int x, int y);
+		void mouseDragged(int x, int y, int button);
+		void mousePressed(int x, int y, int button);
+		void mouseReleased(int x, int y, int button);
+		void exit();
 
-}
+		ofxXmlDefaultSettings XML;
+		Ball ball[3];
+	
+};

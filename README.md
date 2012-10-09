@@ -2,7 +2,7 @@
 
 
 **General Information**  
-ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings.  
+ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings. Also you can use the xml to store other variables.  
   
 openFrameworks core variables:  
 - window position  
@@ -13,14 +13,9 @@ openFrameworks core variables:
 - cursor  
 - escape quits app  
 - log to file  
-  
-The same xml stuff works for the following addons:  
-ofxOsc (ofxOscSender, ofxOscReceiver)  
-  
-Also you can use the xml to store other variables.  
-  
+   
 **Current Version:**  
-0.1.2 (stable and versioned using [semantic versioning](http://semver.org/))   
+0.2.0 (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
 MacOS 10.6+   
@@ -38,20 +33,31 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 ## Changelog  
 A detailed changelog, intended for programmers.  
   
+0.2.0  
+redesign of logging support. Testing.  
+
+0.1.3b  
+Lot of changes at the whole implementation.  
+- Added XmlSyntax enum  
+- Added DefaultSettings struct  
+- Added statusMessage and delete #ifdef DEBUG stuff  
+- Added doxygen support  
+- Delete ofxXmlOscSettings class  
+  
 0.1.2  
-added missing #ifndef  
+Added missing #ifndef  
   
 0.1.1  
-added ofxOsc settings  
+Added ofxOsc settings  
   
 0.1.0d  
-added ofLogToFile, changes at ofFullscreen support.  
+Added ofLogToFile, changes at ofFullscreen support.  
   
 0.1.0c  
-changes at method wording, clear up code, final test  
+Changes at method wording, clear up code, final test  
   
 0.1.0  
-starting addon at ofxXmlDefaultSettings Repository  
+Starting addon at ofxXmlDefaultSettings Repository  
   
   
 ## Author  
@@ -64,4 +70,4 @@ Github: http://www.github.com/wrongentertainment
 
 
 ## License 
-ofxXmlDefaultSettings is Licensed under MIT Public License: http://www.opensource.org/licenses/MIT
+ofxXmlDefaultSettings is released under the MIT License: http://www.opensource.org/licenses/MIT

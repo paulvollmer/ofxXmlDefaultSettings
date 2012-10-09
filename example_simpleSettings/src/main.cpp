@@ -1,5 +1,5 @@
 //
-// testApp.h
+// main.cpp
 // ofxXmlDefaultSettings is released under the MIT License.
 //
 // Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
@@ -24,7 +24,7 @@
 //
 
 /**
- * customSettings example
+ * advancedSettings example
  *
  * @testet_oF          0071
  * @testet_plattform   MacOs 10.6+

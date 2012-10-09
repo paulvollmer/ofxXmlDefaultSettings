@@ -1,4 +1,3 @@
-# https://gist.github.com/gists/1876339
 *.DS_Store
 
 # ignore Xcode compiled build folder and application.
@@ -8,3 +7,7 @@
 # ignore Xcode User .pbxuser and .mode1v3 files.
 *.pbxuser
 *.mode1v3
+
+# ignore example xml file
+example_customSettings/bin/data/mySettings.xml
+example_advancedSettings/bin/data/mySettings.xml

@@ -1,8 +1,8 @@
 <install>
     <name>ofxXmlDefaultSettings</name>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
     <author>Paul Vollmer</author>
-    <url>http://www.wng.cc</url>
+    <url>http://www.wrong-entertainment.com</url>
     
     <add>	
         <!-- ===================================================================== -->
@@ -13,8 +13,6 @@
             <folder name="addons/ofxXmlDefaultSettings/src">
                 <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlDefaultSettings.h</file>
                 <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlDefaultSettings.cpp</file>
-                <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlOscSettings.h</file>
-                <file>../../../addons/ofxXmlDefaultSettings/src/ofxXmlOscSettings.cpp</file>
             </folder>
         </src>
         

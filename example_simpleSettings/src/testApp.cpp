@@ -28,35 +28,18 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	/* Set the xml tag names and root-version, -url attributes.
+	/* Load the xml file from default path.
 	 */
-	XML.changeSyntax(XML.ROOT, "myApp");
-	XML.changeSyntax(XML.ROOT_VERSION, "1.0alpha");
-	XML.changeSyntax(XML.ROOT_URL, "http://www.wng.cc");
-	XML.changeSyntax(XML.CORE, "myCore");
+	XML.load();
 	
-	/* Set the default Settings parameter.
+	/* Get a status message from last method.
 	 */
-	XML.defaultSettings.frameRate = 60;
-	XML.defaultSettings.windowX = 200;
-	XML.defaultSettings.windowY = 200;
-	XML.defaultSettings.windowWidth = 600;
-	XML.defaultSettings.windowHeight = 400;
-	XML.defaultSettings.windowTitle = "Hello Window";
-	XML.defaultSettings.cursor = false;
-	XML.defaultSettings.fullscreen = false;
-	XML.defaultSettings.escapeQuitsApp = true;
-	XML.defaultSettings.log = true;
-	
-	/* Load the xml file from our custom path.
-	 */
-	XML.load("mySettings.xml");
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 	
 	/* Set the openFrameworks app settings.
 	 */
-	XML.setWindowShape();
-	XML.setWindowPosition();
-	XML.setWindowTitle();
+	XML.setSettings();
+	cout << "STATUS: " << XML.getStatusMessage() << endl;
 }
 
 //--------------------------------------------------------------
@@ -77,8 +60,8 @@ void testApp::draw(){
 	/* A small description about the example.
 	 */
 	ofSetColor(ofColor::black);
-	ofDrawBitmapString("At this example , we want to change the root and core xml syntax.\n"
-					   "Also we wil change the default settings to customize the core settings.", 20, 30);
+	ofDrawBitmapString("This is a simple ofxXmlDefaultSettigs addon example. The simple example\n"
+					   "create a default xml file with default openFrameworks settings.", 20, 30);
 	/* Display some information about the default xml file.
 	 */
 	ofDrawBitmapStringHighlight("general information", 20, 70, ofColor::gray, ofColor::white);
@@ -93,24 +76,17 @@ void testApp::draw(){
 	ofDrawBitmapString("ROOT version     = "+XML.getSyntax(XML.ROOT_VERSION), 20, 165);
 	ofDrawBitmapString("ROOT url         = "+XML.getSyntax(XML.ROOT_URL), 20, 180);
 	ofDrawBitmapString("CORE             = "+XML.getSyntax(XML.CORE), 20, 195);
-	/* Return information about the default settings paramter.
-	 */
-	ofDrawBitmapStringHighlight("default settings information", 20, 220, ofColor::gray, ofColor::white);
-	ofSetColor(ofColor::black);
-	ofDrawBitmapString("frameRate        = "+ofToString(XML.defaultSettings.frameRate), 20, 240);
-	ofDrawBitmapString("window width     = "+ofToString(XML.defaultSettings.windowWidth), 20, 255);
-	ofDrawBitmapString("window height    = "+ofToString(XML.defaultSettings.windowHeight), 20, 270);
-	ofDrawBitmapString("window x         = "+ofToString(XML.defaultSettings.windowX), 20, 285);
-	ofDrawBitmapString("window y         = "+ofToString(XML.defaultSettings.windowY), 20, 300);
-	ofDrawBitmapString("window title     = "+ofToString(XML.defaultSettings.windowTitle), 20, 315);
-	ofDrawBitmapString("cursor           = "+ofToString(XML.defaultSettings.cursor), 20, 330);
-	ofDrawBitmapString("fullscreen       = "+ofToString(XML.defaultSettings.fullscreen), 20, 345);
-	ofDrawBitmapString("log              = "+ofToString(XML.defaultSettings.log), 20, 360);
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	
+	switch (key) {
+		/* If key 'f' is pressed, toggle fullscreen mode.
+		 */
+		case 'f':
+			ofToggleFullscreen();
+			break;
+	}
 }
 
 //--------------------------------------------------------------
