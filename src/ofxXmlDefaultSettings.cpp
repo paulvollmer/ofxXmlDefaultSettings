@@ -46,6 +46,8 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings() {
 	defaultSettings.cursor = true;
 	defaultSettings.escapeQuitsApp = true;
 	defaultSettings.log = true;
+	defaultSettings.logFilepath = "default";
+	defaultSettings.logFilename = "logs.txt";
 }
 
 
@@ -151,21 +153,21 @@ void ofxXmlDefaultSettings::setEscapeQuitsApp() {
 
 
 void ofxXmlDefaultSettings::setLog() {
-	static string tempPath = getAttribute(syntax[ROOT]+":"+syntax[CORE]+":logToFile", "filepath", "NULL", 0);
-	static string tempName = getAttribute(syntax[ROOT]+":"+syntax[CORE]+":logToFile", "filename", "logs.txt", 0);
+	static string tempPath = getAttribute(syntax[ROOT]+":"+syntax[CORE]+":logToFile", "filepath",defaultSettings.logFilepath, 0);
+	static string tempName = getAttribute(syntax[ROOT]+":"+syntax[CORE]+":logToFile", "filename", defaultSettings.logFilename, 0);
 	if (getValue(syntax[ROOT]+":"+syntax[CORE]+":logToFile", true, 0) == 1) {
-		// If the filepath attribute is NULL, 
+		// If the filepath attribute is "default", 
 		// we run the default method and save the log file to current working directory.
-		if (tempPath == "NULL") {
+		if (tempPath == "default") {
 			// check if a logs folder exist.
 			// if no folder found, create one.
 			ofDirectory dir(ofFilePath::getCurrentWorkingDirectory()+"/logs");
 			if (!dir.exists()) {
 				dir.create(true);
 			}
-			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs"+"/"+ofGetTimestampString()+"_"+tempName, 1);
+			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs/"+ofGetTimestampString()+"_"+tempName, 1);
 		} else {
-			ofLogToFile(tempPath+"/"+ofGetTimestampString()+"_"+tempName, 1);
+			ofLogToFile(tempPath+"/"+tempName, 1);
 		}
 	}
 }
@@ -234,8 +236,8 @@ void ofxXmlDefaultSettings::createDefaultXml() {
 	xml.addValue("cursor", defaultSettings.cursor);
 	xml.addValue("escapeQuitsApp", defaultSettings.escapeQuitsApp);
 	xml.addValue("logToFile", defaultSettings.log);
-	xml.addAttribute("logToFile", "filepath", "NULL", 0);
-	xml.addAttribute("logToFile", "filename", "logs.txt", 0);
+	xml.addAttribute("logToFile", "filepath", defaultSettings.logFilepath, 0);
+	xml.addAttribute("logToFile", "filename", defaultSettings.logFilename, 0);
 	xml.popTag(); // End CORE
 	
 	xml.popTag(); // End ROOT

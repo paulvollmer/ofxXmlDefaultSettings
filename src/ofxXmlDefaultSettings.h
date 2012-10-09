@@ -245,6 +245,8 @@ public:
 	 * @param cursor The default cursor settings as a boolean.
 	 * @param escapeQuitsApp The default settings if escape quits the application. Set as a boolean.
 	 * @param log The default log settings as a boolean.
+	 * @param logFilepath The path where the log txt files should be saved.
+	 * @param logFilename The name of the log files
 	 */
 	struct DefaultSettings {
 		int windowWidth;
@@ -257,6 +259,8 @@ public:
 		bool cursor;
 		bool escapeQuitsApp;
 		bool log;
+		string logFilepath;
+		string logFilename;
 	};
 	DefaultSettings defaultSettings;
 	
