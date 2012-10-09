@@ -167,6 +167,10 @@ void ofxXmlDefaultSettings::setLog() {
 			}
 			ofLogToFile(ofFilePath::getCurrentWorkingDirectory()+"/logs/"+ofGetTimestampString()+"_"+tempName, 1);
 		} else {
+			ofDirectory dir(tempPath);
+			if (!dir.exists()) {
+				dir.create(true);
+			}
 			ofLogToFile(tempPath+"/"+tempName, 1);
 		}
 	}
