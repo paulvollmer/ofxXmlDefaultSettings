@@ -4,6 +4,8 @@
 **General Information**  
 ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings. Also you can use the xml to store other variables.  
   
+Docs can be found at http://wrongentertainment.github.com/ofxXmlDefaultSettings  
+  
 openFrameworks core variables:  
 - window position  
 - window size  
