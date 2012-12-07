@@ -13,6 +13,8 @@ openFrameworks core variables:
 - cursor  
 - escape quits app  
 - log to file  
+  
+The Documentation can be found [here](http://wrongentertainment.github.com/ofxXmlDefaultSettings/)  
    
 **Current Version:**  
 0.2.0 (stable and versioned using [semantic versioning](http://semver.org/))   
