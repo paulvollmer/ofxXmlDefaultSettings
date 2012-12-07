@@ -11,3 +11,6 @@
 # ignore example xml file
 example_customSettings/bin/data/mySettings.xml
 example_advancedSettings/bin/data/mySettings.xml
+
+#Doxygen
+*html
