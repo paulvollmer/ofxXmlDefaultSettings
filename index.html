@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ofxXmlDefaultSettings
-   &#160;<span id="projectnumber">0.2.0</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
   </td>
  </tr>
@@ -99,21 +99,22 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#GeneralInformation">General Information</a></li>
-<li class="level1"><a href="#xmlfile">XML file.</a></li>
+<li class="level1"><a href="#xmlfile">XML file</a></li>
+<li class="level1"><a href="#license">License</a></li>
 </ul>
 </div>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Paul Vollmer <a href="#" onclick="location.href='mai'+'lto:'+'pau'+'l.'+'vol'+'lm'+'er@'+'fh'+'-po'+'ts'+'dam'+'.d'+'e'; return false;">paul.<span style="display: none;">.nosp@m.</span>voll<span style="display: none;">.nosp@m.</span>mer@f<span style="display: none;">.nosp@m.</span>h-po<span style="display: none;">.nosp@m.</span>tsdam<span style="display: none;">.nosp@m.</span>.de</a><br/>
  wrong-entertainment.com </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2012.10.09 </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.2.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2012.12.07 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>0.2.1 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd><a href="http://opensource.org/licenses/MIT">MIT License</a></dd></dl>
 <h1><a class="anchor" id="GeneralInformation"></a>
 General Information</h1>
 <div><table class="doxtable">
 <tr>
-<td>tested openFrameworks version</td><td>0071 </td></tr>
+<td>tested openFrameworks version</td><td>0073 </td></tr>
 <tr>
-<td>tested plattform MacOs</td><td>10.6+ </td></tr>
+<td>tested plattform MacOs</td><td>10.6, 10.7 </td></tr>
 <tr>
 <td>tested plattform Win</td><td>? </td></tr>
 <tr>
@@ -122,12 +123,12 @@ General Information</h1>
 <td>dependencies</td><td>ofxXmlSettings </td></tr>
 </table>
 </div><p> <br/>
- This openFrameworks addon create a default xml file to store openFrameworks settings like of ofSetFrameRate, ofSetWindowShape etc. The addon check, if a xml file exist to decide whether a file should be created or imported. If no file is found, the addon generate a default file and loads this one. You can found more information about the default parameter at the <a class="el" href="classofx_xml_default_settings.html">ofxXmlDefaultSettings</a> constructor and the <a class="el" href="index.html#xmlfile">XML file.</a>.</p>
+ This openFrameworks addon create a default xml file to store openFrameworks settings like of ofSetFrameRate, ofSetWindowShape etc. The addon check, if a xml file exist to decide whether a file should be created or imported. If no file is found, the addon generate a default file and loads this one. You can found more information about the default parameter at the <a class="el" href="classofx_xml_default_settings.html">ofxXmlDefaultSettings</a> constructor and the <a class="el" href="index.html#xmlfile">XML file</a>.</p>
 <h1><a class="anchor" id="xmlfile"></a>
-XML file.</h1>
+XML file</h1>
 <p>A sample of the generated XML file. </p>
 <pre>
-&lt;ofxXmlDefaultSettings version="0.2.0" url="https://github.com/wrongentertainment/ofxxmldefaultsettings"&gt;
+&lt;ofxXmlDefaultSettings version="0.2.1" url="https://github.com/wrongentertainment/ofxxmldefaultsettings"&gt;
   &lt;ofCore&gt;
     &lt;frameRate&gt;60&lt;/frameRate&gt;
     &lt;fullscreen&gt;0&lt;/fullscreen&gt;
@@ -137,12 +138,29 @@ XML file.</h1>
     &lt;logToFile filepath="NULL" filename="logs.txt"&gt;1&lt;/logToFile&gt;
   &lt;/ofCore&gt;
 &lt;/ofxXmlDefaultSettings&gt; 
+</pre><h1><a class="anchor" id="license"></a>
+License</h1>
+<p><b>MIT License</b> </p>
+<pre>
+Copyright (c) 2012, Paul Vollmer <a href="http://www.wrong-entertainment.com">http://www.wrong-entertainment.com</a></pre><pre>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</pre><pre>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</pre><pre>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 </pre> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Oct 10 2012 11:50:41 for ofxXmlDefaultSettings by
+    <li class="footer">Generated on Fri Dec 7 2012 19:27:26 for ofxXmlDefaultSettings by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>
