@@ -15,7 +15,7 @@ openFrameworks core variables:
 - log to file  
   
 **Current Version:**  
-0.2.0 (stable and versioned using [semantic versioning](http://semver.org/))   
+0.2.1 (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
 MacOS 10.6+   
@@ -32,6 +32,11 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 
 ## Changelog  
 A detailed changelog, intended for programmers.  
+  
+0.2.1  
+- Fixed cursor bug.  
+- Added Doxygen file.  
+- Set logging default parameter to false.  
   
 0.2.0  
 redesign of logging support. Testing.  

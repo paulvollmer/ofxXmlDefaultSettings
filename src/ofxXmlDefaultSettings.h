@@ -29,7 +29,7 @@
 /**
  * The current version of the ofxXmlDefaultSettings addon.
  */
-#define OFXXMLDEFAULTSETTINGS_VERSION "0.2.0b"
+#define OFXXMLDEFAULTSETTINGS_VERSION "0.2.1"
 
 #include "ofxXmlSettings.h"
 
@@ -39,7 +39,7 @@
  * @author      Paul Vollmer <paul.vollmer@fh-potsdam.de><br>
  *              wrong-entertainment.com
  * @date        2012.12.07
- * @version     0.2.0b
+ * @version     0.2.1
  * @copyright   <a href="http://opensource.org/licenses/MIT">MIT License</a>
  * 
  * @section GeneralInformation General Information
@@ -61,7 +61,7 @@
  * @section xmlfile XML file
  * A sample of the generated XML file.
  * <pre>
- * <ofxXmlDefaultSettings version="0.2.0b" url="https://github.com/wrongentertainment/ofxxmldefaultsettings">
+ * <ofxXmlDefaultSettings version="0.2.1" url="https://github.com/wrongentertainment/ofxxmldefaultsettings">
  *   <ofCore>
  *     <frameRate>60</frameRate>
  *     <fullscreen>0</fullscreen>
@@ -111,7 +111,7 @@ public:
 	 * The default xml syntax:
 	 * <table>
 	 *   <tr><td>ROOT</td><td>&lt;ofxXmlDefaultSettings&gt;</td></tr>
-	 *   <tr><td>ROOT_VERSION</td><td>0.2.0b</td></tr>
+	 *   <tr><td>ROOT_VERSION</td><td>0.2.1</td></tr>
 	 *   <tr><td>ROOT_URL</td><td>https://github.com/wrongentertainment/ofxxmldefaultsettings</td></tr>
 	 *   <tr><td>CORE</td><td>&lt;ofCore&gt;</td></tr>
 	 * </table>
