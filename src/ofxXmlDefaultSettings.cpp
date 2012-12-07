@@ -32,7 +32,7 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings() {
 	this->filepath = ofFilePath::getCurrentWorkingDirectory()+"/ofSettings.xml";
  	// Set default xml syntax (names of xml tags, version and url).
 	syntax[ROOT] = "ofxXmlDefaultSettings";
-	syntax[ROOT_VERSION] = "0.2.0";
+	syntax[ROOT_VERSION] = OFXXMLDEFAULTSETTINGS_VERSION;
 	syntax[ROOT_URL] = "https://github.com/wrongentertainment/ofxxmldefaultsettings";
 	syntax[CORE] = "ofCore";
 	// Set default settings values.
@@ -135,7 +135,7 @@ void ofxXmlDefaultSettings::setFullscreen() {
 
 
 void ofxXmlDefaultSettings::setCursor() {
-	if (getValue(syntax[ROOT]+":"+syntax[CORE]+":cursor", defaultSettings.cursor, 0) == 1) {
+	if (getValue(syntax[ROOT]+":"+syntax[CORE]+":cursor", defaultSettings.cursor, 0) == 0) {
 		ofHideCursor();
 	} else {
 		ofShowCursor();
