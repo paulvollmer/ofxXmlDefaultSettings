@@ -45,7 +45,7 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings() {
 	defaultSettings.fullscreen = false;
 	defaultSettings.cursor = true;
 	defaultSettings.escapeQuitsApp = true;
-	defaultSettings.log = true;
+	defaultSettings.log = false;
 	defaultSettings.logFilepath = "default";
 	defaultSettings.logFilename = "logs.txt";
 }
