@@ -23,8 +23,13 @@
 // THE SOFTWARE.
 //
 
-#ifndef OFXXMLDEFAULTSETTINGS_H_
-#define OFXXMLDEFAULTSETTINGS_H_
+#ifndef INCLUDED_OFXXMLDEFAULTSETTINGS_H
+#define INCLUDED_OFXXMLDEFAULTSETTINGS_H
+
+/**
+ * The current version of the ofxXmlDefaultSettings addon.
+ */
+#define OFXXMLDEFAULTSETTINGS_VERSION "0.2.1"
 
 #include "ofxXmlSettings.h"
 
@@ -33,14 +38,14 @@
  * @tableofcontents
  * @author      Paul Vollmer <paul.vollmer@fh-potsdam.de><br>
  *              wrong-entertainment.com
- * @date        2012.10.09
- * @version     0.2.0
+ * @date        2012.12.07
+ * @version     0.2.1
  * @copyright   <a href="http://opensource.org/licenses/MIT">MIT License</a>
  * 
  * @section GeneralInformation General Information
  * <div><table>
- *   <tr><td>tested openFrameworks version</td><td>0071</td></tr>
- *   <tr><td>tested plattform MacOs</td><td>10.6+</td></tr>
+ *   <tr><td>tested openFrameworks version</td><td>0073</td></tr>
+ *   <tr><td>tested plattform MacOs</td><td>10.6, 10.7</td></tr>
  *   <tr><td>tested plattform Win</td><td>?</td></tr>
  *   <tr><td>tested plattform Linux</td><td>?</td></tr>
  *   <tr><td>dependencies</td><td>ofxXmlSettings</td></tr>
@@ -53,10 +58,10 @@
  * can found more information about the default parameter at the @ref ofxXmlDefaultSettings
  * constructor and the @ref xmlfile.
  *
- * @section xmlfile XML file.
+ * @section xmlfile XML file
  * A sample of the generated XML file.
  * <pre>
- * <ofxXmlDefaultSettings version="0.2.0" url="https://github.com/wrongentertainment/ofxxmldefaultsettings">
+ * <ofxXmlDefaultSettings version="0.2.1" url="https://github.com/wrongentertainment/ofxxmldefaultsettings">
  *   <ofCore>
  *     <frameRate>60</frameRate>
  *     <fullscreen>0</fullscreen>
@@ -66,6 +71,30 @@
  *     <logToFile filepath="NULL" filename="logs.txt">1</logToFile>
  *   </ofCore>
  * </ofxXmlDefaultSettings> 
+ * </pre>
+ *
+ * @section license License
+ * <b>MIT License</b>
+ * <pre>
+ * Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  * </pre>
  */
 class ofxXmlDefaultSettings : public ofxXmlSettings {	
@@ -82,7 +111,7 @@ public:
 	 * The default xml syntax:
 	 * <table>
 	 *   <tr><td>ROOT</td><td>&lt;ofxXmlDefaultSettings&gt;</td></tr>
-	 *   <tr><td>ROOT_VERSION</td><td>0.2.0</td></tr>
+	 *   <tr><td>ROOT_VERSION</td><td>0.2.1</td></tr>
 	 *   <tr><td>ROOT_URL</td><td>https://github.com/wrongentertainment/ofxxmldefaultsettings</td></tr>
 	 *   <tr><td>CORE</td><td>&lt;ofCore&gt;</td></tr>
 	 * </table>
@@ -278,10 +307,10 @@ private:
 	
 	string statusMessage;
 	
-	/**
+	/*
 	 * The total size of xml syntax elements. This value will be used by the syntay array.
 	 */
-	#define XML_SYNTAX_SIZE 4
+	static const int XML_SYNTAX_SIZE = 4;
 	string syntax[XML_SYNTAX_SIZE];
 };
-#endif // OFXXMLDEFAULTSETTINGS_H_
+#endif // INCLUDED_OFXXMLDEFAULTSETTINGS_H
