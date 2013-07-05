@@ -2,7 +2,7 @@
 // ofxXmlDefaultSettings.cpp
 // ofxXmlDefaultSettings is released under the MIT License.
 //
-// Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
+// Copyright (c) 2012-2013, Paul Vollmer http://www.wrong-entertainment.com
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,12 +51,12 @@ ofxXmlDefaultSettings::ofxXmlDefaultSettings() {
 }
 
 
-void ofxXmlDefaultSettings::load() {
-	load(filepath);
+bool ofxXmlDefaultSettings::load() {
+	return load(filepath);
 }
 
 
-void ofxXmlDefaultSettings::load(string src) {
+bool ofxXmlDefaultSettings::load(string src) {
 	this->filepath = src;
 	// Check if file exist
 	if (loadFile(src)) {
@@ -74,6 +74,7 @@ void ofxXmlDefaultSettings::load(string src) {
 		createDefaultXml();
 		loadFile(src);
 	}
+    return bDocLoaded;
 }
 
 
