@@ -4,9 +4,11 @@
 *build
 *.app
 
-# ignore Xcode User .pbxuser and .mode1v3 files.
+# ignore other Xcode user data.
 *.pbxuser
 *.mode1v3
+*.xcuserdatad
+*.xcworkspacedata
 
 # ignore example xml file
 example_customSettings/bin/data/mySettings.xml

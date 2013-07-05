@@ -2,7 +2,7 @@
 // ofxXmlDefaultSettings.h
 // ofxXmlDefaultSettings is released under the MIT License.
 //
-// Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
+// Copyright (c) 2012-2013, Paul Vollmer http://www.wrong-entertainment.com
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 /**
  * The current version of the ofxXmlDefaultSettings addon.
  */
-#define OFXXMLDEFAULTSETTINGS_VERSION "0.2.1"
+#define OFXXMLDEFAULTSETTINGS_VERSION "0.2.2"
 
 #include "ofxXmlSettings.h"
 
@@ -38,13 +38,13 @@
  * @tableofcontents
  * @author      Paul Vollmer <paul.vollmer@fh-potsdam.de><br>
  *              wrong-entertainment.com
- * @date        2012.12.07
- * @version     0.2.1
- * @copyright   <a href="http://opensource.org/licenses/MIT">MIT License</a>
+ * @date        2013.07.05
+ * @version     0.2.2
+ * @copyright   <a href="http://wrong-entertainment.mit-license.org/">MIT License</a>
  * 
  * @section GeneralInformation General Information
  * <div><table>
- *   <tr><td>tested openFrameworks version</td><td>0073</td></tr>
+ *   <tr><td>tested openFrameworks version</td><td>0.7.4</td></tr>
  *   <tr><td>tested plattform MacOs</td><td>10.6, 10.7</td></tr>
  *   <tr><td>tested plattform Win</td><td>?</td></tr>
  *   <tr><td>tested plattform Linux</td><td>?</td></tr>
@@ -61,7 +61,7 @@
  * @section xmlfile XML file
  * A sample of the generated XML file.
  * <pre>
- * <ofxXmlDefaultSettings version="0.2.1" url="https://github.com/wrongentertainment/ofxxmldefaultsettings">
+ * <ofxXmlDefaultSettings version="0.2.2" url="https://github.com/wrongentertainment/ofxxmldefaultsettings">
  *   <ofCore>
  *     <frameRate>60</frameRate>
  *     <fullscreen>0</fullscreen>
@@ -76,7 +76,7 @@
  * @section license License
  * <b>MIT License</b>
  * <pre>
- * Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
+ * Copyright (c) 2012-2013, Paul Vollmer http://www.wrong-entertainment.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -158,15 +158,18 @@ public:
 	
 	/**
 	 * Same as load(string src) but we use the default filepath.
+     *
+     * @return bDocLoaded
 	 */
-	void load();
+	bool load();
 	/**
 	 * This method checks if a default xml file exist.\n
 	 * If no file is found, a default xml settings file will be created.
 	 *
 	 * @param src Path to default xml file.
+     * @return bDocLoaded
 	 */
-	void load(string src);
+	bool load(string src);
 	
 	/**
 	 * Get the openFrameworks core settings and save values into xml.
