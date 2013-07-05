@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['load',['load',['../classofx_xml_default_settings.html#aac21c6fa6efd2cf115e15384c8b1af45',1,'ofxXmlDefaultSettings::load()'],['../classofx_xml_default_settings.html#a94e84597309dfb4a01238878a44fcd30',1,'ofxXmlDefaultSettings::load(string src)']]]
+  ['load',['load',['../classofx_xml_default_settings.html#a61b65441edbb7ba64c10b5e3353281f0',1,'ofxXmlDefaultSettings::load()'],['../classofx_xml_default_settings.html#a111b8adf4051788c386fa83476a9fe2b',1,'ofxXmlDefaultSettings::load(string src)']]]
 ];
