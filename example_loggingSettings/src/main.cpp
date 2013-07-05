@@ -2,7 +2,7 @@
 // main.cpp
 // ofxXmlDefaultSettings is released under the MIT License.
 //
-// Copyright (c) 2012, Paul Vollmer http://www.wrong-entertainment.com
+// Copyright (c) 2012-2013, Paul Vollmer http://www.wrong-entertainment.com
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,14 +26,14 @@
 /**
  * logFile example
  *
- * @testet_oF          0071
+ * @testet_oF          0.7.4
  * @testet_plattform   MacOs 10.6+
  *                     ??? Win
  *                     ??? Linux
  * @dependencies       ofxXmlSettings
  * @contributor(s)     Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * @modified           2012.10.09
- * @version            0.2.0
+ * @modified           2013.07.05
+ * @version            0.2.2
  */
 
 #include "ofMain.h"
