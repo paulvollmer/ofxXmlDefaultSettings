@@ -82,3 +82,7 @@ Github: http://www.github.com/wrongentertainment
 
 ## License 
 ofxXmlDefaultSettings is released under the MIT License: http://wrong-entertainment.mit-license.org/
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/WrongEntertainment/ofxxmldefaultsettings/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
