@@ -4,7 +4,7 @@
 **General Information**  
 ofxXmlDefaultSettings is an extension for [openFrameworks](http://www.openframeworks.cc/) to create default xml file. Load, set and save core settings. Also you can use the xml to store other variables.  
   
-Docs can be found at http://wrongentertainment.github.com/ofxXmlDefaultSettings  
+Docs can be found at http://paulvollmer.github.com/ofxXmlDefaultSettings  
   
 openFrameworks core variables:  
 - window position  
@@ -29,7 +29,7 @@ Linux ???
 ofxXmlSettings  
 
 **Issues and Bugs**  
-You can find a list of all known bugs at [GitHub](https://github.com/wrongentertainment/ofxXmlDefaulSettings/issues). Please report if you find an unknown bug.  
+You can find a list of all known bugs at [GitHub](https://github.com/paulvollmer/ofxXmlDefaulSettings/issues). Please report if you find an unknown bug.  
 
 
 ## Changelog  
@@ -71,18 +71,10 @@ A detailed changelog, intended for programmers.
 - Starting addon at ofxXmlDefaultSettings Repository  
   
   
-## Author  
-ofxXmlDefaultSettings is developed by Paul Vollmer http://wrong-entertainment.com/  
-Check out for new release at https://github.com/wrongentertainment/ofxXmlDefaultSettings/  
-  
-Mail: paul.vollmer@fh-potsdam.de  
-Url: http://www.wrong-entertainment.com  
-Github: http://www.github.com/wrongentertainment  
+## Contributors
+- [Paul Vollmer](http://www.github.com/paulvollmer)
 
 
 ## License 
-ofxXmlDefaultSettings is released under the MIT License: http://wrong-entertainment.mit-license.org/
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/WrongEntertainment/ofxxmldefaultsettings/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+ofxXmlDefaultSettings is Licensed under MIT Public License: http://www.opensource.org/licenses/MIT  
+See also, LICENSE.txt in this distribution.
